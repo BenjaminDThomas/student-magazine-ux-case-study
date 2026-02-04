@@ -6,6 +6,7 @@ This project involved creating a student magazine website entirely from scratch,
 # UX Process
 
 - Desk Research & Sketches – Explored user needs, inspiration, and potential pain points.
+- Empathy Map & User Journey Map – Visualizing user motivations, goals, and pain points throughout the experience.
 - Low-Fidelity Wireframes – Defined layout, navigation, and content structure.
 - High-Fidelity Prototypes – Developed polished, interactive designs in Figma.
 - User Testing (Think-Aloud Sessions) – Gathered feedback and iterated on designs.
