@@ -7,6 +7,8 @@ This project involved creating a student magazine website entirely from scratch,
 
 - Desk Research & Sketches – Explored user needs, inspiration, and potential pain points.
 - Empathy Map & User Journey Map – Visualizing user motivations, goals, and pain points throughout the experience.
+- Personas – Created first-year and third-year student personas to guide design decisions and keep user needs central.
+- Questionnaire Findings – Conducted a survey via Qualtrics to determine what users want most in a student magazine, including both quantitative and qualitative insights.
 - Low-Fidelity Wireframes – Defined layout, navigation, and content structure.
 - High-Fidelity Prototypes – Developed polished, interactive designs in Figma.
 - User Testing (Think-Aloud Sessions) – Gathered feedback and iterated on designs.
