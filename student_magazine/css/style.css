@@ -1,0 +1,573 @@
+/*
+--------------------
+Logo
+--------------------
+*/
+
+/* logo design */
+.logo {
+   font-size: clamp(32px, 5vw, 48px);                           /* resize for screen size */
+   margin: 0%;                                                  /* reset placement*/
+   color: var(--text-color);
+   transition: color var(--transition-speed) ease;
+}
+
+/* top hero image with smooth transition */
+.hero {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    background-position: center;
+    overflow: hidden;                                               /* contains pseudo-elements */
+}
+
+/* Light mode background layer */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../images/light_mode_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 1;                                                     /* visible in light mode */
+    transition: opacity var(--transition-speed) ease;               /* smooth fade */
+    z-index: 0;
+}
+
+/* Dark mode background layer */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("../images/dark_mode_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;                                                     /* hidden in light mode */
+    transition: opacity var(--transition-speed) ease;               /* smooth fade */
+    z-index: 0;
+}
+
+/* Dark mode - swap opacity */
+body.dark-mode .hero::before {
+    opacity: 0;                                                     /* hide light image */
+}
+
+body.dark-mode .hero::after {
+    opacity: 1;                                                     /* show dark image */
+}
+
+/* Ensure header and navbar appear above backgrounds */
+.hero header,
+.hero .navbar {
+    position: relative;
+    z-index: 1;
+}
+
+/* hero image background variables */
+:root {
+    --text-color: #000000;                                          /* default text color */
+    --bg-color: #ffffff;                                            /* default background color */
+    --link-color: #3d5afe;                                          /* link color */
+    --card-bg: #ffffff;                                             /* card background */
+    --border-color: #ccc;                                           /* border color */
+    --transition-speed: 600ms;                                      /* global transition speed */
+}
+
+body.dark-mode {
+    --text-color: #ffffff;                                          /* white text */
+    --bg-color: #1a1a1a;                                            /* dark background */
+    --link-color: #6b8aff;                                          /* link colour */
+    --card-bg: #2a2a2a;                                             /* dark card background */
+    --border-color: rgba(255, 255, 255, 0.2);                       /* border color */
+}
+
+/* header container */
+header {
+    display: flex;                                                  /* aligns header elements into horizontal row */
+    justify-content: space-between;                                 /* spacing between header elements */
+    align-items: center;                                            /* aligns header elements centered */
+    padding: 1.5vw;                                                 /* top header padding */
+    padding-left: 5vw;                                              /* left header padding */
+    padding-right: 5vw;                                             /* right header padding */
+}
+
+/*
+----------------------
+Navigation Bar
+----------------------
+*/
+
+.navbar {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    display: flex;
+    justify-content: space-between;                                 /* nav links and toggle */
+    align-items: center;
+    padding-top: 20px;                                              /* spacing above navbar */
+    padding-bottom: 20px;                                           /* spacing below navbar */
+}
+
+/* navigation bar hyperlinks */
+.navbar a {
+    color: #141414;
+    font-weight: bold;
+    font-size: clamp(16px, 5vw, 32px);
+    transition: color var(--transition-speed) ease;
+}
+
+body.dark-mode .navbar a {
+    color: #ffffff;
+}
+
+li a { 
+    text-decoration: none;
+}
+
+/* navigation bar hyperlink lists */
+.navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 4vw, 60px);                                    /* responsive spacing between nav items */
+    margin: 0;                                                      /* removes default margin */
+    padding: 0;                                                     /* removes default padding */
+}
+
+.navbar li a:hover {
+    color: orange !important;                                       /* navbar hover color */
+}
+
+/*
+--------------------
+Navbar Icons (Desktop)
+--------------------
+*/
+
+.navbar-icons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    overflow: hidden;                                               /* contains image */
+}
+
+body.dark-mode .icon-btn {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.icon-btn:hover {
+    border-color: orange;                                         /* border hover outline color */
+    border-radius: 10px;                                            /* rectangular hover border */
+}
+
+.heart-icon {
+  width: 25px;
+  height: 23px;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/*
+----------------------
+Article Header Wrapper
+----------------------
+*/
+
+.header-line.top {
+    margin-bottom: 14px;                                            /* top page divider spacing below */
+}
+
+.header-line.bottom {
+    margin-top: 14px;                                               /* bottom page divider spacing above */                         
+}
+
+/* view all navbar bottom page divider */
+.header-line {
+    width: 90%;                                                     /* line width */
+    margin: auto;                                                   /* aligns page divider centered */
+    margin-bottom: 50px;                                            /* spacing below navbar */
+}
+
+/*
+----------------------
+Header Layout
+----------------------
+*/
+
+/* title spacing */
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;                                            /* aligns item centered */
+    gap: 24px;                                                      /* gap seperating title and return button element */
+}
+
+/* title grouping */
+#article-title {
+    margin: 0;                                                      /* resets spacing */
+    text-align: left;                                               /* aligns text on the left side */
+}
+
+/* author grouping */
+#article-author {
+    margin: 8px 0 0;                                                /* placement underneath title */
+    font-size: 14px;                                                /* author font size */
+    opacity: 0.8;                                                   /* author text opacity */
+    text-align: left;                                               /* author text placement on the left side */
+}
+
+.return-btn:hover {
+    background-color: orange !important;                            /* return button hover color */
+    color: #000 !important;                                         /* force black text */
+    border-color: orange !important;                                /* force orange border */
+}
+
+/*
+----------------------
+Article Content
+----------------------
+*/
+
+#article-content p {
+    line-height: 1.7;
+    font-size: 22px;                                                /* paragraph font size */
+    margin: 0 0 18px;
+    max-width: 70ch;                                                /* text line length */
+}
+
+/* centers first paragraph */
+#article-content p:first-of-type{
+    text-align: center;                                             /* aligns first paragaph text centered */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80px;                                            /* spacing below section */
+    margin-top: 80px;                                               /* spacing above section */
+}
+
+/* article first paragraph */
+.intro-box p {
+    color: white !important;                                        /* keeps first paragraph font color white */
+    font-size: clamp(16px, 2vw, 25px)  !important;                  /* resizes first paragraph font size */
+}
+
+#article-content h2 {
+    margin: 22px 0 14px;                                            /* header alignment */
+    letter-spacing: 0.04em;                                         /* spacing between header letters */
+}
+
+/* subheadings */
+#article-content h3 {
+    position: relative;
+    margin: 50px 0 14px;                                            /* subheading alignment */
+    padding-bottom: 20px;                                           /* spacing below subheader */
+}
+
+/* page divider for second article section */
+#article-content h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;                                                    /*100% of container spacing */
+    height: 1px;                                                    /* line height */
+    background: #000;                                               /* line color */
+    opacity: 0.7;                                                   /* line opacity */
+}
+
+/*
+----------------------
+Media (Text + Images)
+----------------------
+*/
+
+.media-row {
+    display: flex;
+    gap: 28px;
+    align-items: center;                                            /* vertically centers content and image */
+    margin: 34px 0;
+}
+
+.media-text {
+    width: 52%;
+}
+
+.media-img {
+    width: 48%;                                                     /* image page width */
+    height: 280px;                                                  /* image page height */
+    object-fit: cover;                                              /* crops image to fit container */
+    border-radius: 18px;
+}
+
+/* layout variation image 1 */
+.media-row.left {
+    flex-direction: row;                                            /* image 1 forced to left hand side */
+}
+
+/* layout variation image 2 */
+.media-row.right {
+    flex-direction: row-reverse;                                    /* image 1 forced to right hand side */
+}
+
+/* force image 1 against left side of end of screen */
+.media-row.left .media-img {
+    margin-left: calc(-50vw + 50%);
+    transform: translateX(-24px);                                   /* cancels container padding */
+}
+
+/* force image 2 against right side of end of screen */
+.media-row.right .media-img {
+    margin-right: calc(-50vw + 50%);
+    transform: translateX(24px);                                    /* cancels container padding */
+}
+
+/*
+----------------------
+Article Cards (ViewAll Page)
+----------------------
+*/
+#articles-list {
+    display: flex;
+    flex-direction: column;                                         /* displays articles vertically */
+    gap: 30px;                                                      /* spacing between each article */
+    align-items: center;                                            /* centers articles horizontally */
+}
+
+.article-card {
+    position: relative;                                             /* positions overlay relative to card */
+    overflow: hidden;                                               /* hides overflow content */
+    cursor: pointer;                                                /* indicates clickable element */
+    max-width: 800px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.article-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;                                              /* scales image to fit container */
+    display: block;                                                 /* removes inline spacing */
+}
+
+/* hover overlay */
+.overlay {
+    position: absolute;                                             /* positions relative to article card */
+    inset: 0;                                                       /* stretches to cover entire card */
+    background: rgba(0, 0, 0, 0.7);                                 /* semi-transparent dark overlay */
+    color: white;
+    padding: 20px;
+    opacity: 0;                                                     /* hidden until hovered */
+    transition: opacity 0.3s ease;                                  /* smooth fade in/out */
+    display: flex;
+    flex-direction: column;                                         /* stacks overlay elements vertically */
+    justify-content: flex-end;                                      /* aligns content to bottom */
+}
+
+.article-card:hover .overlay {
+    opacity: 1;                                                     /* shows overlay on hover */
+}
+
+.overlay p {
+    font-size: 14px;                                                /* article overlay, paragraph font size */
+}
+
+.overlay a {
+    color: white;                                                   /* article text color */
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+/* all articles title */
+.page-container {
+    max-width: 1200px;                                              /* article card max width */
+    margin: 0 auto;                                                 /* centers container horizontally */
+    padding: 0 24px;                                                      
+}
+
+.category-title{
+    width: 90%;                                                     /* article category title width */
+    max-width: 1100px;                                              /* maximum category title width */
+    margin: 30px auto 10px;                                         /* title placement */
+}
+
+/*
+----------------------
+   Page Layout
+----------------------
+*/
+
+/* bottom page divider and article spacing */
+.article-banner,
+.article-bottom-line {
+    display: block;
+    width: 100%;                                                    /* 100% width of screen */
+    max-width: 1100px;                                              /* max banner and line width */
+    margin: 40px auto;
+}
+
+.article-banner {
+    max-height: 550px;                                              /* max article banner image height */
+}
+
+/* first paragaph box */
+.intro-box {
+    position: relative;                
+    left: 50%;                                                      /* aligned left center */                                 
+    right: 50%;                                                     /* aligned right center */  
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;                                                   /* takes up full screen width */
+    max-width: 100vw;                                               /* cannot exceed screen width */
+    background: #282828;                                            /* first paragraph background box color */
+    color: #f8f8f8;                                                 /* first paragraph text color */
+    padding: 32px 24px;
+    border-radius: 0;                                               /* removes curved corners */
+    margin-top: 24px;                                               /* spacing above first paragraph section */                                          
+    margin-bottom: 32px;                                            /* spacing below first paragraph section */                     
+}
+
+/* '+' symbol styling */
+.intro-box::before, .intro-box::after{
+    content:"+";
+    position:absolute;
+    font-weight:700;                                                /* font weight of '+' symbol */
+    opacity: 0.9;                                                   /* '+' symbol opacity */
+}
+
+/* '+' symbol placement (top-left) */
+.intro-box::before { 
+  top: 16px; 
+  left: 40px; 
+} 
+
+/* '+' symbol placement (bottom-right) */
+.intro-box::after { 
+  bottom: 16px; 
+  right: 40px; 
+}
+
+/* '+' symbol placement (top-right) */
+.intro-box .corner.tr { 
+  top: 16px; 
+  right: 40px; 
+}
+
+/* '+' symbol placement (bottom-left) */
+.intro-box .corner.bl { 
+  bottom: 16px; 
+  left: 40px; 
+}
+
+/* add the other 2 corners with extra pseudo-elements using spans */
+.intro-box .corner{
+    position:absolute;
+    font-weight:700;
+    opacity:0.9;
+}
+
+/*
+--------------------
+Mobile Menu Button
+--------------------
+*/
+
+.mobile-menu-btn {
+    display: none;                                                  /* hidden on desktop, only shows on mobile */
+    position: fixed;                                                /* stays in same position on scroll */
+    top: 20px;                                                      /* spacing from top of screen */
+    left: 20px;                                                     /* spacing from left of screen */
+    padding: 10px 16px;                                             /* spacing inside button */
+    border-radius: 20px;                                            /* rounded corners */
+    border: 2px solid rgba(0, 0, 0, 0.3);              
+    background: rgba(255, 255, 255, 0.5);                
+    backdrop-filter: blur(10px);                                    /* blur effect */
+    font-weight: bold;                                              /* bold font weight */
+    font-size: 14px;                                                /* button font size */
+    cursor: pointer;                                                /* shows clickable cursor */
+    z-index: 1000;                                                  /* positions above other content */
+    transition: all 0.3s ease;                              
+    color: #000;                                                    /* black font color in light mode */
+}
+
+/* dark mode styling */
+body.dark-mode .mobile-menu-btn {
+    border-color: rgba(255, 255, 255, 0.4);                         /* semi-transparent border */
+    background: rgba(0, 0, 0, 0.5);                       
+    color: #fff;                                                    /* white font color in dark mode */
+}
+
+/* hover effect */
+.mobile-menu-btn:hover {
+    border-color: orange;                                           /* border color on hover */
+}
+
+/*
+----------------------
+Mobile Layout
+----------------------
+*/
+
+@media (max-width: 768px) { 
+
+  #article-content {
+    width: 100%;                                                    /* article card size resizes to fit screen size */
+  }
+
+.media-row, .media-row.left, .media-row.right {
+    flex-direction: column;                                         /* stack media rows vertically */
+  }
+
+  .media-text {
+    width: 100%;                                                    /* article card text resizes to fit screen size */
+  }
+
+  .media-img {
+    width: 100%;                                                    /* article card image resizes to fit screen size */                                          
+    height: 220px;                                                  /* article card set height */            
+    border-radius: 12px;
+  }
+
+  .overlay {
+    border-radius: 25px;                                            /* overlay edges over article image */
+  }
+
+  #article-content p {
+    font-size: 16px;                                                /* resizes paragraph font size */
+  }
+
+  .mobile-menu-btn {
+        display: block;                                             /* show on mobile */
+    }
+
+    /* Hide desktop navbar on mobile */
+    .navbar ul {
+        display: none;
+    }
+
+    .navbar-icons {
+        display: none;
+    }
+}

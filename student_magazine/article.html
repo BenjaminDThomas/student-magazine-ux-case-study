@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Magazine Articles</title>
+    <!-- CSS Styles File-->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS Grid File-->
+    <link rel="stylesheet" href="css/grid.css">
+</head>
+<body>
+    <div class="page-grid">
+    <!-- Header -->
+    <header>
+        <h1 class="logo">SM</h1>
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" aria-label="Toggle between light and dark mode" aria-pressed="false">
+            <span class="toggle-track">
+                <span class="toggle-thumb"></span>
+            </span>
+        </button>
+    </header>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="viewall.html">News</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <!-- Navigation Bar Icons -->
+        <div class="navbar-icons">
+            <a href="login.html" class="icon-btn" aria-label="Login / Profile">
+                <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
+            </a>
+            <a href="login.html" class="icon-btn" aria-label="Login / Profile">
+                <img src="images/profile_picture_image.png" alt="Profile" class="profile-icon"/>
+            </a>
+        </div>
+    </nav>
+    <!-- Article Header Container -->
+    <article class="article-header-wrap">
+        <!-- Top Page Divider -->
+        <hr class="header-line top">
+        <!-- Header -->
+        <header class="article-header">
+            <hgroup class="header-left">
+                <!-- Article Title -->
+                <h1 id="article-title"></h1>
+                <!-- Article Author -->
+                <p id="article-author"></p>
+            </hgroup>
+            <!-- Return Button -->
+            <a class="return-btn" href="viewall.html">Return →</a>
+        </header>
+        <!-- Bottom Page Divider-->
+        <hr class="header-line bottom">
+    </article>
+    <!-- Article Content -->
+    <section id="article-content"></section>
+    <hr class="header-line bottom article-bottom-line">
+    <!-- Scroll To Top Button -->
+    <button id="scrollTopBtn" aria-label="Scroll to top">Scroll to Top</button>
+    <!-- Content Blur -->
+    <div class="bottom-blur"></div>
+    </div>
+    <!-- JavaScript File-->
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/article.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forgot Password</title>
+    <!-- CSS Styles File-->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS Grid File-->        
+    <link rel="stylesheet" href="css/grid.css">
+</head>
+<body class="auth">
+    <!-- Close Overlay Topbar -->
+    <div class="auth-topbar">
+        <a class="auth-close" href="login.html" aria-label="Close">×</a>
+    </div>
+    <main class="auth-modal" role="dialog" aria-modal="true">
+        <!-- Reset Password -->
+        <section class="auth-step">
+        <h1>Reset password</h1>
+        <p class="auth-subtext">Enter your email and we'll send a reset link (simulated).</p>
+        <!-- Forgottten Email -->
+        <label class="auth-label" for="forgotEmail">Email</label>
+        <input id="forgotEmail" type="email" placeholder="Enter your email..." autocomplete="email" />
+        <!-- Reset Link -->
+        <button id="resetBtn" class="auth-btn" disabled>Send reset link</button>
+        <!-- Back to Sign In -->
+        <p class="auth-switch">
+            <a href="login.html">Back to sign in</a>
+        </p>
+        </section>
+    </main>
+    <!-- JavaScript File-->
+    <script src="js/auth.js"></script>
+</body>
+</html>

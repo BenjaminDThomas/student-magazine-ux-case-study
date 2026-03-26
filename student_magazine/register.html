@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+    <!-- CSS Styles File-->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS Grid File-->
+    <link rel="stylesheet" href="css/grid.css">
+</head>
+<body class="auth">
+    <!-- Close Overlay Topbar -->
+    <div class="auth-topbar">
+        <a class="auth-close" href="index.html" aria-label="Close">×</a>
+    </div>
+    <main class="auth-modal" role="dialog" aria-modal="true">
+        <!-- Create Account -->
+        <section class="auth-step" data-step="reg-email">
+        <h1>Create account</h1>
+        <!-- Email -->
+        <label class="auth-label" for="regEmail">Email</label>
+        <input id="regEmail" type="email" placeholder="Enter your email..." autocomplete="email" />
+        <!-- Next Section -->
+        <button id="regEmailNext" class="auth-btn" disabled>Next</button>
+        <!-- Already Have an Account -->
+        <p class="auth-switch">
+            Already have an account?
+            <a href="login.html">Sign in</a>
+        </p>
+        </section>
+        <!-- Password -->
+        <section class="auth-step" data-step="reg-password" hidden>
+        <!-- Create Password Header -->
+        <h1>Create password</h1>
+        <label class="auth-label" for="regPassword">Password</label>
+        <!-- Create Password -->
+        <div class="pw-wrap">
+            <input id="regPassword" type="password" placeholder="Create a password (min 6 characters)" autocomplete="new-password" />
+            <button type="button" id="toggleRegPw" class="pw-toggle" aria-label="Toggle password visibility">Show</button>
+        </div>
+        <!-- Create Account -->
+        <button id="createBtn" class="auth-btn" disabled>Create</button>
+        </section>
+    </main>
+    <!-- JavaScript File-->
+    <script src="js/auth.js"></script>
+</body>
+</html>
