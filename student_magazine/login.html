@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Magazine - Sign In</title>
+    <!-- CSS Styles File-->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS Grid File-->
+    <link rel="stylesheet" href="css/grid.css">
+    </head>
+    <body class="auth">
+        <!-- Close Overlay Topbar -->
+        <div class="auth-topbar">
+            <a class="auth-close" href="index.html" aria-label="Close">×</a>
+        </div>
+        <main class="auth-modal" role="dialog" aria-modal="true">
+        <!-- Email -->
+        <section class="auth-step" data-step="email">
+            <!-- Sign In -->
+            <h1>Sign In</h1>
+            <label class="auth-label" for="loginEmail">Email</label>
+            <input id="loginEmail" type="email" placeholder="Enter your email..." autocomplete="email">
+            <div class="auth-links">
+                <!-- Register -->
+                <a href="register.html">Not got an account?</a>
+                <!-- Forgot Password -->
+                <a href="forgot.html">Forgot password?</a>
+            </div>
+            <!-- Next Section -->
+            <button id="emailNext" class="auth-btn" disabled>Next</button>
+        </section>
+        <!-- Password -->
+        <section class="auth-step" data-step="password" hidden>
+            <h1>Enter password</h1>
+            <label class="auth-label" for="loginPassword">Password</label>
+            <div class="pw-wrap">
+                <input id="loginPassword" type="password" placeholder="Enter your password" autocomplete="current-password">
+                <!-- Show Password -->
+                <button type="button" id="togglePw" class="pw-toggle" aria-label="Toggle password visibility">Show</button>
+            </div>
+            <!-- Next Section -->
+            <button id="pwNext" class="auth-btn" disabled>Next</button>
+        </section>
+        <!-- Stay Signed In -->
+        <section class="auth-step" data-step="stay" hidden>
+            <h1>Stay signed in?</h1>
+            <p class="auth-subtext" id="stayEmailText"></p>
+            <!-- Stay Signed In Options -->
+            <p class="auth-subtext">Do this to reduce the number of times you are asked to sign in.</p>
+            <div class="stay-options">
+                <button type="button" class="stay-choice" data-choice="no">No</button>
+                <button type="button" class="stay-choice" data-choice="yes">Yes</button>
+            </div>
+            <!-- Next Section -->
+            <button id="stayNext" class="auth-btn" disabled>Next</button>
+        </section>
+        </main>
+        <!-- JavaScript File-->
+        <script src="js/auth.js"></script>
+    </body>
+</html> 

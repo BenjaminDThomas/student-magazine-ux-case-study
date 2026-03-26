@@ -1,0 +1,371 @@
+[
+    {
+        "id": 1,
+        "category": "Support",
+        "title": "Money matters but you don’t have to navigate it on your own",
+        "author": "Thomas Jeffrey",
+        "date": "2026-02-01",
+        "sections": [
+            {
+                "type": "heading",
+                "text": "SUPPORT"
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/finanical_support_banner.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Money can be one of the trickiest parts of student life. It’s there in the everyday decisions, paying rent, budgeting for food, deciding whether to work extra hours or focus on assignments. Sometimes it feels manageable, and other times it can feel overwhelming. If that sounds familiar, you’re definitely not alone. That’s where Catalyst support teams come in."
+            },
+                        {
+                "type": "subheading",
+                "text": "1. Uncertainty with financial management"
+            },
+            {
+                "type": "paragraph",
+                "text": "Whether you’re unsure where to start, dealing with unexpected financial pressure, or just want to feel more confident about managing your money, the Student Support team is there to help. They offer a mix of in-person and virtual appointments, so you can choose what works best for you and your schedule."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/financial_support_uncertainty_with_financial_management.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Support doesn’t have to be formal or intimidating. It can be a conversation, sitting down with someone who understands student life and can help you make sense of your options."
+            },
+            {
+                "type": "subheading",
+                "text": "2. Financial guidance support"
+            },
+            {
+                "type": "paragraph",
+                "text": "From practical financial guidance to signposting useful resources, the team is there to help you take the next step, whatever that looks like for you. If you’ve already had an initial appointment, arranging further support is simple. You can emailStudentSupportTeam@edgehill.ac.uk to book a follow-up appointment and continue the conversation when you need it."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/financial_support_financial_guidance_support.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Money matters but you don’t have to navigate it on your own. With the right support, clear advice, and people who genuinely want to help, things can feel more manageable. Wherever you’re starting from, Catalyst and the Student Support team are here to support you every step of the way."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "category": "Support",
+        "title": "Support that meets you where you are",
+        "author": "Thompson Akles",
+        "date": "2026-04-02",
+        "sections": 
+        [
+            {
+                "type": "heading",
+                "text": "SUPPORT"
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/student_support_banner.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "University life isn’t just about lectures and deadlines, it’s about learning how to navigate everything that comes with them. Sometimes that means asking questions, sharing ideas, or sitting down with others to work things out together."
+            },
+                        {
+                "type": "subheading",
+                "text": "1. Support available"
+            },
+            {
+                "type": "paragraph",
+                "text": "Across campus, support spaces are designed to do exactly that. From relaxed group sessions to interactive workshops, students come together to talk things through, build confidence, and get practical guidance they can actually use."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/support_available.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Whether you’re exploring new skills, looking for direction, or figuring out your next steps, these sessions are about creating a space where you feel comfortable getting involved."
+            },
+            {
+                "type": "subheading",
+                "text": "2. Devising clear plans"
+            },
+            {
+                "type": "paragraph",
+                "text": "Some students prefer learning in groups, bouncing ideas around and hearing different perspectives. Others benefit from focused guidance, tools, and resources that help turn uncertainty into a clear plan. That’s why support is flexible, built around real conversations and real student experiences."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/devising_clear_plans.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "You don’t need to have everything figured out before you take part. Showing up, asking questions, and getting involved is often the first step. With the right people around you, those steps start to feel a lot more manageable. Because support isn’t just about solving problems, it’s about helping you grow, connect, and move forward with confidence."
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "category": "Campus Events",
+        "title": "Welcome Weekend: finding you palce on campus",
+        "author": "Jackson Smith",
+        "date": "2026-04-02",
+        "sections": 
+        [
+            {
+                "type": "heading",
+                "text": "CAMPUS EVENTS"
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/welcome_weekend_banner.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Welcome Weekend is designed to help you settle into campus life and start your university experience with confidence. Over the weekend, the campus is filled with events, activities, and drop-in spaces created to help new students find their way around, meet others, and learn what support and opportunities are available to them."
+            },
+            {
+                "type": "subheading",
+                "text": "1. Things to do on campus"
+            },
+            {
+                "type": "paragraph",
+                "text": "Throughout the day, key areas of campus become busy social spaces where students can connect, ask questions, and take part in activities. There are opportunities to explore societies, student services, and campus facilities, as well as time to relax outdoors, enjoy the atmosphere, and get familiar with your surroundings."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/things_to_do_on_campus.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Welcome Weekend is flexible and student-led. You can choose what to take part in, move at your own pace, and focus on what matters most to you."
+            },
+            {
+                "type": "subheading",
+                "text": "2. Support teams"
+            },
+            {
+                "type": "paragraph",
+                "text": "Support teams and student ambassadors are on hand across campus to offer guidance, answer questions, and help you navigate everything from timetables and resources to getting involved in student life. Whether you are looking for practical information or simply a friendly face, help is always nearby."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/support_teams.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "It is a chance to explore, get involved, and take your first steps into university life feeling supported and informed. By the end of the weekend, campus will feel more familiar, connections will start to form, and you will have a clearer sense of where to go and who to ask as you begin your studies."
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "category": "Campus Events",
+        "title": "Life on campus: Events you can join this term",
+        "author": "Scott Cawthon",
+        "date": "2026-04-02",
+        "sections": 
+        [
+            {
+                "type": "heading",
+                "text": "CAMPUS EVENTS"
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/life_on_campus_banner.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Campus is buzzing with activities and events all through the academic year, and there are plenty of ways to take part, connect, and make the most of student life. There is something for everyone, whether you love social nights, creative projects, fitness, culture, or just meeting new people."
+            },
+            {
+                "type": "subheading",
+                "text": "1. Activities to partake in around campus"
+            },
+            {
+                "type": "paragraph",
+                "text": "Across campus, the Student Life Portal acts as your central hub for events. You can browse, filter and book activities by date, theme, or location, from film nights and art workshops to well-being sessions and cultural celebrations. Most of these events are free to attend, and they are designed to be inclusive and fun."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/activities_to_partake_in_around_campus.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "There are also off-campus opportunities and trips that bring students together in the local area. These might include community volunteer events, cultural outings, or group activities that help you explore beyond the campus grounds. Every week there are regular activities you can join, including sessions like Commuter Breakfast, Learn2Cook, Global Café and more. These run alongside social events at the Students’ Union and pop-up activities organised by the Student Life Team."
+            },
+            {
+                "type": "subheading",
+                "text": "2. Societies to join"
+            },
+            {
+                "type": "paragraph",
+                "text": "On the social side, clubs and societies host their own calendars of events. With over 100 societies on offer, there is a group for almost every interest, from anime and book clubs to music, dance, academic groups, and special interest communities. You can join a society through the Students’ Union website, meet weekly with others who share your interests, and take part in events that range from study sessions to themed socials. <a href='https://www.edgehillsu.org.uk/' target='_blank'>EHSU | Edge Hill Students' Union</a> The Students’ Union bar and venue are also busy spots for evening activities, including quiz nights, karaoke, club socials, and themed events. These events are open to all students and are a great way to unwind, have fun, and strengthen social connections."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/societies_to_join.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Getting involved is easy. Check the Student Life Portal regularly, follow the official student life social channels, and keep an eye on society calendars and Students’ Union event listings. Whether you want to learn a new skill, find your community, or simply have a good time, there is always something happening around you."
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "category": "Societies",
+        "title": "Code, Create, Connect - Dive into the computing society",
+        "author": "Micheal Simone",
+        "date": "2026-04-02",
+        "sections": 
+        [
+            {
+                "type": "heading",
+                "text": "SOCIETY"
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/computing_society_banner.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "If you love coding, building digital projects, or exploring how technology can solve real‑world challenges, the Computing Society is a place where you can connect with others who share the same curiosity and ambition. This society brings together students from across disciplines to learn, create and grow in a supportive and collaborative environment."
+            },
+            {
+                "type": "subheading",
+                "text": "1. The computing society"
+            },
+            {
+                "type": "paragraph",
+                "text": "The Computing Society hosts regular meetups where members work together on coding sessions, share insights into different programming languages, and explore tech tools and frameworks. Whether you are just starting with your first lines of code or you are building complex applications, these events are designed to help you develop skills at your own pace while learning from peers."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/the_computing_society.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Beyond basic coding meetups, the society often organises workshops and talks on topics such as web development, data science, cybersecurity and software design. Guest speakers from the tech world are invited to share their experiences and best practices, giving you insight into careers in computing and guidance on how to prepare for them. These sessions are practical and interactive, allowing you to ask questions and apply what you learn right away."
+            },
+            {
+                "type": "subheading",
+                "text": "2. How to join"
+            },
+            {
+                "type": "paragraph",
+                "text": "Most sessions are open to all experience levels so you can join in and see what it feels like before committing fully. Being part of this community means more than just coding. It means connecting with people who are passionate about technology, supporting each other’s learning journeys and turning ideas into real projects."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/how_to_join.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "If you are excited about technology and want to explore what you can create, the Computing Society is the perfect place to start."
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "category": "Student Offers",
+        "title": "Save Smart - Discover the student offers and discounts",
+        "author": "Steve Edwards",
+        "date": "2026-04-02",
+        "sections": 
+        [
+            {
+                "type": "heading",
+                "text": "STUDENT OFFERS"
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/discover_student_offers_banner.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Being a student comes with a lot of opportunities to save money and make your budget go further. Platforms like UNiDAYS and Student Beans provide access to a wide range of exclusive discounts, deals and offers from high street shops, online retailers, restaurants and technology providers. These resources are designed to help you enjoy student life without stretching your finances."
+            },
+            {
+                "type": "subheading",
+                "text": "1. Signing up for student offers"
+            },
+            {
+                "type": "paragraph",
+                "text": "Signing up for these platforms is simple. Once you verify your student status you can access offers instantly on your phone or computer. This includes discounts on clothes, electronics, streaming services, travel, and even groceries. You can browse offers, redeem codes in store or online and track which deals are available each week."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/signing_up_for_student_offers.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Students can also take advantage of discount platforms such as <a href='https://www.myunidays.com/GB/en-GB' target='_blank'>UNiDAYS</a> and <a href='https://www.studentbeans.com/' target='_blank'>Student Beans</a>, which offer free student discounts, exclusive discount codes, and deals across a wide range of brands."
+            },
+            {
+                "type": "subheading",
+                "text": "2. What is available?"
+            },
+            {
+                "type": "paragraph",
+                "text": "Campus shops and local businesses often collaborate with these platforms to provide additional offers. From cafes and restaurants to leisure activities and events, you can find a range of ways to make your money go further while enjoying social and practical activities around campus.Using student offers is easy and flexible. You can check your apps regularly for new deals, plan your purchases around available discounts or simply explore what is on offer when you need it. Many students find that just taking a few minutes to browse can make a noticeable difference in weekly expenses."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/what_is_available.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "By combining deals, planning purchases and using multiple offers you can maximise savings while still enjoying experiences and products that make student life fun and fulfilling. Accessing these offers also gives you insight into budgeting and managing spending. Whether you are shopping online, going to the high street, or grabbing a meal on campus, taking advantage of student offers is a smart way to enjoy more for less. Start exploring, compare deals and make the most of every opportunity to save while you study."
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "category": "Career Events",
+        "title": "Get Career Ready: events and opportunities to shape your future",
+        "author": "Cameron Scott",
+        "date": "2026-04-02",
+        "sections": 
+        [
+            {
+                "type": "heading",
+                "text": "CAREER EVENTS"
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/get_career_ready_banner.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Career events on campus give you direct access to employers, organisations and practical support that can help you explore job roles, gain experience and build confidence as you plan your future. Throughout the academic year you can take part in a range of activities designed to help you connect with potential employers, develop key skills and find opportunities that suit your ambitions."
+            },
+            {
+                "type": "subheading",
+                "text": "1. Recruitement opportunities"
+            },
+            {
+                "type": "paragraph",
+                "text": "One of the standout events each year is the part time jobs fair where employers from a wide range of sectors come together to offer roles that fit around your studies. This is a great chance to speak face to face with recruiters, ask questions about available positions, and learn what they are looking for from applicants. Many organisations attending are looking to hire flexible workers and provide insight into how part time work can enhance your CV and employability."
+            },
+            {
+                "type": "image",
+                "src": "../student_magazine/images/recruitement_opportunities.png"
+            },
+            {
+                "type": "paragraph",
+                "text": "Another career focused opportunity is the volunteering fair. Volunteering roles can help you build valuable experience while contributing to community causes. At this fair you can meet organisations with flexible roles suited to your schedule, learn how volunteering can strengthen your skills, and talk to experts who can help you decide which roles might match your goals."
+            },
+            {
+                "type": "subheading",
+                "text": "2. What is available?"
+            },
+            {
+                "type": "paragraph",
+                "text": "Professional headshot photography for LinkedIn profiles is often available too, helping you make a strong impression online. There are also specialised careers fairs, such as the fair focused on working with children, young people and families. At this event you can explore opportunities in education, youth services, sport and care sectors, and speak directly to organisations offering roles that support your career development in social and community based fields. In addition to fairs, careers teams often host workshops and preparation sessions to help you get ready for events. These can include guidance on creating standout CVs, advice on job applications, and support in setting up professional online profiles. Taking part in these activities not only improves your confidence but also helps you make the most of the networking opportunities at the fairs themselves. Preparing for career events is key to making them successful. You can start by researching employers who will be attending, updating your CV, and thinking about the questions you want to ask recruiters. Many events are open to all students regardless of programme or level of study, so whether you are just starting to think about your future or are ready to take the next step, there is something for you. Career events are a chance to connect with employers, discover pathways you might not have considered, and get practical support to help you move forward professionally. Keep an eye on event listings and attend as many as you can to build your network, learn from experts and take confident steps towards your goals."
+            }
+        ]
+    }
+]

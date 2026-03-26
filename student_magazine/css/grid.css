@@ -1,0 +1,585 @@
+/*
+--------------------
+Page Alignment
+--------------------
+*/
+
+/* resets margins for whole page */
+html, body {
+    margin: 0;
+    padding: 0; 
+    width: 100%;                                            /* 100% of page width for content */
+    max-width: 100%;                                        /* content cannot exceed 100% of screen */
+    box-sizing: border-box;
+    overflow-x: hidden;                                     /* stops horizontal overflow */
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+* { 
+    box-sizing: border-box;                                 /* stops padding making elements wider than container */
+    margin: 0;
+    padding: 0;
+}     
+
+/*
+--------------------
+Theme Slider
+--------------------
+*/
+
+.theme-toggle {
+    background: none;                                       /* no set background */
+    border: none;                                           /* no set border */
+    cursor: pointer;
+    padding: 0;
+}
+
+.toggle-track {
+    width: 80px;                                            /* slider width */
+    height: 32px;                                           /* slider height */
+    background: rgba(0, 0, 0, 0.15);                        /* slider background */
+    border-radius: 16px;                                    /* rounded corners */
+    position: relative;
+    transition: all var(--transition-speed) ease;
+    border: 2px solid rgba(0, 0, 0, 0.3);                   /* darker border in light mode */
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+/* dark mode */
+body.dark-mode .toggle-track {
+    background: rgba(255, 255, 255, 0.15);                  /* slider background */
+    border-color: rgba(255, 255, 255, 0.3);                 /* slider white border */
+}
+
+/* light mode slider icon - left side */
+.toggle-track::before {
+    content: "";
+    width: 10px;                                            /* dash symbol */
+    height: 2px;
+    background: rgba(0, 0, 0, 0.5);             
+    border-radius: 1px;
+    position: absolute;
+    left: 10px;
+    transition: opacity var(--transition-speed) ease;                          
+    z-index: 1;
+}
+
+/* dark mode slider icon - right side */
+.toggle-track::after {
+    content: "";
+    width: 10px;                                            /* dash symbol */
+    height: 2px;
+    background: rgba(255, 255, 255, 0.6);              
+    border-radius: 1px;
+    position: absolute;
+    right: 10px;
+    opacity: 0.3;                                           /* faded when not active */
+    transition: opacity var(--transition-speed) ease;                         
+    z-index: 1;
+}
+
+body.dark-mode .toggle-track::before {
+    opacity: 0.3;                                           /* fade black dash in dark mode */
+}
+
+body.dark-mode .toggle-track::after {
+    opacity: 1;                                             /* brighten white dash in dark mode */
+}
+
+/* toggle border */
+.toggle-thumb {
+    width: 28px;                                            /* border width */
+    height: 4px;                                            /* border height */
+    background: #fff;                                       /* border color */
+    border-radius: 2px;                                     /* rounded corners */
+    position: absolute;
+    top: 50%;                                               /* positioned from top */
+    transform: translateY(-50%);                            /* centers slider toggle vertically */
+    left: 6px;                                              /* starts on left */
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);     /* smooth easing animation */
+    z-index: 2;                                            
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);               /* drop shadow */
+}
+
+body.dark-mode .toggle-thumb {
+    left: calc(100% - 34px);                                /* slides to right */
+    background: #fff;                                       /* stays white in dark mode */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);               /* drop shadow */
+}
+
+/*
+--------------------
+Article Page Elements
+--------------------
+*/
+
+.header-line {
+    height: 1px;
+    background: #000;                                       /* black in light mode */
+    opacity: 0.7;
+    border: none;
+    transition: background var(--transition-speed) ease;    /* smooth color change */
+}
+
+body.dark-mode .header-line {
+    background: #fff;                                       /* white in dark mode */
+    opacity: 0.5;
+}
+
+.header-line.top {
+    margin-bottom: 14px;                                    /* article title bottom spacing */
+}
+
+.header-line.bottom {
+    margin-top: 14px;                                       /* article title top spacing */
+}
+
+/* article header wrapper */
+.article-header-wrap {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 24px;
+    padding: 0 24px;
+}
+
+/* article header layout */
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-left h1, #article-title {
+    margin: 0;
+    text-align: left;
+    color: var(--text-color);                               /* uses theme color */
+    transition: color var(--transition-speed) ease;
+}
+
+#article-author {
+    margin: 8px 0 0;
+    font-size: 14px;
+    opacity: 0.8;
+    text-align: left;
+    color: var(--text-color);
+    transition: color var(--transition-speed) ease;
+}
+
+/* return button */
+.return-btn {
+    border: 2px solid #000;
+    padding: 8px 14px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: #000;
+    background: #fff;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .return-btn {
+    border-color: #fff;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);                   /* slight background in dark mode */
+}
+
+/* article content */
+#article-content {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: left;
+}
+
+#article-content p {
+    line-height: 1.7;
+    font-size: 16px;
+    margin: 0 0 18px;
+    max-width: 70ch;
+    color: var(--text-color);
+    transition: color var(--transition-speed) ease;
+}
+
+#article-content h2 {
+    margin: 22px 0 14px;
+    letter-spacing: 0.04em;
+    color: var(--text-color);
+    transition: color var(--transition-speed) ease;
+}
+
+/* subheadings with underline */
+#article-content h3 {
+    position: relative;
+    margin: 28px 0 14px;
+    padding-bottom: 12px;
+    color: var(--text-color);
+    transition: color var(--transition-speed) ease;
+}
+
+#article-content h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #000;
+    opacity: 0.7;
+    transition: background var(--transition-speed) ease;
+}
+
+body.dark-mode #article-content h3::after {
+    background: #fff;
+    opacity: 0.5;
+}
+
+/*
+--------------------
+Scroll To Top Button
+--------------------
+*/
+
+#scrollTopBtn{
+  position: fixed;                                          /* fixed button element on screen */
+  right: 24px;                                              /* spacing to the right of button */
+  bottom: 24px;                                             /* spacing below button */
+  z-index: 200;                                             /* priortisies button over background content */
+  padding: 10px 14px;                                       /* button padding */
+  border-radius: 100px;                                     /* curved button edges */                              
+  border: 3px solid rgba(0, 0, 0, 0.35);                    /* button border */
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(10px);                              /* blurs content behind button */
+  cursor: pointer;                                          /* cursor state interaction change */
+  transition: border-color .25s ease, transform .25s ease;  /* smoothly animates border-color change easing in */
+  display: none;                                            /* hidden until scrolled below top section */
+}
+
+#scrollTopBtn:hover{
+  border-color: orange;                                     /* button hover color */
+  transform: translateY(-2px);                              /* pushes button up animation on hover */
+}
+
+/*
+--------------------
+Bottom Screen Blur
+--------------------
+*/
+
+.bottom-blur {
+  position: fixed;                                          /* positions remains same on whole page */
+  left: 0;                                                  /* positioning left */
+  right: 0;                                                 /* positioning right */
+  bottom: 0;                                                /* positioning bottom */
+  height: 320px;                                            /* blur height */
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.6) 25%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(14px);                              /* blur radius */                      
+  -webkit-backdrop-filter: blur(14px);                      /* blurs content behind the element */
+  pointer-events: none;                                     /* stops content being interacted with behind the blur element */
+  z-index: 100;                                             /* positions the blur over all other content */
+  transition: background var(--transition-speed) ease;
+  /* progressive blur effect */
+  mask-image: linear-gradient(to top,
+    black 0%,
+    black 15%,                                                          
+    rgba(0, 0, 0, 0.85) 35%,
+    rgba(0, 0, 0, 0.6) 55%,
+    rgba(0, 0, 0, 0.3) 75%,
+    rgba(0, 0, 0, 0.1) 88%,
+    rgba(0, 0, 0, 0.03) 95%,
+    transparent 100%
+  );
+}
+
+body.dark-mode .bottom-blur {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.6) 25%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/*
+--------------------
+Authentication Pages
+--------------------
+*/
+
+.auth {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Light mode background layer */
+.auth::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("../images/light_mode_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    transition: opacity var(--transition-speed) ease;
+    z-index: -2;
+}
+
+/* Dark mode background layer */
+.auth::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("../images/dark_mode_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+    z-index: -2;
+}
+
+/* Dark mode - swap opacity */
+body.dark-mode .auth::before {
+    opacity: 0;
+}
+
+body.dark-mode .auth::after {
+    opacity: 1;
+}
+
+/* Blur overlay (now separate) */
+.blur-overlay {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.25);
+    z-index: -1;
+    transition: background var(--transition-speed) ease;
+}
+
+body.dark-mode .blur-overlay {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/*
+--------------------
+Close Login
+--------------------
+*/
+
+.auth-topbar {
+  position: fixed;                                          /* stays at top on scroll */
+  top: 0;
+  left: 0;
+  right: 0;                                                 /* spans full width of screen */
+  background: rgba(0, 0, 0, 0.15);                          /* dark transparent background */
+  padding: 12px 20px;                                       /* spacing inside bar */
+  z-index: 100;                                             /* placed above other content */
+  backdrop-filter: blur(10px);                              
+}
+
+.auth-close {
+  width: 32px;
+  height: 32px;                                            
+  border-radius: 50%;                                       /* makes element circular */
+  border: 1.5px solid transparent;                          /* invisible border shown on hover */
+  display: flex;                                            /* flexbox for centering */
+  align-items: center;                                      /* centers content vertically */
+  justify-content: center;                                  /* centers content horizontally */
+  font-size: 20px;                                                      
+  text-decoration: none;                                    /* removes underline from links */
+  color: #fff;                                              /* font color */
+  transition: all 0.2s;                                     /* smooth animation on hover */
+}
+
+.auth-close:hover {
+  border-color: rgba(255, 255, 255, 0.4);                   /* close button border appears on hover */
+  background: rgba(255, 255, 255, 0.1);                     /* close button background on hover */
+}
+
+/*
+--------------------
+Authentication Modal
+--------------------
+*/
+
+.auth-modal {
+  position: relative;                                              
+  z-index: 1;                                               /* appears above blurred background */
+  width: min(92vw, 520px);                                          
+  border-radius: 16px;                                      /* rounded corners */
+  background: rgba(255, 255, 255, 0.85);                 
+  backdrop-filter: blur(10px);                                         
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);              /* drop shadow */
+}
+
+.auth-step {
+  padding: 32px 36px;                                       /* content spacing */
+}
+
+.auth-step h1 {
+  margin: 0 0 8px;                                          /* bottom margin spacing */
+}
+
+.auth-label {
+  display: block;                                           /* makes label full width */
+  margin-top: 18px;                                         /* spacing above label */
+  font-weight: 500;                                         /* label font weight*/
+}
+
+.auth-modal input {
+  width: 100%;                                              /* full width of container */
+  padding: 12px;                                          
+  margin: 6px 0 14px;                                                
+  border-radius: 8px;                                       /* rounded corners */
+  border: 1px solid #ccc;                              
+  font-size: 15px;                                          /* font size */
+}
+
+.auth-modal input:focus {
+  outline: 2px solid #3d5afe;                               /* outline when input is selected */
+  border-color: #3d5afe;                                    /* border when input is selected */
+}
+
+/*
+--------------------
+Buttons
+--------------------
+*/
+
+.auth-btn {
+  width: 100%;                                              /* button width */
+  margin-top: 16px;                                         /* spacing above button */
+  padding: 12px 18px;                                       /* spacing inside button */
+  border-radius: 100px;                            
+  border: none;                                             /* removes default border */
+  background: #3d5afe;                                      /* button background */
+  color: white;                                             /* button font color */
+  font-size: 15px;                                          /* button font size */
+  font-weight: 500;                                         /* button font weight*/
+  opacity: 0.4;                                             /* button faded when disabled */
+  cursor: not-allowed;                                      /* shows disabled cursor */
+  transition: 0.2s;                              
+}
+
+.auth-btn.enabled {
+  opacity: 1;                                               /* fully visible when enabled */
+  cursor: pointer;                                          /* shows clickable cursor */
+}
+
+.auth-btn.enabled:hover {
+  background: #3347e8;                                      /* background color on hover */
+}
+
+/* stay signed in buttons */
+.stay-options {
+  display: flex;                                            /* displays buttons next to eachother */
+  gap: 14px;                                                /* spacing between buttons */
+  margin: 20px 0 10px;                                      /* spacing above and below */
+}
+
+.stay-choice {
+  flex: 1;                                                             
+  padding: 12px 16px;                                                   
+  border-radius: 10px;                                      /* rounded corners */
+  border: 2px solid rgba(0, 0, 0, 0.15);                    /* button border */
+  background: rgba(255, 255, 255, 0.6);                     /* button background */
+  font-size: 15px;                                          /* button font size */
+  font-weight: 500;                                         /* button font weight */
+  cursor: pointer;                                          
+  transition: all 0.2s;                                            
+}
+
+.stay-choice:hover {
+  border-color: rgba(0, 0, 0, 0.3);                         /* button border on hover */
+  background: rgba(255, 255, 255, 0.8);                     /* button background on hover */
+}
+
+.stay-choice.selected {
+  border-color: #3d5afe;                                    /* button border when selected */
+  background: rgba(61, 90, 254, 0.15);                      /* button background when selected */
+  color: #3d5afe;                                                 
+}
+
+/* password toggle button */
+.pw-toggle {
+  border: 1px solid rgba(0, 0, 0, 0.2);                     /* password button border */
+  background: rgba(255, 255, 255, 0.7);                     /* password button background */
+  border-radius: 8px;                                       /* rounded corners */
+  padding: 10px 14px;                                       /* spacing inside button */
+  font-size: 14px;                                          /* button font size */
+  cursor: pointer;                                                     
+}
+
+.pw-toggle:hover {
+  background: rgba(255, 255, 255, 0.9);                     /* password button background on hover */
+}
+
+/*
+--------------------
+Hyperlinks
+--------------------
+*/
+
+.auth-links {
+  display: flex;                                            /* displays links side by side */
+  justify-content: space-between;                           /* spacing between links */
+  margin-top: 8px;                                          /* spacing above */
+  font-size: 14px;                                          /* font size */
+}
+
+.auth-links a,
+.auth-switch a {
+  color: #3d5afe;                                           /* link color */
+  text-decoration: none;                                    /* removes underline */
+}
+
+.auth-links a:hover,
+.auth-switch a:hover {
+  text-decoration: underline;                               /* underlines on hover */
+}
+
+.auth-switch {
+  margin-top: 16px;                                         /* spacing above */
+  font-size: 14px;                                          /* font size */
+  text-align: center;                                       /* centers text */
+}
+
+.auth-subtext {
+  margin: 8px 0;                                            /* spacing above and below */
+  font-size: 14px;                                    
+  color: #555;                                              /* subtext font color */
+}
+
+/*
+--------------------
+Password Wrapper
+--------------------
+*/
+
+.pw-wrap {
+  display: flex;                                   
+  gap: 10px;                                                /* spacing between input and button */
+  align-items: center;                                      /* vertically aligns input and button */
+}
+
+.pw-wrap input {
+  flex: 1;                                                
+  margin: 6px 0 0;                                          /* removes bottom margin */
+}
