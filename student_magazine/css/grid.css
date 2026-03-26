@@ -247,23 +247,41 @@ Scroll To Top Button
 */
 
 #scrollTopBtn{
-  position: fixed;                                          /* fixed button element on screen */
-  right: 24px;                                              /* spacing to the right of button */
-  bottom: 24px;                                             /* spacing below button */
-  z-index: 200;                                             /* priortisies button over background content */
-  padding: 10px 14px;                                       /* button padding */
-  border-radius: 100px;                                     /* curved button edges */                              
-  border: 3px solid rgba(0, 0, 0, 0.35);                    /* button border */
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(10px);                              /* blurs content behind button */
-  cursor: pointer;                                          /* cursor state interaction change */
-  transition: border-color .25s ease, transform .25s ease;  /* smoothly animates border-color change easing in */
-  display: none;                                            /* hidden until scrolled below top section */
+  position: fixed;
+  right: 24px;
+  bottom: 32px;
+  z-index: 200;
+  padding: 12px 20px;
+  border-radius: 100px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
-#scrollTopBtn:hover{
-  border-color: orange;                                     /* button hover color */
-  transform: translateY(-2px);                              /* pushes button up animation on hover */
+#scrollTopBtn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+#scrollTopBtn:hover {
+  border-color: orange;
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+}
+
+body.dark-mode #scrollTopBtn {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
 }
 
 /*
@@ -273,42 +291,15 @@ Bottom Screen Blur
 */
 
 .bottom-blur {
-  position: fixed;                                          /* positions remains same on whole page */
-  left: 0;                                                  /* positioning left */
-  right: 0;                                                 /* positioning right */
-  bottom: 0;                                                /* positioning bottom */
-  height: 320px;                                            /* blur height */
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0.88) 0%,
-    rgba(255, 255, 255, 0.6) 25%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  backdrop-filter: blur(14px);                              /* blur radius */                      
-  -webkit-backdrop-filter: blur(14px);                      /* blurs content behind the element */
-  pointer-events: none;                                     /* stops content being interacted with behind the blur element */
-  z-index: 100;                                             /* positions the blur over all other content */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 100;
   transition: background var(--transition-speed) ease;
-  /* progressive blur effect */
-  mask-image: linear-gradient(to top,
-    black 0%,
-    black 15%,                                                          
-    rgba(0, 0, 0, 0.85) 35%,
-    rgba(0, 0, 0, 0.6) 55%,
-    rgba(0, 0, 0, 0.3) 75%,
-    rgba(0, 0, 0, 0.1) 88%,
-    rgba(0, 0, 0, 0.03) 95%,
-    transparent 100%
-  );
-}
-
-body.dark-mode .bottom-blur {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.88) 0%,
-    rgba(0, 0, 0, 0.6) 25%,
-    rgba(0, 0, 0, 0) 100%
-  );
 }
 
 /*
@@ -324,6 +315,7 @@ Authentication Pages
     place-items: center;
     padding: 20px;
     overflow: hidden;
+    isolation: isolate;
 }
 
 /* Light mode background layer */

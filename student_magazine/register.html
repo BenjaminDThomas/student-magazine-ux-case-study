@@ -12,9 +12,9 @@
 <body class="auth">
     <!-- Close Overlay Topbar -->
     <div class="auth-topbar">
-        <a class="auth-close" href="index.html" aria-label="Close">×</a>
+        <a class="auth-close" href="index.html" title="Close">&times;</a>
     </div>
-    <main class="auth-modal" role="dialog" aria-modal="true">
+    <main class="auth-modal">
         <!-- Create Account -->
         <section class="auth-step" data-step="reg-email">
         <h1>Create account</h1>
@@ -37,7 +37,7 @@
         <!-- Create Password -->
         <div class="pw-wrap">
             <input id="regPassword" type="password" placeholder="Create a password (min 6 characters)" autocomplete="new-password" />
-            <button type="button" id="toggleRegPw" class="pw-toggle" aria-label="Toggle password visibility">Show</button>
+            <button type="button" id="toggleRegPw" class="pw-toggle" title="Toggle password visibility">Show</button>
         </div>
         <!-- Create Account -->
         <button id="createBtn" class="auth-btn" disabled>Create</button>

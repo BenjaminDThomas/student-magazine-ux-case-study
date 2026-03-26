@@ -13,9 +13,17 @@
     <div class="page-grid">
     <!-- Header -->
     <header>
-        <h1 class="logo">SM</h1>
+        <h1 class="logo">
+            <strong class="logo-sm">S M</strong>
+            <span class="logo-word-cycle">
+                <span class="lw">N<span class="lw-expand">EWS</span></span>
+                <span class="lw">D<span class="lw-expand">ISCOVER</span></span>
+                <span class="lw">S<span class="lw-expand">OCIALISE</span></span>
+            </span>
+        </h1>
         <!-- Theme Toggle -->
-        <button class="theme-toggle" aria-label="Toggle between light and dark mode" aria-pressed="false">
+        <button class="theme-toggle" title="Toggle theme">
+            <span class="visually-hidden">Toggle theme</span>
             <span class="toggle-track">
                 <span class="toggle-thumb"></span>
             </span>
@@ -31,10 +39,10 @@
         </ul>
         <!-- Navigation Bar Icons -->
         <div class="navbar-icons">
-            <a href="login.html" class="icon-btn" aria-label="Login / Profile">
+            <a href="login.html" class="icon-btn" title="Saved articles">
                 <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
             </a>
-            <a href="login.html" class="icon-btn" aria-label="Login / Profile">
+            <a href="login.html" class="icon-btn" title="Profile">
                 <img src="images/profile_picture_image.png" alt="Profile" class="profile-icon"/>
             </a>
         </div>
@@ -61,10 +69,56 @@
     <section id="article-content"></section>
     <hr class="header-line bottom article-bottom-line">
     <!-- Scroll To Top Button -->
-    <button id="scrollTopBtn" aria-label="Scroll to top">Scroll to Top</button>
+    <button id="scrollTopBtn" title="Scroll to top">Scroll to Top</button>
     <!-- Content Blur -->
     <div class="bottom-blur"></div>
     </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <nav class="footer-nav">
+            <p class="footer-animated-logo">
+                <strong class="footer-sm">S M</strong>
+                <span class="footer-word-cycle">
+                    <span class="fw">N<span class="fw-expand">EWS</span></span>
+                    <span class="fw">D<span class="fw-expand">ISCOVER</span></span>
+                    <span class="fw">S<span class="fw-expand">OCIALISE</span></span>
+                </span>
+            </p>
+            <details class="footer-group">
+                <summary>Get Started</summary>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Sign In</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </details>
+            <details class="footer-group">
+                <summary>Discover</summary>
+                <ul>
+                    <li><a href="viewall.html">All Articles</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </details>
+            <details class="footer-group">
+                <summary>Contact</summary>
+                <ul>
+                    <li><a href="#">Get in touch</a></li>
+                </ul>
+            </details>
+        </nav>
+        <hr class="footer-divider">
+        <p class="footer-touch">Get in touch</p>
+        <p class="footer-socials-label">Socials</p>
+        <ul class="footer-socials">
+            <li><a href="#" title="Facebook">f</a></li>
+            <li><a href="#" title="Instagram">ig</a></li>
+            <li><a href="#" title="LinkedIn">in</a></li>
+        </ul>
+        <p class="footer-copyright">
+            <strong class="footer-sm-small">SM</strong>
+            Student Magazine 2026
+        </p>
+    </footer>
     <!-- JavaScript File-->
     <script src="js/theme-toggle.js"></script>
     <script src="js/article.js"></script>

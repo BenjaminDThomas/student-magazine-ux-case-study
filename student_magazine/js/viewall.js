@@ -29,12 +29,11 @@ fetch("../student_magazine/data/articles.json")                                 
         const imageSection = article.sections.find(s => s.type === "image");            // finds first found article image for the banne
         const introSection = article.sections.find(s => s.type === "paragraph");        // finds first paragraph for info regarding the article
         card.innerHTML = `<a href="article.html?id=${article.id}" class="card-link">
-        <img src="${imageSection ? imageSection.src : ""}" />
-        <section class="overlay">
-            <h3>${article.title}</h3>
-            <p>${introSection ? introSection.text.slice(0, 120) + "..." : ""}</p>
-            <span class="read-more">Read More</span>
-        </section></a>`;                                                                // limits overlay section to 120 characters to not extend the length with 'Read More' after the displayed content
+        <img src="${imageSection ? imageSection.src : ""}" alt="${article.title}" />
+        <h3 class="card-title">${article.title}</h3>
+        <p class="card-excerpt">${introSection ? introSection.text.slice(0, 120) + "..." : ""}</p>
+        <span class="card-read-more">Read More \u2192</span>
+        </a>`;                                                                // limits overlay section to 120 characters to not extend the length with 'Read More' after the displayed content
         document.querySelector("#articles-list").appendChild(card);                     // appends the list of article to the wrapper 'card'
     });
 });
