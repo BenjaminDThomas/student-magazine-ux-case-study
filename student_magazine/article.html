@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Magazine Articles</title>
+    <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/style.css">
     <!-- CSS Grid File-->
@@ -14,7 +15,7 @@
     <!-- Header -->
     <header>
         <h1 class="logo">
-            <strong class="logo-sm">S M</strong>
+            <span class="logo-sm">S M</span>
             <span class="logo-word-cycle">
                 <span class="lw">N<span class="lw-expand">EWS</span></span>
                 <span class="lw">D<span class="lw-expand">ISCOVER</span></span>
@@ -35,7 +36,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="viewall.html">News</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#site-footer">Contact</a></li>
         </ul>
         <!-- Navigation Bar Icons -->
         <div class="navbar-icons">
@@ -71,13 +72,13 @@
     <!-- Scroll To Top Button -->
     <button id="scrollTopBtn" title="Scroll to top">Scroll to Top</button>
     <!-- Content Blur -->
-    <div class="bottom-blur"></div>
+    <div class="bottom-blur" aria-hidden="true"></div>
     </div>
     <!-- Footer -->
-    <footer class="site-footer">
-        <nav class="footer-nav">
+    <footer class="site-footer" id="site-footer">
+        <nav class="footer-nav" aria-label="Footer">
             <p class="footer-animated-logo">
-                <strong class="footer-sm">S M</strong>
+                <span class="footer-sm">S M</span>
                 <span class="footer-word-cycle">
                     <span class="fw">N<span class="fw-expand">EWS</span></span>
                     <span class="fw">D<span class="fw-expand">ISCOVER</span></span>
@@ -115,12 +116,13 @@
             <li><a href="#" title="LinkedIn">in</a></li>
         </ul>
         <p class="footer-copyright">
-            <strong class="footer-sm-small">SM</strong>
+            <span class="footer-sm-small">SM</span>
             Student Magazine 2026
         </p>
     </footer>
     <!-- JavaScript File-->
     <script src="js/theme-toggle.js"></script>
+    <script src="js/logo-cycle.js"></script>
     <script src="js/article.js"></script>
     <script src="js/main.js"></script>
 </body>

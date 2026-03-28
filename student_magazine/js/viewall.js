@@ -1,40 +1,183 @@
 /*
 ----------------------
-Retrieve Article File
+View All Articles
 ----------------------
+
+AI provenance:
+- This module was generated and iteratively refined with GitHub Copilot.
+
+Prompt-engineering summary:
+1. Build a full "View All" browsing experience rather than a simple static list.
+2. Add category filtering to quickly narrow article discovery by topic.
+3. Add keyword search with suggestions for titles, authors, and categories.
+4. Keep card interactions clear and UX-focused, including readable excerpts and explicit "Read More".
+5. Support global custom cursor labels (for example, "Explore article") on cards.
+6. Maintain clean structure and semantics while preserving theme compatibility.
 */
 
-fetch("../student_magazine/data/articles.json")                                         // converts json to js
-.then(res => res.json())
-.then(articles => {
-    const container = document.querySelector("#articles-list");                         // selects all articles
-    container.innerHTML = "";
+const listRoot = document.querySelector("#articles-list");
+const searchInput = document.querySelector("#article-search");
+const categoryFilter = document.querySelector("#category-filter");
+const suggestionList = document.querySelector("#article-suggestions");
 
-    const groups = articles.reduce((acc, article) => {                                  // groups articles by category
+let allArticles = [];
+
+function getArticleImage(article) {
+    const imageSection = Array.isArray(article.sections)
+        ? article.sections.find((s) => s.type === "image")
+        : null;
+    return imageSection ? imageSection.src : "";
+}
+
+function getArticleExcerpt(article) {
+    const paragraph = Array.isArray(article.sections)
+        ? article.sections.find((s) => s.type === "paragraph")
+        : null;
+    if (!paragraph || !paragraph.text) {
+        return "";
+    }
+
+    const text = paragraph.text.trim();
+    return text.length > 150 ? `${text.slice(0, 147)}...` : text;
+}
+
+function populateCategories(articles) {
+    if (!categoryFilter) {
+        return;
+    }
+
+    const categories = [...new Set(articles.map((a) => a.category || "Other"))].sort();
+    categoryFilter.innerHTML = '<option value="all">All categories</option>';
+
+    categories.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+    });
+}
+
+function populateSuggestions(articles) {
+    if (!suggestionList) {
+        return;
+    }
+
+    suggestionList.innerHTML = "";
+    const values = new Set();
+
+    articles.forEach((article) => {
+        values.add(article.title);
+        values.add(article.author);
+        values.add(article.category || "Other");
+    });
+
+    [...values].filter(Boolean).slice(0, 40).forEach((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        suggestionList.appendChild(option);
+    });
+}
+
+function renderArticles() {
+    if (!listRoot) {
+        return;
+    }
+
+    const query = (searchInput ? searchInput.value : "").trim().toLowerCase();
+    const selectedCategory = categoryFilter ? categoryFilter.value : "all";
+
+    const filtered = allArticles.filter((article) => {
+        const category = article.category || "Other";
+        if (selectedCategory !== "all" && category !== selectedCategory) {
+            return false;
+        }
+
+        if (!query) {
+            return true;
+        }
+
+        const searchableText = [
+            article.title,
+            article.author,
+            category,
+            getArticleExcerpt(article)
+        ].join(" ").toLowerCase();
+
+        return searchableText.includes(query);
+    });
+
+    const groups = filtered.reduce((acc, article) => {
         const key = article.category || "Other";
-        if (!acc[key]) acc[key] = [];
+        if (!acc[key]) {
+            acc[key] = [];
+        }
         acc[key].push(article);
         return acc;
-        }, {});
+    }, {});
 
-        Object.entries(groups).forEach(([category, items]) => {                         // loads only articles within the associated category
-        const h2 = document.createElement("h2");                                        // creates article category header
-        h2.className = "category-title";                                                // associated category title name
-        h2.textContent = category;
-        container.appendChild(h2);                                                      // appends data to header for article category
+    listRoot.innerHTML = "";
 
-    items.forEach(article => {                                                          // for loop for each article stored
-        const card = document.createElement("div");
-        card.classList.add("article-card");                                             // creates a wrapper for an article
-        const imageSection = article.sections.find(s => s.type === "image");            // finds first found article image for the banne
-        const introSection = article.sections.find(s => s.type === "paragraph");        // finds first paragraph for info regarding the article
-        card.innerHTML = `<a href="article.html?id=${article.id}" class="card-link">
-        <img src="${imageSection ? imageSection.src : ""}" alt="${article.title}" />
-        <h3 class="card-title">${article.title}</h3>
-        <p class="card-excerpt">${introSection ? introSection.text.slice(0, 120) + "..." : ""}</p>
-        <span class="card-read-more">Read More \u2192</span>
-        </a>`;                                                                // limits overlay section to 120 characters to not extend the length with 'Read More' after the displayed content
-        document.querySelector("#articles-list").appendChild(card);                     // appends the list of article to the wrapper 'card'
+    const entries = Object.entries(groups);
+    if (!entries.length) {
+        listRoot.innerHTML = '<p class="viewall-empty">No articles match your search.</p>';
+        return;
+    }
+
+    entries.forEach(([category, items]) => {
+        const heading = document.createElement("h2");
+        heading.className = "category-title";
+        heading.textContent = category;
+        listRoot.appendChild(heading);
+
+        items.forEach((article) => {
+            const card = document.createElement("article");
+            card.className = "article-card";
+
+            const link = document.createElement("a");
+            link.href = `article.html?id=${article.id}`;
+            link.className = "card-link";
+            link.dataset.cursorLabel = "Explore article";
+
+            const image = document.createElement("img");
+            image.src = getArticleImage(article);
+            image.alt = article.title;
+
+            const title = document.createElement("h3");
+            title.className = "card-title";
+            title.textContent = article.title;
+
+            const excerpt = document.createElement("p");
+            excerpt.className = "card-excerpt";
+            excerpt.textContent = getArticleExcerpt(article);
+
+            const readMore = document.createElement("span");
+            readMore.className = "card-read-more";
+            readMore.textContent = "Read More \u2192";
+
+            link.appendChild(image);
+            link.appendChild(title);
+            link.appendChild(excerpt);
+            link.appendChild(readMore);
+            card.appendChild(link);
+
+            listRoot.appendChild(card);
+        });
     });
-});
-});
+}
+
+fetch("../student_magazine/data/articles.json")
+    .then((res) => res.json())
+    .then((articles) => {
+        allArticles = Array.isArray(articles) ? articles : [];
+        populateCategories(allArticles);
+        populateSuggestions(allArticles);
+        renderArticles();
+    });
+
+if (searchInput) {
+    searchInput.addEventListener("input", renderArticles);
+}
+
+if (categoryFilter) {
+    categoryFilter.addEventListener("change", renderArticles);
+}

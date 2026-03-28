@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Magazine</title>
+    <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/style.css">
     <!-- Homepage Carousel Styles -->
@@ -11,13 +12,13 @@
     <!-- CSS Grid File-->
     <link rel="stylesheet" href="css/grid.css">
 </head>
-<body>
+<body class="home-page">
     <!-- Hero Image -->
     <section class="hero">
         <!-- Header -->
         <header>
             <h1 class="logo">
-                <strong class="logo-sm">S M</strong>
+                <span class="logo-sm">S M</span>
                 <span class="logo-word-cycle">
                     <span class="lw">N<span class="lw-expand">EWS</span></span>
                     <span class="lw">D<span class="lw-expand">ISCOVER</span></span>
@@ -38,7 +39,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="viewall.html">News</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#site-footer">Contact</a></li>
             </ul>
             <!-- Navigation Bar Icons -->
             <div class="navbar-icons">
@@ -72,10 +73,10 @@
         </div>
     </section>
     <!-- Footer -->
-    <footer class="site-footer">
-        <nav class="footer-nav">
+    <footer class="site-footer" id="site-footer">
+        <nav class="footer-nav" aria-label="Footer">
             <p class="footer-animated-logo">
-                <strong class="footer-sm">S M</strong>
+                <span class="footer-sm">S M</span>
                 <span class="footer-word-cycle">
                     <span class="fw">N<span class="fw-expand">EWS</span></span>
                     <span class="fw">D<span class="fw-expand">ISCOVER</span></span>
@@ -113,12 +114,41 @@
             <li><a href="#" title="LinkedIn">in</a></li>
         </ul>
         <p class="footer-copyright">
-            <strong class="footer-sm-small">SM</strong>
+            <span class="footer-sm-small">SM</span>
             Student Magazine 2026
         </p>
     </footer>
+    <!-- Mobile hamburger button — fixed bottom-right (thumb zone) -->
+    <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Mobile nav drawer — slides up from bottom -->
+    <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="viewall.html">News</a></li>
+            <li><a href="#site-footer">Contact</a></li>
+        </ul>
+        <div class="mobile-drawer-icons">
+            <a href="login.html" class="icon-btn" title="Saved articles">
+                <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
+            </a>
+            <a href="login.html" class="icon-btn" title="Profile">
+                <img src="images/profile_picture_image.png" alt="Profile" class="profile-icon"/>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Backdrop overlay behind drawer -->
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
+
     <!-- JavaScript File-->
     <script src="js/theme-toggle.js"></script>
+    <script src="js/logo-cycle.js"></script>
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
 </body>

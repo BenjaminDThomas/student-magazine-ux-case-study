@@ -14,6 +14,7 @@ html, body {
     overflow-x: hidden;                                     /* stops horizontal overflow */
     color: var(--text-color);
     background-color: var(--bg-color);
+    font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
@@ -50,7 +51,7 @@ Theme Slider
 }
 
 /* dark mode */
-body.dark-mode .toggle-track {
+html.dark-mode .toggle-track {
     background: rgba(255, 255, 255, 0.15);                  /* slider background */
     border-color: rgba(255, 255, 255, 0.3);                 /* slider white border */
 }
@@ -82,11 +83,11 @@ body.dark-mode .toggle-track {
     z-index: 1;
 }
 
-body.dark-mode .toggle-track::before {
+html.dark-mode .toggle-track::before {
     opacity: 0.3;                                           /* fade black dash in dark mode */
 }
 
-body.dark-mode .toggle-track::after {
+html.dark-mode .toggle-track::after {
     opacity: 1;                                             /* brighten white dash in dark mode */
 }
 
@@ -105,7 +106,7 @@ body.dark-mode .toggle-track::after {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);               /* drop shadow */
 }
 
-body.dark-mode .toggle-thumb {
+html.dark-mode .toggle-thumb {
     left: calc(100% - 34px);                                /* slides to right */
     background: #fff;                                       /* stays white in dark mode */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);               /* drop shadow */
@@ -125,7 +126,7 @@ Article Page Elements
     transition: background var(--transition-speed) ease;    /* smooth color change */
 }
 
-body.dark-mode .header-line {
+html.dark-mode .header-line {
     background: #fff;                                       /* white in dark mode */
     opacity: 0.5;
 }
@@ -157,6 +158,8 @@ body.dark-mode .header-line {
 .header-left h1, #article-title {
     margin: 0;
     text-align: left;
+    font-size: clamp(28px, 4.2vw, 46px);
+    line-height: 1.1;
     color: var(--text-color);                               /* uses theme color */
     transition: color var(--transition-speed) ease;
 }
@@ -183,7 +186,7 @@ body.dark-mode .header-line {
     transition: all 0.3s ease;
 }
 
-body.dark-mode .return-btn {
+html.dark-mode .return-btn {
     border-color: #fff;
     color: #fff;
     background: rgba(255, 255, 255, 0.1);                   /* slight background in dark mode */
@@ -196,19 +199,24 @@ body.dark-mode .return-btn {
     margin: 0 auto;
     padding: 0 24px;
     text-align: left;
+  display: grid;
+  gap: 26px;
 }
 
 #article-content p {
-    line-height: 1.7;
-    font-size: 16px;
-    margin: 0 0 18px;
+  line-height: 1.68;
+  font-size: clamp(16px, 2vw, 25px);
+  margin: 0;
     max-width: 70ch;
+  width: min(70ch, 100%);
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
 }
 
 #article-content h2 {
-    margin: 22px 0 14px;
+  margin: 8px 0 4px;
+  font-size: clamp(20px, 2.2vw, 30px);
+  line-height: 1.2;
     letter-spacing: 0.04em;
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
@@ -217,8 +225,10 @@ body.dark-mode .return-btn {
 /* subheadings with underline */
 #article-content h3 {
     position: relative;
-    margin: 28px 0 14px;
-    padding-bottom: 12px;
+  margin: 26px 0 8px;
+  padding-bottom: 14px;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.2;
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
 }
@@ -235,7 +245,7 @@ body.dark-mode .return-btn {
     transition: background var(--transition-speed) ease;
 }
 
-body.dark-mode #article-content h3::after {
+html.dark-mode #article-content h3::after {
     background: #fff;
     opacity: 0.5;
 }
@@ -278,7 +288,7 @@ Scroll To Top Button
   transform: translateY(-2px);
 }
 
-body.dark-mode #scrollTopBtn {
+html.dark-mode #scrollTopBtn {
   border-color: rgba(255, 255, 255, 0.2);
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -347,11 +357,11 @@ Authentication Pages
 }
 
 /* Dark mode - swap opacity */
-body.dark-mode .auth::before {
+html.dark-mode .auth::before {
     opacity: 0;
 }
 
-body.dark-mode .auth::after {
+html.dark-mode .auth::after {
     opacity: 1;
 }
 
@@ -365,7 +375,7 @@ body.dark-mode .auth::after {
     transition: background var(--transition-speed) ease;
 }
 
-body.dark-mode .blur-overlay {
+html.dark-mode .blur-overlay {
     background: rgba(0, 0, 0, 0.4);
 }
 

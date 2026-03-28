@@ -114,8 +114,8 @@ Carousel Contextual Cursor
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    background: #ffffff;
-    color: #111111;
+    background: #111111;
+    color: #ffffff;
     font-size: 12px;
     font-weight: 700;
     font-family: inherit;
@@ -126,6 +126,11 @@ Carousel Contextual Cursor
     opacity: 0;
     transform: translate(16px, -42px);
     transition: opacity 0.15s ease;
+}
+
+html.dark-mode #carousel-cursor {
+    background: #ffffff;
+    color: #111111;
 }
 
 #carousel-cursor.visible {
@@ -291,7 +296,7 @@ Carousel Contextual Cursor
     text-align: left;
 }
 
-body.dark-mode .carousel-progress-wrap {
+html.dark-mode .carousel-progress-wrap {
     border-color: rgba(255, 255, 255, 0.18);
     background: rgba(24, 24, 24, 0.72);
 }
@@ -314,8 +319,12 @@ body.dark-mode .carousel-progress-wrap {
     transition: background 0.25s ease, transform 0.25s ease;
 }
 
-body.dark-mode .carousel-dot {
+html.dark-mode .carousel-dot {
     background: rgba(255, 255, 255, 0.25);
+}
+
+html.dark-mode .carousel-dot.active {
+    background: orange;
 }
 
 .carousel-dot.active {
@@ -327,7 +336,7 @@ body.dark-mode .carousel-dot {
     background: rgba(0, 0, 0, 0.42);
 }
 
-body.dark-mode .carousel-dot:hover:not(.active) {
+html.dark-mode .carousel-dot:hover:not(.active) {
     background: rgba(255, 255, 255, 0.5);
 }
 
@@ -364,7 +373,7 @@ body.dark-mode .carousel-dot:hover:not(.active) {
     border-radius: 999px;
 }
 
-body.dark-mode .carousel-progress::-webkit-progress-bar {
+html.dark-mode .carousel-progress::-webkit-progress-bar {
     background: rgba(255, 255, 255, 0.15);
 }
 

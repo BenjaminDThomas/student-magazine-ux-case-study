@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View All Articles</title>
+    <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/style.css">
+    <!-- View All Page Styles -->
+    <link rel="stylesheet" href="css/viewall.css">
     <!-- CSS Grid File-->
     <link rel="stylesheet" href="css/grid.css">
 </head>
-<body>
+<body class="viewall-page">
     <!-- Header -->
     <header>
         <h1 class="logo">
-            <strong class="logo-sm">S M</strong>
+            <span class="logo-sm">S M</span>
             <span class="logo-word-cycle">
                 <span class="lw">N<span class="lw-expand">EWS</span></span>
                 <span class="lw">D<span class="lw-expand">ISCOVER</span></span>
@@ -34,7 +37,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="viewall.html">News</a></li>
-            <li><a href="#">Contact</a></li>
+                <li><a href="#site-footer">Contact</a></li>
         </ul>
         <!-- Navigation Bar Icons -->
         <div class="navbar-icons">
@@ -50,14 +53,32 @@
     <hr class="header-line">
     <section class="page-container">
         <h1>All Articles</h1>
+        <section class="viewall-tools" aria-label="Article filters">
+            <label class="visually-hidden" for="article-search">Search articles</label>
+            <input id="article-search" class="viewall-search" type="search" placeholder="Search by title, author or keyword" list="article-suggestions" autocomplete="off">
+            <datalist id="article-suggestions"></datalist>
+
+            <label class="visually-hidden" for="category-filter">Filter by category</label>
+            <select id="category-filter" class="viewall-filter">
+                <option value="all">All categories</option>
+            </select>
+        </section>
         <!-- All Articles-->
         <section id="articles-list"></section>
+
+        <section class="viewall-endcap" aria-label="Continue exploring">
+            <h2>Keep Exploring Student Life</h2>
+            <p>Browse more stories, support resources, and opportunities designed to help you thrive on campus.</p>
+            <p class="viewall-endcap-actions">
+                <a href="#">About Student Magazine</a>
+            </p>
+        </section>
     </section> 
     <!-- Footer -->
-    <footer class="site-footer">
-        <nav class="footer-nav">
+    <footer class="site-footer" id="site-footer">
+        <nav class="footer-nav" aria-label="Footer">
             <p class="footer-animated-logo">
-                <strong class="footer-sm">S M</strong>
+                <span class="footer-sm">S M</span>
                 <span class="footer-word-cycle">
                     <span class="fw">N<span class="fw-expand">EWS</span></span>
                     <span class="fw">D<span class="fw-expand">ISCOVER</span></span>
@@ -95,12 +116,14 @@
             <li><a href="#" title="LinkedIn">in</a></li>
         </ul>
         <p class="footer-copyright">
-            <strong class="footer-sm-small">SM</strong>
+            <span class="footer-sm-small">SM</span>
             Student Magazine 2026
         </p>
     </footer>
     <!-- JavaScript File-->
     <script src="js/viewall.js"></script>
     <script src="js/theme-toggle.js"></script>
+    <script src="js/logo-cycle.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
