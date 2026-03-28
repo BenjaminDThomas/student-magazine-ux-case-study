@@ -68,16 +68,58 @@ Prompt-engineering summary:
     let pendingDirection = 0;
     let isCarouselVisible = false;
 
+    async function loadArticles() {
+        const candidates = [
+            "data/articles.json",
+            "/data/articles.json",
+            "../data/articles.json",
+            "../student_magazine/data/articles.json",
+            "student_magazine/data/articles.json"
+        ];
+
+        for (const url of candidates) {
+            try {
+                const response = await fetch(url, { cache: "no-cache" });
+                if (!response.ok) {
+                    continue;
+                }
+
+                const contentType = response.headers.get("content-type") || "";
+                if (!contentType.toLowerCase().includes("application/json")) {
+                    continue;
+                }
+
+                const data = await response.json();
+                return Array.isArray(data) ? data : [];
+            } catch {
+                // Try the next candidate path.
+            }
+        }
+
+        return [];
+    }
+
     function getRealIndex() {
         // Map current track index (with clones) to the real article index.
         return ((trackIndex - 2) + articles.length) % articles.length;
+    }
+
+    function normalizeAssetPath(path) {
+        if (!path) {
+            return "";
+        }
+
+        return path
+            .replace(/^\/?student_magazine\//, "")
+            .replace(/^(\.\.\/)+student_magazine\//, "")
+            .replace(/^(\.\.\/)+/, "");
     }
 
     function getArticleImage(article) {
         // Prefer first image section; use a fallback if article data is incomplete.
         const sections = Array.isArray(article.sections) ? article.sections : [];
         const imageSection = sections.find((section) => section.type === "image");
-        return imageSection ? imageSection.src : "images/light_mode_background.png";
+        return imageSection ? normalizeAssetPath(imageSection.src) : "images/light_mode_background.png";
     }
 
     function getArticleExcerpt(article, maxLen) {
@@ -471,8 +513,7 @@ Prompt-engineering summary:
         startCycle();
     });
 
-    fetch("data/articles.json")
-        .then((response) => response.json())
+    loadArticles()
         .then((data) => {
             // Require at least 3 stories so side previews remain meaningful.
             articles = Array.isArray(data) ? data.slice(0, Math.max(data.length, 3)) : [];

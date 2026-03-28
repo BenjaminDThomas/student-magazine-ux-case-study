@@ -22,11 +22,53 @@ const suggestionList = document.querySelector("#article-suggestions");
 
 let allArticles = [];
 
+async function loadArticles() {
+    const candidates = [
+        "data/articles.json",
+        "/data/articles.json",
+        "../data/articles.json",
+        "../student_magazine/data/articles.json",
+        "student_magazine/data/articles.json"
+    ];
+
+    for (const url of candidates) {
+        try {
+            const res = await fetch(url, { cache: "no-cache" });
+            if (!res.ok) {
+                continue;
+            }
+
+            const contentType = res.headers.get("content-type") || "";
+            if (!contentType.toLowerCase().includes("application/json")) {
+                continue;
+            }
+
+            const data = await res.json();
+            return Array.isArray(data) ? data : [];
+        } catch {
+            // Try the next candidate path.
+        }
+    }
+
+    return [];
+}
+
+function normalizeAssetPath(path) {
+    if (!path) {
+        return "";
+    }
+
+    return path
+        .replace(/^\/?student_magazine\//, "")
+        .replace(/^(\.\.\/)+student_magazine\//, "")
+        .replace(/^(\.\.\/)+/, "");
+}
+
 function getArticleImage(article) {
     const imageSection = Array.isArray(article.sections)
         ? article.sections.find((s) => s.type === "image")
         : null;
-    return imageSection ? imageSection.src : "";
+    return imageSection ? normalizeAssetPath(imageSection.src) : "";
 }
 
 function getArticleExcerpt(article) {
@@ -165,14 +207,12 @@ function renderArticles() {
     });
 }
 
-fetch("../student_magazine/data/articles.json")
-    .then((res) => res.json())
-    .then((articles) => {
-        allArticles = Array.isArray(articles) ? articles : [];
-        populateCategories(allArticles);
-        populateSuggestions(allArticles);
-        renderArticles();
-    });
+loadArticles().then((articles) => {
+    allArticles = articles;
+    populateCategories(allArticles);
+    populateSuggestions(allArticles);
+    renderArticles();
+});
 
 if (searchInput) {
     searchInput.addEventListener("input", renderArticles);

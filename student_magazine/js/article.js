@@ -7,19 +7,63 @@ Read URL ID
 const paramater = new URLSearchParams(window.location.search);                  // read id from url
 const articleId = paramater.get("id");                                          // extract id value from search
 
+function normalizeAssetPath(path) {
+  if (!path) {
+    return "";
+  }
+
+  return path
+    .replace(/^\/?student_magazine\//, "")
+    .replace(/^(\.\.\/)+student_magazine\//, "")
+    .replace(/^(\.\.\/)+/, "");
+}
+
+async function loadArticles() {
+  const candidates = [
+    "data/articles.json",
+    "/data/articles.json",
+    "../data/articles.json",
+    "../student_magazine/data/articles.json",
+    "student_magazine/data/articles.json"
+  ];
+
+  for (const url of candidates) {
+    try {
+      const response = await fetch(url, { cache: "no-cache" });
+      if (!response.ok) {
+        continue;
+      }
+
+      const contentType = response.headers.get("content-type") || "";
+      if (!contentType.toLowerCase().includes("application/json")) {
+        continue;
+      }
+
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+    } catch {
+      // Try the next candidate path.
+    }
+  }
+
+  return [];
+}
+
 /*
 ----------------------
 Retrieve Article File
 ----------------------
 */
 
-fetch("../student_magazine/data/articles.json")
-.then(response => response.json())                                              // converts json to js
-.then(articles => {
+loadArticles().then(articles => {
     let article = articles.find(a => a.id == articleId);                        // loops through articles so article id matches
     if(!article){
         article = articles[0];                                                  // if no matches found, shows first article
     }
+
+  if (!article) {
+    return;
+  }
 
     document.querySelector("#article-title").textContent = article.title;       // returns first matching element for 'article-title'
     document.querySelector("#article-author").textContent = article.author;     // returns first matching element for 'article-author'
@@ -77,7 +121,7 @@ fetch("../student_magazine/data/articles.json")
 
     if (imageCount === 1) {
       const img = document.createElement("img");                                // creates image element
-      img.src = section.src;
+      img.src = normalizeAssetPath(section.src);
       img.classList.add("article-banner");                                      
       contentSection.appendChild(img);                                          // appends content to image
     } else {
@@ -86,7 +130,7 @@ fetch("../student_magazine/data/articles.json")
       row.classList.add((imageCount - 2) % 2 === 0 ? "left" : "right");         // keeps track of imageCount to set image either left or right
 
       const img = document.createElement("img");                                // creates image element
-      img.src = section.src;
+      img.src = normalizeAssetPath(section.src);
       img.classList.add("media-img");                                           // assigns class 'media-img' to the image element
 
       const text = document.createElement("div");
