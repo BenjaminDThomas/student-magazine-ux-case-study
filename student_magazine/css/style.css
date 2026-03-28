@@ -40,39 +40,12 @@ Logo
     animation: none;
 }
 
-.lw:nth-child(1) { animation-delay: 0s; }
-.lw:nth-child(2) { animation-delay: 3s; }
-.lw:nth-child(3) { animation-delay: 6s; }
-
 .lw-expand {
     display: inline-block;
     overflow: visible;
     max-width: none;
     vertical-align: bottom;
     animation: none;
-}
-
-.lw:nth-child(1) .lw-expand { animation-delay: 0s; }
-.lw:nth-child(2) .lw-expand { animation-delay: 3s; }
-.lw:nth-child(3) .lw-expand { animation-delay: 6s; }
-
-@keyframes lw-cycle {
-    0%      { opacity: 0; }
-    2%      { opacity: 1; }
-    31%     { opacity: 1; }
-    33.33%  { opacity: 0; }
-    100%    { opacity: 0; }
-}
-
-@keyframes lw-expand {
-    0%      { max-width: 0; }
-    5%      { max-width: 0; }
-    8%      { max-width: 0; }
-    18%     { max-width: 10em; }
-    24%     { max-width: 10em; }
-    30%     { max-width: 0; }
-    33.33%  { max-width: 0; }
-    100%    { max-width: 0; }
 }
 
 .logo-word-display {
@@ -849,13 +822,54 @@ Mobile Layout
 
     .footer-nav {
         grid-template-columns: 1fr;
-        gap: 0;
+        gap: 24px;
+        text-align: left;
+    }
+
+    .footer-col-title {
+        text-align: left;
+    }
+
+    .footer-animated-logo {
+        text-align: left;
+        justify-self: start;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .footer-contact-area {
+        width: 100%;
+    }
+
+    .footer-typewriter {
+        text-align: left;
+    }
+
+    .footer-right {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .footer-socials {
+        justify-content: center;
+        width: fit-content;
+        align-self: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-copyright {
+        align-self: flex-start;
     }
 }
 
 /*
 ----------------------
-Visually Hidden (accessible text)
+Visually Hidden
 ----------------------
 */
 
@@ -929,64 +943,8 @@ Site Footer
     margin-top: 60px;
 }
 
-/* Dark mode: flip footer to white so it visually separates from the dark page */
 html.dark-mode .site-footer {
     --footer-bg: #f5f5f5;
-    color: #1a1a1a;
-}
-
-html.dark-mode .footer-sm {
-    color: #1a1a1a;
-}
-
-html.dark-mode .fw {
-    color: #1a1a1a;
-}
-
-html.dark-mode .footer-group {
-    border-bottom-color: rgba(0, 0, 0, 0.12);
-}
-
-html.dark-mode .footer-group summary {
-    color: #1a1a1a;
-}
-
-html.dark-mode .footer-group ul a {
-    color: #555;
-}
-
-html.dark-mode .footer-group ul a:hover {
-    color: #e07b00;
-}
-
-html.dark-mode .footer-divider {
-    border-top-color: rgba(0, 0, 0, 0.12);
-}
-
-html.dark-mode .footer-touch {
-    color: #333;
-}
-
-html.dark-mode .footer-socials-label {
-    color: #666;
-}
-
-html.dark-mode .footer-socials a {
-    border-color: rgba(0, 0, 0, 0.25);
-    color: #1a1a1a;
-}
-
-html.dark-mode .footer-socials a:hover {
-    border-color: #e07b00;
-    background: rgba(224, 123, 0, 0.1);
-}
-
-html.dark-mode .footer-copyright {
-    color: #666;
-}
-
-html.dark-mode .footer-sm-small {
-    background: #ddd;
     color: #1a1a1a;
 }
 
@@ -1003,15 +961,13 @@ html.dark-mode .footer-sm-small {
     pointer-events: none;
 }
 
-/* Footer navigation layout */
 .footer-nav {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
     align-items: start;
 }
 
-/* Animated logo in footer */
 .footer-animated-logo {
     line-height: 1.1;
     margin: 0;
@@ -1025,6 +981,10 @@ html.dark-mode .footer-sm-small {
     letter-spacing: 0.01em;
     word-spacing: -0.16em;
     font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html.dark-mode .footer-sm {
+    color: #1a1a1a;
 }
 
 .footer-word-cycle {
@@ -1045,9 +1005,9 @@ html.dark-mode .footer-sm-small {
     animation: none;
 }
 
-.fw:nth-child(1) { animation-delay: 0s; }
-.fw:nth-child(2) { animation-delay: 3s; }
-.fw:nth-child(3) { animation-delay: 6s; }
+html.dark-mode .fw {
+    color: #1a1a1a;
+}
 
 .fw-expand {
     display: inline-block;
@@ -1057,89 +1017,123 @@ html.dark-mode .footer-sm-small {
     animation: none;
 }
 
-.fw:nth-child(1) .fw-expand { animation-delay: 0s; }
-.fw:nth-child(2) .fw-expand { animation-delay: 3s; }
-.fw:nth-child(3) .fw-expand { animation-delay: 6s; }
-
-/* Footer accordion groups */
-.footer-group {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding-bottom: 12px;
-}
-
-.footer-group summary {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 15px;
+/* Flat nav columns */
+.footer-col-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
     color: #fff;
+    font-weight: 700;
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+html.dark-mode .footer-col-title {
+    color: #1a1a1a;
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.footer-col ul {
     list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
+    margin: 0;
+    padding: 0;
 }
 
-.footer-group summary::-webkit-details-marker {
-    display: none;
+.footer-col ul li {
+    margin-bottom: 8px;
 }
 
-.footer-group summary::after {
-    content: "+";
-    font-size: 18px;
-    font-weight: 300;
-    transition: transform 0.3s ease;
-}
-
-.footer-group[open] summary::after {
-    content: "\2212";
-}
-
-.footer-group ul {
-    list-style: none;
-    padding: 8px 0 0;
-}
-
-.footer-group ul li {
-    margin-bottom: 6px;
-}
-
-.footer-group ul a {
+.footer-col ul a {
     color: #aaa;
     text-decoration: none;
     font-size: 14px;
     transition: color 0.2s;
 }
 
-.footer-group ul a:hover {
+.footer-col ul a:hover {
     color: orange;
 }
 
-/* Footer bottom section */
+html.dark-mode .footer-col ul a {
+    color: #555;
+}
+
+html.dark-mode .footer-col ul a:hover {
+    color: #e07b00;
+}
+
+/* ── Divider ── */
 .footer-divider {
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 32px 0;
 }
 
-.footer-touch {
+html.dark-mode .footer-divider {
+    border-top-color: rgba(0, 0, 0, 0.12);
+}
+
+/* contact typewriter + socials */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+}
+
+.footer-contact-area {
+    flex: 1;
+}
+
+.footer-typewriter {
     font-size: 14px;
-    margin-bottom: 16px;
     color: #ccc;
+    line-height: 1.7;
+    min-height: 2.4em;
 }
 
-.footer-socials-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #888;
-    margin-bottom: 12px;
+html.dark-mode .footer-typewriter {
+    color: #333;
+}
+
+.footer-tw-text {
+    white-space: pre-wrap;
+}
+
+.footer-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 0.9em;
+    background: orange;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+    animation: footer-cursor-blink 0.85s step-end infinite;
+}
+
+.footer-cursor--done {
+    animation: none;
+    opacity: 0;
+}
+
+@keyframes footer-cursor-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
 }
 
 .footer-socials {
     display: flex;
-    gap: 14px;
+    gap: 12px;
     list-style: none;
-    margin-bottom: 24px;
+    margin: 0;
+    padding: 0;
 }
 
 .footer-socials a {
@@ -1162,12 +1156,27 @@ html.dark-mode .footer-sm-small {
     background: rgba(255, 165, 0, 0.15);
 }
 
+html.dark-mode .footer-socials a {
+    border-color: rgba(0, 0, 0, 0.25);
+    color: #1a1a1a;
+}
+
+html.dark-mode .footer-socials a:hover {
+    border-color: #e07b00;
+    background: rgba(224, 123, 0, 0.1);
+}
+
 .footer-copyright {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: 18px;
     font-size: 13px;
     color: #777;
+}
+
+html.dark-mode .footer-copyright {
+    color: #666;
 }
 
 .footer-sm-small {
@@ -1181,5 +1190,10 @@ html.dark-mode .footer-sm-small {
     font-size: 10px;
     font-weight: 900;
     color: #fff;
+}
+
+html.dark-mode .footer-sm-small {
+    background: #ddd;
+    color: #1a1a1a;
 }
 

@@ -76,10 +76,6 @@ Homepage Featured Carousel
     box-shadow: none;
 }
 
-.carousel-slide.active:hover {
-    transform: scale(1.03);
-}
-
 .carousel-slide.active:hover img {
     transform: scale(1.12);
     transition: transform 0.45s ease;
@@ -381,10 +377,6 @@ html.dark-mode .carousel-progress::-webkit-progress-bar {
     .featured-carousel {
         width: 100%;
         margin-top: 38px;
-    }
-
-    .carousel-shell {
-        overflow: visible;
     }
 
     .carousel-track {

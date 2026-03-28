@@ -179,14 +179,14 @@ View All Articles Page
     opacity: 0.82;
 }
 
-.viewall-page .viewall-endcap-actions {
-    margin-top: 14px;
+.viewall-page .viewall-endcap p.viewall-endcap-actions {
+    margin-top: 24px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.viewall-page .viewall-endcap-actions a {
+.viewall-page .viewall-endcap p.viewall-endcap-actions a {
     text-decoration: none;
     color: var(--text-color);
     border: 1px solid var(--border-color);
@@ -196,7 +196,7 @@ View All Articles Page
     transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.viewall-page .viewall-endcap-actions a:hover {
+.viewall-page .viewall-endcap p.viewall-endcap-actions a:hover {
     border-color: color-mix(in srgb, var(--text-color) 50%, var(--border-color));
     background: color-mix(in srgb, var(--bg-color) 84%, var(--text-color) 16%);
 }

@@ -188,3 +188,58 @@ if (mobileMenuBtn && mobileNavDrawer) {
         link.addEventListener("click", closeDrawer);
     });
 }
+
+/*
+----------------------
+Footer Contact Typewriter
+----------------------
+*/
+
+(function initFooterTypewriter() {
+    const textEl = document.getElementById("footer-tw-text");
+    const cursorEl = document.querySelector(".footer-cursor");
+    if (!textEl) return;
+
+    const CONTACT = "Phone number: +44 1234 567890\nEmail: adminAccount@gmail.com";
+    let triggered = false;
+
+    function sleep(ms) {
+        return new Promise(function (resolve) { setTimeout(resolve, ms); });
+    }
+
+    async function untype() {
+        while (textEl.textContent.length > 0) {
+            textEl.textContent = textEl.textContent.slice(0, -1);
+            await sleep(55);
+        }
+    }
+
+    async function type(text) {
+        for (const char of text) {
+            textEl.textContent += char;
+            await sleep(38);
+        }
+    }
+
+    async function runSequence() {
+        if (triggered) return;
+        triggered = true;
+        await sleep(350);
+        await untype();
+        await sleep(180);
+        await type(CONTACT);
+        if (cursorEl) cursorEl.classList.add("footer-cursor--done");
+    }
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                runSequence();
+                observer.disconnect();
+            }
+        });
+    }, { threshold: 0.05 });
+
+    const area = document.getElementById("footer-contact-area");
+    if (area) observer.observe(area);
+}());
