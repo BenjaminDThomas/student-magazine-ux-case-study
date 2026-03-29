@@ -1,0 +1,101 @@
+/* Bottom blur */
+.page-bottom-blur {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 100px;
+    pointer-events: none;
+    z-index: 90;
+    --blur-color: var(--bg-color);
+    background: linear-gradient(
+        to top,
+        var(--blur-color) 0%,
+        color-mix(in srgb, var(--blur-color) 70%, transparent) 45%,
+        color-mix(in srgb, var(--blur-color) 20%, transparent) 72%,
+        transparent 100%
+    );
+    transition: background 0.35s ease;
+}
+.page-bottom-blur.over-dark      { --blur-color: #1a1a1a; }
+html.dark-mode .page-bottom-blur { --blur-color: #1a1a1a; }
+.bottom-blur { display: none !important; }
+
+/* Discover section */
+.articles-browse {
+    position: relative;
+    padding: clamp(60px, 8vw, 110px) 0 clamp(80px, 10vw, 130px);
+    overflow: hidden;
+}
+
+.browse-heading {
+    font-size: clamp(32px, 6vw, 80px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-align: center;
+    margin: 0 0 clamp(48px, 6vw, 80px);
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.browse-tags {
+    position: relative;
+    width: 100%;
+    height: clamp(280px, 40vw, 440px);
+    margin: 0 0 clamp(48px, 6vw, 72px);
+}
+
+.browse-tag {
+    position: absolute;
+    left: 50%;
+    white-space: nowrap;
+    font-size: clamp(20px, 2.8vw, 36px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.15;
+    color: var(--text-color);
+    opacity: 0;
+    transform: translateX(-50%);
+    will-change: transform, opacity;
+}
+
+/* Vertical positions */
+.tag-campus  { top: 0%; }
+.tag-careers  { top: 22%; }
+.tag-societies      { top: 44%; }
+.tag-support        { top: 66%; }
+.tag-offers { top: 86%; }
+
+/* CTA */
+.browse-cta {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 5vw;
+    text-align: left;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+.browse-body {
+    font-size: clamp(14px, 1.5vw, 17px);
+    line-height: 1.7;
+    opacity: 0.7;
+    margin: 0 0 24px;
+}
+.browse-btn-wrap { display: flex; justify-content: center; }
+.browse-btn {
+    display: inline-flex;
+    text-decoration: none;
+    background: var(--text-color);
+    color: var(--bg-color);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 999px;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.browse-btn:hover { opacity: 0.8; transform: translateY(-2px); }
+
+@media (max-width: 600px) {
+    .browse-tag  { font-size: clamp(16px, 5vw, 24px); }
+    .browse-tags { height: clamp(320px, 90vw, 500px); }
+}
