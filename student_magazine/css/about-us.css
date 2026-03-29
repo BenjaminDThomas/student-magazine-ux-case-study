@@ -1,0 +1,147 @@
+/*
+  About Us Scroll Section
+*/
+
+.about-us-section {
+    position: relative;
+    min-height: 82vh;
+    margin-top: clamp(28px, 3vw, 44px);
+    scroll-margin-top: 60px;
+    --au-bg: color-mix(in srgb, var(--bg-color) 96%, var(--text-color) 4%);
+    --au-outline: color-mix(in srgb, var(--text-color) 26%, transparent);
+    background: color-mix(in srgb, var(--bg-color) 96%, var(--text-color) 4%);
+    will-change: transform;
+}
+
+.about-us-sticky {
+    position: sticky;
+    top: 0;
+    min-height: 78vh;
+    padding: clamp(20px, 2.4vw, 30px) 0 clamp(8px, 1.4vw, 16px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow: hidden;
+}
+
+/* ---- heading row: repeated labels ---- */
+
+.about-us-heading-row {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 14%, transparent);
+    padding: 0 0 12px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.about-us-heading-track {
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 36px);
+    width: max-content;
+    will-change: transform;
+}
+
+.au-label {
+    flex-shrink: 0;
+    width: clamp(120px, 18vw, 220px);
+    height: clamp(30px, 5vw, 56px);
+    overflow: visible;
+}
+
+.au-text-stroke {
+    font-family: inherit;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    fill: none;
+    stroke: var(--au-outline);
+    stroke-width: 2.4px;
+}
+
+.au-text-knock {
+    font-family: inherit;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    fill: var(--au-bg);
+    stroke: none;
+}
+
+/* Active state — solid fill, no stroke (JS-driven, CSS fallback) */
+.au-label.au-active .au-text-stroke {
+    fill: var(--text-color);
+    stroke: none;
+}
+
+.au-label.au-active .au-text-knock {
+    display: none;
+}
+
+/* ---- reading area ---- */
+
+.about-us-reading {
+    width: min(80vw, 1120px);
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 3vw, 32px);
+}
+
+.about-us-block {
+    margin: 0;
+    font-size: clamp(15px, 1.5vw, 22px);
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+}
+
+/* ---- word chunks (JS-created spans) ---- */
+
+.au-chunk {
+    opacity: 0.12;
+    font-weight: 400;
+    color: var(--text-color);
+    transition: opacity 0.45s ease, font-weight 0.45s ease;
+}
+
+/* ---- dark mode ---- */
+
+html.dark-mode .about-us-section {
+    --au-bg: color-mix(in srgb, var(--bg-color) 92%, var(--text-color) 8%);
+    --au-outline: color-mix(in srgb, var(--text-color) 30%, transparent);
+    background: color-mix(in srgb, var(--bg-color) 92%, var(--text-color) 8%);
+}
+
+html.dark-mode .au-label.au-active .au-text-stroke {
+    fill: var(--text-color);
+}
+
+html.dark-mode .about-us-heading-row {
+    border-bottom-color: color-mix(in srgb, var(--text-color) 20%, transparent);
+}
+
+/* ---- mobile ---- */
+
+@media (max-width: 900px) {
+    .about-us-section {
+        min-height: 160vh;
+        margin-top: clamp(32px, 6vw, 56px);
+    }
+
+    .about-us-sticky {
+        min-height: 100svh;
+        padding-top: 22px;
+        padding-bottom: 28px;
+    }
+
+    .about-us-reading {
+        width: 80vw;
+    }
+
+    .about-us-block {
+        font-size: clamp(13px, 3.5vw, 18px);
+        line-height: 1.5;
+    }
+}

@@ -940,7 +940,7 @@ Site Footer
     background: var(--footer-bg);
     color: #e0e0e0;
     padding: 40px 5vw 30px;
-    margin-top: 60px;
+    margin-top: 0;
 }
 
 html.dark-mode .site-footer {

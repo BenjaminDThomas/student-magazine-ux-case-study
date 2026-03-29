@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Homepage Carousel Styles -->
     <link rel="stylesheet" href="css/carousel.css">
+    <!-- About Us Section Styles -->
+    <link rel="stylesheet" href="css/about-us.css">
     <!-- CSS Grid File-->
     <link rel="stylesheet" href="css/grid.css">
 </head>
@@ -37,7 +39,7 @@
         <nav class="navbar">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="#about-us-anchor">About Us</a></li>
                 <li><a href="viewall.html">News</a></li>
                 <li><a href="#site-footer">Contact</a></li>
             </ul>
@@ -71,7 +73,63 @@
             <progress id="carousel-progress" class="carousel-progress" value="0" max="100">0%</progress>
             <div class="carousel-dots" id="carousel-dots"></div>
         </div>
+
     </section>
+
+    <!-- About Us Anchor for scroll targeting -->
+    <div id="about-us-anchor" style="height: 0; margin-top: 120px;"></div>
+
+    <!--
+    ----------------------
+    About Us Scroll Section
+    ----------------------
+    -->
+     <section class="about-us-section" id="about-us" aria-label="About us">
+        <div class="about-us-sticky">
+            <h2 class="visually-hidden">About Us</h2>
+            <div class="about-us-heading-row" aria-hidden="true">
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+                <svg class="au-label" viewBox="0 0 240 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <text class="au-text au-text-stroke" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                    <text class="au-text au-text-knock" x="50%" y="52%" dominant-baseline="central" text-anchor="middle">ABOUT US</text>
+                </svg>
+            </div>
+
+            <div class="about-us-reading">
+                <p class="about-us-block">The Student Magazine is a student-led digital publication created to share relevant information, opportunities, and stories from across the university. The platform brings together articles covering academic support, campus life, events, and student opportunities, making it easier for students to find information in one place.</p>
+                <p class="about-us-block">The magazine is designed to be simple to use and easy to navigate, with content presented in a clear, editorial-style layout inspired by traditional print magazines. The focus is on readability, accessibility, and helping students quickly access articles that are useful to them. Alongside browsing articles, users can choose to save content or subscribe to the newsletter to stay up to date.</p>
+                <p class="about-us-block">The platform aims to support students throughout their time at university by providing practical, relevant, and engaging content in a format that feels familiar and approachable.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="site-footer" id="site-footer">
         <!-- Logo + flat nav columns -->
@@ -96,7 +154,7 @@
                 <p class="footer-col-title">Discover</p>
                 <ul>
                     <li><a href="viewall.html">All Articles</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a href="#about-us-anchor">About Us</a></li>
                 </ul>
             </div>
         </nav>
@@ -132,7 +190,7 @@
     <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="#featured-carousel">About Us</a></li>
             <li><a href="viewall.html">News</a></li>
             <li><a href="#site-footer">Contact</a></li>
         </ul>
@@ -154,5 +212,6 @@
     <script src="js/logo-cycle.js"></script>
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
+    <script src="js/about-us.js"></script>
 </body>
 </html>
