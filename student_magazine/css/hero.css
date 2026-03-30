@@ -1,0 +1,226 @@
+/*
+----------------------
+Hero Content
+----------------------
+
+AI provenance:
+- This module was generated with Claude (Anthropic) and iteratively refined.
+ 
+Prompt-engineering summary:
+1. "Create a hero section with text anchored to the bottom over a full-height
+    background image, using a white scrim gradient for contrast."
+2. "Add an eyebrow label, large headline with an orange accent word, body copy,
+    two CTA buttons and a row of topic pills."
+3. "Fix contrast issues so all text passes WCAG AA — dark backing on the eyebrow
+    and orange em, dark pill on the amber accent so it reads on light backgrounds."
+4. "Make the layout responsive on mobile with natural button sizing and the
+    headline scaling down without the em backing looking blocky."
+*/
+
+/* positions content over the background */
+.hero-context {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    min-height: calc(100vh - 160px);
+    padding: 0 5vw clamp(40px, 5vw, 70px);
+}
+
+.hero-context-inner {
+    max-width: 620px;
+}
+
+/* background label */
+.hero-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #fff;
+    margin: 0 0 12px;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* main headline */
+.hero-headline {
+    margin: 0 0 14px;
+    font-size: clamp(26px, 3.8vw, 52px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: #111;
+}
+
+.hero-headline em {
+    font-style: normal;
+    color: #e07b00;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 2px 8px 4px;
+    border-radius: 6px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.hero-body {
+    margin: 0 0 26px;
+    font-size: clamp(15px, 1.5vw, 18px);
+    line-height: 1.6;
+    color: #222;
+    max-width: 48ch;
+}
+
+/* CTA buttons */
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+
+.hero-cta-primary {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.hero-cta-primary:hover {
+    background: #e07b00;
+    transform: translateY(-2px);
+}
+
+.hero-cta-secondary {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: transparent;
+    color: #111;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1.5px solid rgba(0, 0, 0, 0.4);
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.hero-cta-secondary:hover {
+    border-color: #e07b00;
+    color: #e07b00;
+    transform: translateY(-2px);
+}
+
+/* topic capsule sections */
+.hero-pills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.hero-pills li {
+    font-size: 12px;
+    font-weight: 600;
+    color: #111;
+    padding: 5px 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.03em;
+    transition: border-color 0.18s, background 0.18s;
+    cursor: default;
+}
+
+.hero-pills li:hover {
+    border-color: #e07b00;
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(to bottom, transparent 20%, rgba(255, 255, 255, 0.82) 100%);
+    pointer-events: none;
+}
+
+/* ----------------
+Mobile 
+---------------- */
+@media (max-width: 768px) {
+    .hero-context {
+        padding: 0 5vw clamp(72px, 14vw, 96px);
+        min-height: calc(100vh - 100px);
+        align-items: flex-end;
+    }
+
+    .hero-headline {
+        font-size: clamp(24px, 7vw, 36px);
+    }
+
+    .hero-headline em {
+        background: none;
+        padding: 0;
+        color: #e07b00;
+        text-shadow: 0 1px 6px rgba(255, 255, 255, 0.6);
+    }
+
+    .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .hero-cta-primary,
+    .hero-cta-secondary {
+        text-align: center;
+        flex: 0 0 auto;
+        padding: 11px 22px;
+    }
+}
+
+/*
+----------------------
+Hero Dark Mode
+----------------------
+*/
+
+/* flip all text to white in dark mode */
+html.dark-mode .hero-eyebrow,
+html.dark-mode .hero-headline,
+html.dark-mode .hero-body {
+    color: #fff;
+}
+
+html.dark-mode .hero-headline em {
+    color: #e07b00;
+}
+
+html.dark-mode .hero-cta-secondary {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+html.dark-mode .hero-cta-secondary:hover {
+    color: #e07b00;
+    border-color: #e07b00;
+}
+
+html.dark-mode .hero-pills li {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* background for dark mode so light text reads over the photo */
+html.dark-mode .hero-scrim {
+    background: linear-gradient(to bottom, transparent 20%, rgba(0, 0, 0, 0.55) 100%);
+}
