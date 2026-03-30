@@ -4,7 +4,8 @@
 
 .about-us-section {
     position: relative;
-    min-height: 82vh;
+    min-height: unset;
+    height: auto;
     margin-top: clamp(28px, 3vw, 44px);
     scroll-margin-top: 60px;
     --au-bg: color-mix(in srgb, var(--bg-color) 96%, var(--text-color) 4%);
@@ -16,8 +17,8 @@
 .about-us-sticky {
     position: sticky;
     top: 0;
-    min-height: 78vh;
-    padding: clamp(20px, 2.4vw, 30px) 0 clamp(8px, 1.4vw, 16px);
+    min-height: unset;
+    padding: clamp(20px, 2.4vw, 30px) 0 clamp(48px, 5vw, 72px);
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -126,12 +127,14 @@ html.dark-mode .about-us-heading-row {
 
 @media (max-width: 900px) {
     .about-us-section {
-        min-height: 160vh;
+        min-height: unset;
+        height: auto;
         margin-top: clamp(32px, 6vw, 56px);
     }
 
     .about-us-sticky {
-        min-height: 100svh;
+        position: relative;
+        min-height: unset;
         padding-top: 22px;
         padding-bottom: 28px;
     }

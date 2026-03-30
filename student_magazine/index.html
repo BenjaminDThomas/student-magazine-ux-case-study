@@ -14,6 +14,8 @@
     <!-- CSS Grid File-->
     <link rel="stylesheet" href="css/grid.css">
     <!-- Discover Section Styles -->
+    <!-- Newsletter Section Styles -->
+    <link rel="stylesheet" href="css/newsletter.css">
     <link rel="stylesheet" href="css/discover.css">
 </head>
 <body class="home-page">
@@ -177,6 +179,65 @@
         </div>
     </section>
 
+
+    <!--
+    ----------------------
+    Newsletter Subscription Section
+    ----------------------
+    -->
+    <div class="newsletter-isolate">
+    <section class="newsletter-section" id="newsletter-section" aria-label="Newsletter subscription">
+        <div class="newsletter-sticky">
+            <!-- Left sticky text -->
+            <div class="newsletter-left" aria-hidden="true">
+                <p class="newsletter-left-text">
+                    <span>Be first to hear</span>
+                    <span>of</span>
+                    <span>&nbsp;</span>
+                    <span>new &amp; upcoming</span>
+                    <span>stories</span>
+                </p>
+            </div>
+
+            <!-- Card stack -->
+            <div class="newsletter-cards" aria-live="polite">
+
+                <!-- Card 1: Intro -->
+                <div class="nl-card nl-card-intro">
+                    <p class="nl-eyebrow">Student Magazine</p>
+                    <h3>Discover what's happening on campus</h3>
+                    <p>Stay in the loop with the latest student news, events, and opportunities.</p>
+                </div>
+
+                <!-- Card 2: Explore topics -->
+                <div class="nl-card nl-card-explore">
+                    <p class="nl-eyebrow">Explore</p>
+                    <ul class="nl-topics">
+                        <li>Campus events</li>
+                        <li>Career events</li>
+                        <li>Societies</li>
+                        <li>Student offers</li>
+                        <li>Support</li>
+                    </ul>
+                    <p class="nl-tagline">All in one place.</p>
+                </div>
+
+                <!-- Card 3: Subscribe -->
+                <div class="nl-card nl-card-subscribe">
+                    <h3>Subscribe now!</h3>
+                    <div class="nl-email-row">
+                        <input class="nl-email-input" type="email" placeholder="Enter your email address..." aria-label="Email address" />
+                        <button id="nl-submit-btn" class="nl-submit" type="button">Subscribe</button>
+                    </div>
+                    <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+                </div>
+
+            </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
     <!-- Clean bottom blur -->
     <div class="page-bottom-blur" aria-hidden="true"></div>
 
@@ -264,5 +325,5 @@
     <script src="js/carousel.js"></script>
     <script src="js/about-us.js"></script>
     <script src="js/discover.js"></script>
-</body>
+    <script src="js/newsletter.js"></script></body>
 </html>

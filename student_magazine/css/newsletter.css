@@ -1,0 +1,172 @@
+/*
+----------------------
+Newsletter Subscription Section
+----------------------
+*/
+
+.newsletter-isolate {
+    position: relative;
+}
+
+.newsletter-section {
+    position: relative;
+    border-top: 1px solid color-mix(in srgb, var(--text-color) 10%, transparent);
+}
+
+.newsletter-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3vw;
+    box-sizing: border-box;
+    gap: clamp(16px, 3vw, 36px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+.newsletter-sticky.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.newsletter-sticky.nl-dodge-footer {
+    top: auto !important;
+    bottom: 200px;
+}
+
+.newsletter-left {
+    flex: 0 0 auto;
+    width: clamp(170px, 18vw, 230px);
+    margin-right: 0.5vw;
+}
+
+.newsletter-left-text {
+    font-size: clamp(15px, 1.5vw, 19px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    line-height: 1.45;
+    color: var(--text-color);
+    opacity: 0.62;
+    margin: 0;
+}
+.newsletter-left-text span { display: block; }
+
+.newsletter-cards {
+    position: relative;
+    flex: 0 0 auto;
+    width: min(410px, 40vw);
+    height: clamp(300px, 38vw, 420px);
+}
+
+.nl-card {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    border: 1.5px solid color-mix(in srgb, var(--text-color) 13%, transparent);
+    background: color-mix(in srgb, var(--bg-color) 94%, var(--text-color) 6%);
+    padding: clamp(24px, 3.5vw, 44px);
+    box-sizing: border-box;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    will-change: transform;
+}
+html.dark-mode .nl-card {
+    background: color-mix(in srgb, var(--bg-color) 87%, var(--text-color) 13%);
+    border-color: color-mix(in srgb, var(--text-color) 20%, transparent);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+}
+.nl-card:nth-child(1) { z-index: 1; }
+.nl-card:nth-child(2) { z-index: 2; }
+.nl-card:nth-child(3) { z-index: 3; }
+
+.nl-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; opacity:.38; margin:0 0 14px; color:var(--text-color); }
+.nl-card-intro h3 { font-size:clamp(20px,2.4vw,30px); font-weight:800; line-height:1.2; margin:0 0 12px; color:var(--text-color); }
+.nl-card-intro p  { font-size:clamp(13px,1.3vw,16px); line-height:1.65; opacity:.6; margin:0; color:var(--text-color); }
+.nl-topics { list-style:none; padding:0; margin:0 0 18px; display:flex; flex-direction:column; gap:10px; }
+.nl-topics li { font-size:clamp(14px,1.5vw,18px); font-weight:600; color:var(--text-color); opacity:.82; display:flex; align-items:center; gap:10px; padding:6px 0; border-bottom:1px solid color-mix(in srgb,var(--text-color) 8%,transparent); }
+.nl-topics li:last-child { border-bottom:none; }
+.nl-tagline { font-size:clamp(12px,1vw,14px); font-weight:600; opacity:.42; color:var(--text-color); margin:0; }
+.nl-card-subscribe h3 { font-size:clamp(20px,2.6vw,36px); font-weight:900; text-transform:uppercase; text-align:center; margin:0 0 clamp(18px,2.5vw,28px); color:var(--text-color); }
+.nl-email-input { width:100%; padding:13px 18px; border-radius:999px; border:1.5px solid color-mix(in srgb,var(--text-color) 18%,transparent); background:color-mix(in srgb,var(--bg-color) 97%,var(--text-color) 3%); color:var(--text-color); font-size:14px; font-family:inherit; outline:none; box-sizing:border-box; margin-bottom:12px; display:block; transition:border-color .2s; }
+.nl-email-input::placeholder { opacity:.38; }
+.nl-email-input:focus { border-color:orange; }
+/* Pointer for subscribe button */
+.nl-submit {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    border-radius: 999px;
+    border: none;
+    background: var(--text-color);
+    color: var(--bg-color);
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    text-align: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: opacity .2s, transform .15s;
+}
+.nl-submit:hover {
+    opacity: .8;
+    transform: translateY(-1px);
+}
+.nl-submit:disabled {
+    cursor: default;
+    pointer-events: none;
+}
+.nl-privacy { margin:10px 0 0; font-size:12px; opacity:.55; text-align:center; color:var(--text-color); }
+.nl-input-error { border-color:orange!important; }
+.nl-input-done  { opacity:.5; }
+.nl-submit-success { background:#16a34a!important; color:#fff!important; cursor:default; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.nl-submit:disabled { cursor:default; }
+#site-cursor { pointer-events:none!important; }
+
+@media (max-width:768px) {
+    /* Hide the left-side text on mobile */
+    .newsletter-left {
+        display: none;
+    }
+
+    /* Panel stays fixed */
+    .newsletter-sticky {
+        position: fixed;
+        height: 70vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 24px;
+        gap: 0;
+    }
+
+    /* Card stack fills the available width */
+    .newsletter-cards {
+        width: min(360px, calc(100vw - 48px));
+        height: 380px;
+        flex: 0 0 auto;
+    }
+
+    /* Cards are positioned inside the stack */
+    .nl-card {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        padding: 28px 24px;
+        transform: none;
+        margin-bottom: 0;
+    }
+
+    .nl-submit {
+        cursor: pointer;
+    }
+}
