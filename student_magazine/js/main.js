@@ -16,6 +16,27 @@ if (btn) {
     });
 }
 
+/* keep the back/scroll button positioned just above the hamburger at all times */
+(function () {
+    var scrollBtn = document.getElementById("scrollTopBtn");
+    var hamburger = document.getElementById("mobile-menu-btn");
+    if (!scrollBtn || !hamburger) return;
+
+    function positionBtn() {
+        var hamRect = hamburger.getBoundingClientRect();
+        var btnHeight = scrollBtn.offsetHeight || 36;
+        var gap = 10;
+        /* position above the hamburger using fixed coords */
+        scrollBtn.style.bottom = (window.innerHeight - hamRect.top + gap) + "px";
+        scrollBtn.style.right = (window.innerWidth - hamRect.right) + "px";
+        scrollBtn.style.left = "auto";
+    }
+
+    window.addEventListener("scroll", positionBtn, { passive: true });
+    window.addEventListener("resize", positionBtn, { passive: true });
+    positionBtn();
+}());
+
 /*
 ----------------------
 Desktop Scroll-triggered Hamburger
@@ -410,7 +431,6 @@ Footer Contact Typewriter
 /*
 ----------------------
 Bottom Blur — adaptive colour + footer fade
-Runs on all pages that include .page-bottom-blur
 ----------------------
 */
 (function () {
