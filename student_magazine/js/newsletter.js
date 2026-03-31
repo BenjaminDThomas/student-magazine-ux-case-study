@@ -7,9 +7,10 @@ AI provenance:
 - This module was generated and iteratively refined with Claude (Anthropic).
 
 Prompt-engineering summary:
-1. position:fixed panel — immune to overflow-x:hidden on body.
-2. Panel always visible, clipped to section bounds using clip-path.
-3. Cards start spread below and travel upward to stack on scroll.
+1. Create a scroll-driven newsletter section where a fixed panel stays centred on screen while the user scrolls through the section height.
+2. Stack three cards that travel upward from below and land on top of each other as scroll progress moves from 0 to 1, using easeInOut.
+3. Add a subscribe button with email validation, a success state, and a fixed toast popup that fades in and out on submission.
+4. Make the animation work on mobile with tighter travel distance and section height so the sequence completes without excessive scrolling.
 */
 
 (function () {
@@ -26,9 +27,9 @@ Prompt-engineering summary:
 
     if (!panel || cards.length < 3) return;
 
-    /* Subscribe */
+    /* subscription form handler */
     if (submitBtn && emailInput) {
-        // Create a fixed popup for notifications
+        /* toast popup shown on success or validation failure */
         var popup = document.createElement('div');
         popup.className = 'nl-subscribe-popup';
         popup.style.display = 'none';
@@ -80,7 +81,7 @@ Prompt-engineering summary:
             emailInput.classList.add("nl-input-done");
             showPopup("\u2713 Subscribed successfully with " + email, 'rgba(22,163,74,0.98)');
             setTimeout(function () {
-                // Reset
+                /* reset the form so users can subscribe again if needed */
                 submitBtn.classList.remove("nl-submit-success");
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Subscribe";
@@ -91,7 +92,7 @@ Prompt-engineering summary:
         });
     }
 
-    /*  Custom cursor */
+    /* custom cursor label on the subscribe button, desktop only */
     var siteCursor = document.getElementById("site-cursor");
     if (siteCursor) siteCursor.style.pointerEvents = "none";
     if (submitBtn && siteCursor) {
@@ -106,39 +107,42 @@ Prompt-engineering summary:
             siteCursor.style.top  = e.clientY + "px";
         });
     }
+
+    /* card travel distance set during init based on viewport and device */
     let TRAVEL = 0;
 
     function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
     function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
+    /* resting positions for each card in the final stacked state */
     var REST = [
         { x: -8, y: 8,  r: -1.8 },
         { x:  6, y: 4,  r:  1.4 },
         { x:  0, y: 0,  r:  0   }
     ];
 
-    var CARD_HEIGHT = 420;
-    var CARD_GAP = 24; // visual gap between stacked cards
-    var STACK_HEIGHT = CARD_HEIGHT + 2 * CARD_GAP; // height when all cards stacked
+    var CARD_HEIGHT  = 420;
+    var CARD_GAP     = 24;
+    var STACK_HEIGHT = CARD_HEIGHT + 2 * CARD_GAP;
 
     function setSection() {
-        // Set section height
-        var footer = document.querySelector('.site-footer');
-        var sectionRect = section.getBoundingClientRect();
-        var docRect = document.documentElement.getBoundingClientRect();
+        /* section height controls how much scroll distance the animation gets */
+        var footer       = document.querySelector('.site-footer');
+        var sectionRect  = section.getBoundingClientRect();
+        var docRect      = document.documentElement.getBoundingClientRect();
         var windowHeight = window.innerHeight;
-        var footerTop = footer ? (footer.getBoundingClientRect().top - docRect.top) : (sectionRect.top + windowHeight * 2);
-        var sectionTop = sectionRect.top - docRect.top;
-        // Stop before footer
+        var footerTop    = footer
+            ? (footer.getBoundingClientRect().top - docRect.top)
+            : (sectionRect.top + windowHeight * 2);
+        var sectionTop       = sectionRect.top - docRect.top;
         var maxSectionHeight = footerTop - sectionTop - 340;
         var minSectionHeight;
         if (isMobile()) {
-            // Section ends shortly after cards finish stacking
             minSectionHeight = windowHeight + TRAVEL + 40;
         } else {
             minSectionHeight = windowHeight + (windowHeight * 0.7) * 1.4;
         }
-        section.style.height = Math.max(minSectionHeight, Math.min(maxSectionHeight, minSectionHeight)) + 'px';
+        section.style.height = Math.min(minSectionHeight, maxSectionHeight) + 'px';
     }
 
     function getProgress() {
@@ -157,7 +161,7 @@ Prompt-engineering summary:
         var r  = section.getBoundingClientRect();
         var vh = window.innerHeight;
 
-        // Show panel only when section is in view
+        /* show the panel only while the section is within the viewport */
         var sectionInView = r.bottom > 80 && r.top < vh - 80;
         if (sectionInView) {
             panel.classList.add("is-visible");
@@ -165,15 +169,14 @@ Prompt-engineering summary:
             panel.classList.remove("is-visible");
         }
 
-        // Stick panel to section, but never overlap footer
-        var panelH = panel.offsetHeight;
-        var footer = document.querySelector(".site-footer");
-        var footerTop = footer ? footer.getBoundingClientRect().top : vh * 2;
+        /* keep the panel within the section bounds and clear of the footer */
+        var panelH        = panel.offsetHeight;
+        var footer        = document.querySelector(".site-footer");
+        var footerTop     = footer ? footer.getBoundingClientRect().top : vh * 2;
         var sectionBottom = r.top + r.height;
-        var maxPanelTop = Math.min(sectionBottom - panelH, footerTop - panelH - 40);
+        var maxPanelTop   = Math.min(sectionBottom - panelH, footerTop - panelH - 40);
         var panelTop;
         if (isMobile()) {
-            // Position panel in the upper portion of the viewport on mobile
             panelTop = Math.max((vh - panelH) * 0.2, r.top);
         } else {
             panelTop = Math.max(r.top, 0);
@@ -181,11 +184,13 @@ Prompt-engineering summary:
         panelTop = Math.min(panelTop, maxPanelTop);
         panel.style.top = panelTop + "px";
 
-        // Animate cards through section scroll
+        /* drive card positions from scroll progress */
         var p = getProgress();
 
+        /* card 0 stays fixed in its resting position throughout */
         setCard(cards[0], REST[0].x, REST[0].y, REST[0].r);
 
+        /* card 1 rises into place over the first half of the scroll range */
         var p1 = easeInOut(clamp(p / 0.5, 0, 1));
         setCard(cards[1],
             REST[1].x * p1,
@@ -193,6 +198,7 @@ Prompt-engineering summary:
             REST[1].r * p1 + 3 * (1 - p1)
         );
 
+        /* card 2 rises into place over the second half */
         var p2 = easeInOut(clamp((p - 0.5) / 0.5, 0, 1));
         setCard(cards[2],
             0,
@@ -202,7 +208,6 @@ Prompt-engineering summary:
     }
 
     function init() {
-        // On mobile, cards start further apart so they don't overlap initially
         TRAVEL = isMobile() ? window.innerHeight * 0.55 : window.innerHeight * 0.70;
         setSection();
         cards.forEach(function (c) { c.style.transition = "none"; });
@@ -224,9 +229,9 @@ Prompt-engineering summary:
         update();
     }, { passive: true });
 
-
     setTimeout(function () { init(); update(); }, 100);
 
+    /* recalculate after all assets have loaded to account for any layout shifts */
     window.addEventListener('load', function() {
         init();
         update();

@@ -4,7 +4,7 @@ Logo Word Cycle
 ----------------------
 */
 
-/*Keeps the first letter permanently visible and rotates the full word every 3s */
+/* keeps the first letter visible at all times and rotates the full word every 3 seconds */
 (() => {
     const WORDS = ["NEWS", "DISCOVER", "SOCIALISE"];
     const STEP_MS = 3000;
@@ -41,13 +41,13 @@ Logo Word Cycle
         }
 
         function setWord(word) {
-            // Hard reset prevents residual sub-pixel width from showing a peek of next letters.
+            /* hard reset clears any residual width left over from the previous word */
             rest.classList.add("is-reset");
             first.textContent = word.charAt(0);
             rest.textContent = word.slice(1);
             rest.classList.remove("is-open");
             rest.style.setProperty("--rest-open-width", `${Math.ceil(rest.scrollWidth)}px`);
-            // Force layout so reset style is committed before animation resumes.
+            /* force a layout flush so the reset state commits before the next animation */
             void rest.offsetWidth;
             rest.classList.remove("is-reset");
         }
@@ -57,11 +57,12 @@ Logo Word Cycle
             const nextIndex = (index + 1) % WORDS.length;
             const nextWord = WORDS[nextIndex];
             const collapseStartMs = REVEAL_MS + HOLD_OPEN_MS;
+            /* swap the lead letter partway through the collapse for a cleaner crossfade */
             const switchDuringCollapseMs = collapseStartMs + Math.round(COLLAPSE_MS * LETTER_SWITCH_PROGRESS);
 
             setWord(word);
 
-            // Let DOM apply collapsed state, then trigger expand transition.
+            /* wait one frame before triggering the expand so the collapsed state is painted first */
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     rest.classList.add("is-open");
@@ -72,7 +73,6 @@ Logo Word Cycle
                 rest.classList.remove("is-open");
             }, collapseStartMs);
 
-            // Swap the lead letter while the suffix is retracting for a cleaner overlap.
             schedule(() => {
                 first.textContent = nextWord.charAt(0);
             }, switchDuringCollapseMs);

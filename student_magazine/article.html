@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/grid.css">
     <!-- Discover / Blur Styles -->
     <link rel="stylesheet" href="css/discover.css">
+    <link rel="stylesheet" href="css/viewall.css">
+    <link rel="stylesheet" href="css/newsletter.css">
 </head>
 <body>
     <div class="page-grid">
@@ -42,7 +44,7 @@
         </ul>
         <!-- Navigation Bar Icons -->
         <div class="navbar-icons">
-            <a href="login.html" class="icon-btn" title="Saved articles">
+            <a href="saved.html" class="icon-btn" title="Saved articles">
                 <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
             </a>
             <a href="login.html" class="icon-btn" title="Profile">
@@ -77,6 +79,58 @@
 
     <!-- Clean bottom blur (replaces the old messy one) -->
     <div class="page-bottom-blur" aria-hidden="true"></div>
+
+    <!--
+    ----------------------
+    Newsletter Subscription Section
+    ----------------------
+    -->
+    <div class="newsletter-isolate">
+    <section class="newsletter-section" id="newsletter-section" aria-label="Newsletter subscription">
+        <div class="newsletter-sticky">
+            <!-- Left sticky text -->
+            <div class="newsletter-left" aria-hidden="true">
+                <p class="newsletter-left-text">
+                    <span>Be first to hear</span>
+                    <span>of</span>
+                    <span>&nbsp;</span>
+                    <span>new &amp; upcoming</span>
+                    <span>stories</span>
+                </p>
+            </div>
+            <!-- Card stack -->
+            <div class="newsletter-cards" aria-live="polite">
+                <!-- Card 1: Intro -->
+                <div class="nl-card nl-card-intro">
+                    <p class="nl-eyebrow">Student Magazine</p>
+                    <h3>Discover what's happening on campus</h3>
+                    <p>Stay in the loop with the latest student news, events, and opportunities.</p>
+                </div>
+                <!-- Card 2: Explore topics -->
+                <div class="nl-card nl-card-explore">
+                    <p class="nl-eyebrow">Explore</p>
+                    <ul class="nl-topics">
+                        <li>Campus events</li>
+                        <li>Career events</li>
+                        <li>Societies</li>
+                        <li>Student offers</li>
+                        <li>Support</li>
+                    </ul>
+                    <p class="nl-tagline">All in one place.</p>
+                </div>
+                <!-- Card 3: Subscribe -->
+                <div class="nl-card nl-card-subscribe">
+                    <h3>Subscribe now!</h3>
+                    <div class="nl-email-row">
+                        <input class="nl-email-input" type="email" placeholder="Enter your email address..." aria-label="Email address" />
+                        <button id="nl-submit-btn" class="nl-submit" type="button">Subscribe</button>
+                    </div>
+                    <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="site-footer" id="site-footer">
@@ -143,7 +197,7 @@
             <li><a href="#site-footer">Contact</a></li>
         </ul>
         <div class="mobile-drawer-icons">
-            <a href="login.html" class="icon-btn" title="Saved articles">
+            <a href="saved.html" class="icon-btn" title="Saved articles">
                 <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
             </a>
             <a href="login.html" class="icon-btn" title="Profile">
@@ -160,5 +214,8 @@
     <script src="js/logo-cycle.js"></script>
     <script src="js/article.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/save.js"></script>
+    <script src="js/comments.js"></script>
+    <script src="js/newsletter.js"></script>
 </body>
 </html>

@@ -1,0 +1,258 @@
+==============================================
+AI Provenance — Student Magazine Project
+==============================================
+This document logs where AI tools were used across the project.
+Tools: Claude (Anthropic) and GitHub Copilot.
+
+----------------------------------------------
+js/theme-init.js
+----------------------------------------------
+Generated with GitHub Copilot.
+
+Prompts:
+1. "Replace the inline dark mode script with an external file that loads in
+   the head so the theme applies before the page renders."
+
+----------------------------------------------
+js/logo-cycle.js
+----------------------------------------------
+Generated with GitHub Copilot.
+
+Prompts:
+1. "Animate the logo so the word after SM cycles between NEWS, DISCOVER and
+   SOCIALISE, expanding on hover and collapsing on mouse leave."
+2. "Make sure only one word animates at a time with no layout shift."
+
+----------------------------------------------
+js/carousel.js
+----------------------------------------------
+Generated with GitHub Copilot.
+
+Prompts:
+1. "Make the carousel slides transition smoothly rather than flashing between
+   stories."
+2. "Only start autoplaying when the carousel is scrolled into view, and show
+   a progress bar that resets when you click between slides."
+3. "Add swipe support on mobile and lazy load images as they become active."
+
+----------------------------------------------
+js/about-us.js
+----------------------------------------------
+Generated with GitHub Copilot.
+
+Prompts:
+1. "Create a scroll-driven heading strip where a bold ABOUT US label travels
+   from the left edge to the right as you scroll through the section."
+2. "Fill the strip with outlined copies so the space left behind stays full
+   and the whole thing reverses on scroll up."
+3. "Add scroll-linked text highlighting so the paragraph words light up in
+   sync with the heading movement."
+
+----------------------------------------------
+js/discover.js
+----------------------------------------------
+Scroll animation generated with Claude (Anthropic).
+Section layout and wiring written independently.
+
+Prompts:
+1. "Slide the category words in from left and right toward a shared centre
+   point as you scroll down, reversing back out on scroll up."
+2. "Link the movement directly to scroll position rather than triggering it
+   as a one-off animation."
+3. "Stagger the words so they come in one after another rather than all at
+   the same time."
+
+----------------------------------------------
+js/newsletter.js
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Build a scroll-driven newsletter section where a fixed panel stays on
+   screen while the user scrolls through."
+2. "Have three cards rise up from below one at a time and stack on top of
+   each other as you scroll through the section."
+3. "Add email validation to the subscribe button with a success message and
+   a toast notification."
+4. "Get it working on mobile with a shorter scroll distance so it does not
+   feel like too much scrolling."
+
+----------------------------------------------
+js/main.js
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Show the hamburger on desktop once the navbar scrolls off screen, and on
+   the homepage once the hero navbar disappears."
+2. "Add a profile panel inside the mobile drawer with a back button, the
+   user's name and avatar, saved articles and sign out."
+3. "Build a bottom blur that adapts its colour to whatever section is beneath
+   it and fades out when the footer comes into view."
+4. "Add a typewriter effect in the footer that types out the contact details
+   when that area scrolls into view."
+
+----------------------------------------------
+js/auth.js
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Stop users signing in if they have not registered — check against saved
+   accounts and show an error if the email is not found."
+2. "Save passwords when registering and check them at login, showing an error
+   if the password is wrong."
+3. "Add a back button on the password step so users are not stuck and can
+   return to the email step."
+4. "Add a back button and a sign in link on the register password step too."
+
+----------------------------------------------
+js/save.js
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Save articles per user account using localStorage so different users have
+   separate saved lists."
+2. "Add a floating heart button on article cards and a pill button on the
+   article page, sending users to login if they are not signed in."
+3. "Make the save buttons attach after the cards render rather than on page
+   load to avoid timing issues."
+
+----------------------------------------------
+js/saved.js
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Only show the articles the current user has saved, loading them from
+   the articles JSON."
+2. "Show a sign in message if the user is logged out and an empty state if
+   they have nothing saved."
+3. "Remove the card from the page straight away when an article is unsaved
+   from the saved articles page."
+
+----------------------------------------------
+js/comments.js
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Add a comments section under each article with a few preloaded comments
+   and a form with star ratings for logged in users."
+2. "Let users edit or delete their own comments, updating the page and
+   localStorage straight away."
+3. "Make the prev and next article buttons work even when visiting an article
+   directly via URL rather than from the articles list."
+
+----------------------------------------------
+js/viewall.js
+----------------------------------------------
+Generated with GitHub Copilot.
+
+Prompts:
+1. "Build the articles page with category filtering and a keyword search bar
+   with autocomplete."
+2. "Save the article order to sessionStorage so the article page knows which
+   article comes before and after."
+3. "Attach the save buttons to cards right after they render."
+
+----------------------------------------------
+css/style.css
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Fix the gap below the footer on inner pages without breaking the scroll
+   animations on the homepage."
+2. "Make the login and register modals work properly in dark mode — inputs,
+   labels and buttons all need to flip."
+3. "Build a profile dropdown that opens when you click the profile icon, with
+   options to change name, upload a photo, sign out and delete account."
+4. "Centre the sign in modal vertically on desktop and mobile."
+5. "Show the desktop hamburger button once the navbar scrolls out of view."
+
+----------------------------------------------
+css/viewall.css
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Style the save buttons as floating circles with a heart icon on the
+   article cards."
+2. "Style the comments section including edit and delete buttons on user
+   comments."
+3. "Make the article nav buttons bigger, closer together, and add a line
+   above and below the row so they read clearly as navigation."
+
+----------------------------------------------
+css/saved.css
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Style the empty state and sign in prompt for the saved articles page,
+   centred with a return button."
+2. "Make sure only one state shows at a time and the hidden attribute
+   actually hides the panel."
+
+----------------------------------------------
+css/hero.css
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Style the hero text so it sits at the bottom of the full screen image
+   with a scrim gradient underneath for readability."
+2. "Add an eyebrow label, a large headline with an orange accent, body text,
+   two buttons and topic pills."
+3. "Fix the contrast so everything passes WCAG AA — the orange needed a dark
+   background behind it to pass on light images."
+
+----------------------------------------------
+article.html
+----------------------------------------------
+Updated with Claude (Anthropic).
+
+Prompts:
+1. "Add a save button to the article page that only works when logged in."
+2. "Add a comments section and prev/next/back buttons below each article."
+3. "Add the newsletter section above the footer."
+
+----------------------------------------------
+viewall.html
+----------------------------------------------
+Updated with Claude (Anthropic).
+
+Prompts:
+1. "Add the newsletter section above the footer on the view all page."
+2. "Add save.js so the heart buttons show up on the article cards."
+
+----------------------------------------------
+saved.html
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Create the saved articles page with the same header, nav and footer as
+   the other pages."
+2. "Show a sign in prompt when logged out and an empty state when nothing
+   is saved."
+
+----------------------------------------------
+login.html
+----------------------------------------------
+Updated with Claude (Anthropic).
+
+Prompts:
+1. "Add main.js to login so the footer typewriter and cursor effects work
+   the same as on other pages."
+
+----------------------------------------------
+register.html
+----------------------------------------------
+Generated with Claude (Anthropic).
+
+Prompts:
+1. "Create a two step register form — email first, then password."
+2. "Add a back button on the password step and a link to sign in instead."

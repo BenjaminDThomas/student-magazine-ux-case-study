@@ -12,6 +12,7 @@ View All Articles Page
 
 .viewall-page h1 {
     margin-bottom: 14px;
+    margin-top: 32px;
 }
 
 .viewall-page .viewall-tools {
@@ -156,7 +157,7 @@ View All Articles Page
 
 .viewall-page .viewall-endcap {
     width: min(800px, 100%);
-    margin: 18px auto 56px;
+    margin: 18px auto 100px;
     padding: 20px 22px;
     border: 1px solid var(--border-color);
     border-radius: 12px;
@@ -209,5 +210,508 @@ View All Articles Page
     .viewall-page .viewall-endcap {
         padding: 16px;
         margin: 14px auto 42px;
+    }
+}
+
+/*
+----------------------
+Save Buttons
+----------------------
+*/
+
+/* floating save button on cards */
+.save-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    z-index: 2;
+    padding: 0;
+    color: #888;
+}
+
+.save-btn svg {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.save-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+    background: #fff;
+}
+
+.save-btn.is-saved {
+    color: #e07b00;
+    background: #fff;
+}
+
+html.dark-mode .save-btn {
+    background: rgba(30, 30, 30, 0.92);
+    color: #aaa;
+}
+
+html.dark-mode .save-btn.is-saved {
+    color: #e07b00;
+    background: rgba(30, 30, 30, 0.98);
+}
+
+/* save button wrapper on the article page */
+.article-save-wrap {
+    width: min(1100px, 90%);
+    margin: 0 auto 12px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.save-btn--article {
+    position: static;
+    width: auto;
+    height: auto;
+    border-radius: 999px;
+    padding: 9px 18px;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--text-color);
+    background: color-mix(in srgb, var(--bg-color) 94%, var(--text-color) 6%);
+    border: 1.5px solid color-mix(in srgb, var(--text-color) 16%, transparent);
+    box-shadow: none;
+}
+
+.save-btn--article::after {
+    content: attr(aria-label);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.save-btn--article:hover {
+    transform: none;
+    background: color-mix(in srgb, var(--bg-color) 88%, var(--text-color) 12%);
+}
+
+.save-btn--article.is-saved {
+    color: #e07b00;
+    border-color: rgba(224, 123, 0, 0.3);
+    background: rgba(224, 123, 0, 0.06);
+}
+
+/*
+----------------------
+Comments Section
+----------------------
+*/
+
+.comments-section {
+    width: min(1100px, 90%);
+    margin: 40px auto 0;
+    padding: 0 24px 48px;
+}
+
+.comments-heading {
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 800;
+    color: var(--text-color);
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+}
+
+/* comment card */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.comment-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border: 1.5px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+    border-radius: 14px;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--bg-color) 97%, var(--text-color) 3%);
+}
+
+html.dark-mode .comment-card {
+    background: color-mix(in srgb, var(--bg-color) 90%, var(--text-color) 10%);
+}
+
+/* left meta panel — avatar + name + stars */
+.comment-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 18px 20px;
+    min-width: 90px;
+    background: color-mix(in srgb, var(--bg-color) 93%, var(--text-color) 7%);
+}
+
+html.dark-mode .comment-meta {
+    background: color-mix(in srgb, var(--bg-color) 85%, var(--text-color) 15%);
+}
+
+.comment-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--text-color) 12%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    opacity: 0.55;
+    overflow: hidden;
+}
+
+.comment-avatar svg {
+    width: 22px;
+    height: 22px;
+}
+
+.comment-identity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.comment-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.comment-stars {
+    display: flex;
+    gap: 1px;
+}
+
+.comment-star {
+    font-size: 14px;
+    color: color-mix(in srgb, var(--text-color) 20%, transparent);
+}
+
+.comment-star.filled {
+    color: #e07b00;
+}
+
+/* vertical divider between meta and text */
+.comment-divider {
+    width: 1px;
+    background: color-mix(in srgb, var(--text-color) 10%, transparent);
+    flex-shrink: 0;
+}
+
+.comment-text {
+    flex: 1;
+    padding: 18px 22px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* wraps comment text and edit/delete buttons */
+.comment-body-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 22px;
+    gap: 8px;
+}
+
+.comment-body-wrap .comment-text {
+    padding: 0;
+    margin: 0;
+}
+
+/* edit / delete row */
+.comment-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.comment-action-btn {
+    background: none;
+    border: 1px solid color-mix(in srgb, var(--text-color) 14%, transparent);
+    border-radius: 999px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.comment-action-btn:hover {
+    background: color-mix(in srgb, var(--text-color) 6%, transparent);
+    border-color: color-mix(in srgb, var(--text-color) 28%, transparent);
+}
+
+.comment-action-btn--delete:hover {
+    color: #c0392b;
+    border-color: rgba(192, 57, 43, 0.35);
+    background: rgba(192, 57, 43, 0.05);
+}
+
+html.dark-mode .comment-action-btn--delete:hover {
+    color: #e74c3c;
+    border-color: rgba(231, 76, 60, 0.4);
+}
+
+/*
+----------------------
+Comment Form
+----------------------
+*/
+
+.comment-add-wrap {
+    border-top: 1px solid color-mix(in srgb, var(--text-color) 10%, transparent);
+    padding-top: 28px;
+}
+
+.comment-form-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 16px;
+}
+
+.comment-form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color);
+    opacity: 0.6;
+    margin: 0 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* interactive star picker */
+.rating-picker {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+}
+
+.rating-star {
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: color-mix(in srgb, var(--text-color) 18%, transparent);
+    padding: 0;
+    line-height: 1;
+    transition: color 0.12s, transform 0.1s;
+}
+
+.rating-star.hovered,
+.rating-star.selected {
+    color: #e07b00;
+}
+
+.rating-star:hover {
+    transform: scale(1.15);
+}
+
+/* textarea */
+.comment-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1.5px solid color-mix(in srgb, var(--text-color) 14%, transparent);
+    background: color-mix(in srgb, var(--bg-color) 97%, var(--text-color) 3%);
+    color: var(--text-color);
+    font-size: 15px;
+    font-family: inherit;
+    line-height: 1.55;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+}
+
+.comment-textarea:focus {
+    outline: none;
+    border-color: #e07b00;
+}
+
+.comment-error {
+    font-size: 13px;
+    color: #c0392b;
+    margin: 0 0 8px;
+}
+
+/* submit button */
+.comment-submit-btn {
+    padding: 11px 28px;
+    border-radius: 999px;
+    border: none;
+    background: var(--text-color);
+    color: var(--bg-color);
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+.comment-submit-btn:hover:not(:disabled) {
+    opacity: 0.8;
+    transform: translateY(-1px);
+}
+
+.comment-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* sign-in prompt for non-logged-in users */
+.comment-login-prompt {
+    font-size: 15px;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0;
+}
+
+.comment-login-prompt a {
+    color: #e07b00;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.comment-login-prompt a:hover {
+    text-decoration: underline;
+}
+
+/*
+----------------------
+Article Navigation
+----------------------
+*/
+
+/* framed nav block with dividers above and below */
+.article-nav {
+    width: min(1100px, 90%);
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    border-top: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+    margin-bottom: 60px;
+}
+
+/* bigger, consistent-width buttons */
+.article-nav-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 999px;
+    border: 1.5px solid color-mix(in srgb, var(--text-color) 18%, transparent);
+    background: transparent;
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s, color 0.2s;
+    white-space: nowrap;
+    min-width: 130px;
+    text-align: center;
+}
+
+.article-nav-btn:hover:not(.disabled) {
+    border-color: #e07b00;
+    color: #e07b00;
+    transform: translateY(-1px);
+}
+
+.article-nav-btn.disabled {
+    opacity: 0.28;
+    pointer-events: none;
+}
+
+/* centre back-to-all button — solid fill */
+.article-nav-btn--back {
+    background: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+    min-width: 160px;
+}
+
+.article-nav-btn--back:hover {
+    opacity: 0.82;
+    color: var(--bg-color) !important;
+    border-color: var(--text-color) !important;
+    transform: translateY(-1px);
+}
+
+/*
+----------------------
+Saved Page Footer Spacing
+----------------------
+*/
+
+.saved-page #articles-list {
+    padding-bottom: 140px;
+}
+
+.saved-page .page-container {
+    padding-bottom: 80px;
+}
+
+@media (max-width: 600px) {
+    .article-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        /* clear the fixed hamburger button at bottom-right */
+        margin-bottom: 100px;
+    }
+
+    .article-nav-btn,
+    .article-nav-btn--back {
+        text-align: center;
+        min-width: unset;
+        width: 100%;
+    }
+
+    .comment-card {
+        flex-direction: column;
+    }
+
+    .comment-meta {
+        flex-direction: row;
+        padding: 12px 16px;
+        min-width: unset;
+        gap: 12px;
+    }
+
+    .comment-divider {
+        width: 100%;
+        height: 1px;
     }
 }

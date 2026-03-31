@@ -1,11 +1,11 @@
 /*
 ----------------------
-Browse Section — Scroll Animation
+Browse Section Scroll Animation
 ----------------------
 
 AI provenance:
 - This module was generated and iteratively refined with Claude (Anthropic).
- 
+
 Prompt-engineering summary:
 1. Animate category words sliding in from left and right toward a shared centre axis on scroll down, reversing back out on scroll up.
 2. Tie progress directly to scroll position so movement is continuous rather than a one-shot trigger.
@@ -30,8 +30,8 @@ Prompt-engineering summary:
     function getProgress() {
         var r      = section.getBoundingClientRect();
         var vh     = window.innerHeight;
-        var enterY = vh * 0.95;   /* start when section nears bottom of screen */
-        var exitY  = vh * -0.20;  /* complete when section top is 20% above viewport */
+        var enterY = vh * 0.95;   /* animation begins when section nears the bottom of screen */
+        var exitY  = vh * -0.20;  /* animation completes when section top is 20% above viewport */
         return clamp((enterY - r.top) / (enterY - exitY), 0, 1);
     }
     function update() {
@@ -49,8 +49,10 @@ Prompt-engineering summary:
             w.el.style.opacity = wp;
 
             if (w.dir !== 0) {
+                /* words with a direction slide in horizontally from left or right */
                 w.el.style.transform = "translateX(calc(-50% + " + (w.dir * OFFSET * (1 - wp)) + "px))";
             } else {
+                /* centre word rises vertically */
                 w.el.style.transform = "translateX(-50%) translateY(" + (44 * (1 - wp)) + "px)";
             }
         });

@@ -13,6 +13,7 @@ Prompt-engineering summary:
 4. Keep card interactions clear and UX-focused, including readable excerpts and explicit "Read More".
 5. Support global custom cursor labels (for example, "Explore article") on cards.
 6. Maintain clean structure and semantics while preserving theme compatibility.
+7. Store ordered article IDs in sessionStorage so article pages can navigate prev/next.
 */
 
 const listRoot = document.querySelector("#articles-list");
@@ -46,7 +47,6 @@ async function loadArticles() {
             const data = await res.json();
             return Array.isArray(data) ? data : [];
         } catch {
-            // Try the next candidate path.
         }
     }
 
@@ -205,6 +205,14 @@ function renderArticles() {
             listRoot.appendChild(card);
         });
     });
+
+    // store ordered article IDs for prev/next navigation on article pages
+    sessionStorage.setItem("articleIds", JSON.stringify(filtered.map((a) => a.id)));
+
+    // attach save buttons if save.js is loaded
+    if (typeof window.attachSaveBtnsToCards === "function") {
+        window.attachSaveBtnsToCards();
+    }
 }
 
 loadArticles().then((articles) => {

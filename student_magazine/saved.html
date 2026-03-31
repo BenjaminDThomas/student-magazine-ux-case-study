@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View All Articles</title>
+    <title>Saved Articles — Student Magazine</title>
     <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/style.css">
-    <!-- View All Page Styles -->
+    <!-- View All Page Styles (reused for card layout) -->
     <link rel="stylesheet" href="css/viewall.css">
     <!-- CSS Grid File-->
     <link rel="stylesheet" href="css/grid.css">
-    <!-- Discover / Blur Styles -->
-    <link rel="stylesheet" href="css/discover.css">
+    <!-- Saved Page Styles -->
+    <link rel="stylesheet" href="css/saved.css">
     <link rel="stylesheet" href="css/newsletter.css">
 </head>
-<body class="viewall-page">
+<body class="viewall-page saved-page">
     <!-- Header -->
     <header>
         <h1 class="logo">
@@ -38,44 +38,42 @@
     <nav class="navbar">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#featured-carousel">About Us</a></li>
+            <li><a href="index.html#about-us-anchor">About Us</a></li>
             <li><a href="viewall.html">News</a></li>
-                <li><a href="#site-footer">Contact</a></li>
+            <li><a href="#site-footer">Contact</a></li>
         </ul>
         <!-- Navigation Bar Icons -->
         <div class="navbar-icons">
             <a href="saved.html" class="icon-btn" title="Saved articles">
                 <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
             </a>
-            <a href="login.html" class="icon-btn" title="Profile">
+            <a href="login.html" class="icon-btn" title="Profile" id="profile-nav-btn">
                 <img src="images/profile_picture_image.png" alt="Profile" class="profile-icon"/>
             </a>
         </div>
     </nav>
     <!-- Page Divider -->
     <hr class="header-line">
+
     <section class="page-container">
-        <h1>All Articles</h1>
-        <section class="viewall-tools" aria-label="Article filters">
-            <label class="visually-hidden" for="article-search">Search articles</label>
-            <input id="article-search" class="viewall-search" type="search" placeholder="Search by title, author or keyword" list="article-suggestions" autocomplete="off">
-            <datalist id="article-suggestions"></datalist>
+        <h1>Saved Articles</h1>
 
-            <label class="visually-hidden" for="category-filter">Filter by category</label>
-            <select id="category-filter" class="viewall-filter">
-                <option value="all">All categories</option>
-            </select>
-        </section>
-        <!-- All Articles-->
+        <!-- Empty state — shown when no articles saved or not logged in -->
+        <div class="saved-empty" id="saved-empty" hidden>
+            <p class="saved-empty-title">No saved articles yet</p>
+            <p class="saved-empty-body">Start exploring and save articles you want to read later.</p>
+            <a href="viewall.html" class="saved-return-btn">Return</a>
+        </div>
+
+        <!-- Not logged in state -->
+        <div class="saved-login" id="saved-login" hidden>
+            <p class="saved-empty-title">Sign in to see your saved articles</p>
+            <p class="saved-empty-body">Your saved articles are tied to your account.</p>
+            <a href="login.html" class="saved-return-btn">Sign in</a>
+        </div>
+
+        <!-- Article list populated by saved.js -->
         <section id="articles-list"></section>
-
-        <section class="viewall-endcap" aria-label="Continue exploring">
-            <h2>Keep Exploring Student Life</h2>
-            <p>Browse more stories, support resources, and opportunities designed to help you thrive on campus.</p>
-            <p class="viewall-endcap-actions">
-                <a href="#">About Student Magazine</a>
-            </p>
-        </section>
     </section>
 
     <!-- Clean bottom blur -->
@@ -157,7 +155,7 @@
                 <p class="footer-col-title">Discover</p>
                 <ul>
                     <li><a href="viewall.html">All Articles</a></li>
-                    <li><a href="index.html#featured-carousel">About Us</a></li>
+                    <li><a href="index.html#about-us-anchor">About Us</a></li>
                 </ul>
             </div>
         </nav>
@@ -182,6 +180,7 @@
             Student Magazine 2026
         </p>
     </footer>
+
     <!-- Mobile hamburger button — fixed bottom-right (thumb zone) -->
     <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false">
         <span></span>
@@ -193,7 +192,7 @@
     <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#featured-carousel">About Us</a></li>
+            <li><a href="index.html#about-us-anchor">About Us</a></li>
             <li><a href="viewall.html">News</a></li>
             <li><a href="#site-footer">Contact</a></li>
         </ul>
@@ -210,12 +209,12 @@
     <!-- Backdrop overlay behind drawer -->
     <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
 
-    <!-- JavaScript File-->
-    <script src="js/viewall.js"></script>
+    <!-- JavaScript Files -->
     <script src="js/theme-toggle.js"></script>
     <script src="js/logo-cycle.js"></script>
     <script src="js/main.js"></script>
     <script src="js/save.js"></script>
+    <script src="js/saved.js"></script>
     <script src="js/newsletter.js"></script>
 </body>
 </html>
