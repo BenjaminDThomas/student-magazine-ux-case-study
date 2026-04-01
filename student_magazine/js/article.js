@@ -49,6 +49,66 @@ async function loadArticles() {
   return [];
 }
 
+function slugify(text) {
+  return String(text || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
+function setupReadingProgress() {
+  const bar = document.querySelector("#article-progress-bar");
+  const content = document.querySelector("#article-content");
+  if (!bar || !content) {
+    return;
+  }
+
+  const updateProgress = () => {
+    const rect = content.getBoundingClientRect();
+    const viewport = window.innerHeight || document.documentElement.clientHeight;
+    const total = rect.height + viewport;
+    const traversed = viewport - rect.top;
+    const ratio = Math.max(0, Math.min(1, traversed / Math.max(1, total)));
+    bar.style.setProperty("--prog", ratio);
+  };
+
+  updateProgress();
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+}
+
+function buildSectionNav(contentSection) {
+  const toc = document.querySelector("#article-toc");
+  const tocList = document.querySelector("#article-toc-list");
+  if (!toc || !tocList || !contentSection) {
+    return;
+  }
+
+  const headings = contentSection.querySelectorAll("h3");
+  tocList.innerHTML = "";
+
+  if (!headings.length) {
+    toc.hidden = true;
+    return;
+  }
+
+  headings.forEach((heading, index) => {
+    const sectionId = heading.id || `section-${index + 1}-${slugify(heading.textContent)}`;
+    heading.id = sectionId;
+
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = `#${sectionId}`;
+    link.textContent = heading.textContent;
+    item.appendChild(link);
+    tocList.appendChild(item);
+  });
+
+  toc.hidden = false;
+}
+
 /*
 ----------------------
 Retrieve Article File
@@ -106,6 +166,7 @@ loadArticles().then(articles => {
 
   else if (section.type === "heading") {                                        // checks each stored article if the section has the type 'heading'
     const h2 = document.createElement("h2");                                    // creates heading
+    h2.className = "article-category-heading";                                  // styled as an eyebrow label
     h2.textContent = section.text;
     contentSection.appendChild(h2);                                             // appends content to heading
   }
@@ -129,7 +190,7 @@ loadArticles().then(articles => {
       img.classList.add("article-banner");                                      
       contentSection.appendChild(img);                                          // appends content to image
     } else {
-      const row = document.createElement("div");                                // creates a div for the image
+      const row = document.createElement("figure");                             // semantic figure: image paired with its text
       row.classList.add("media-row");
       row.classList.add((imageCount - 2) % 2 === 0 ? "left" : "right");         // keeps track of imageCount to set image either left or right
 
@@ -140,8 +201,8 @@ loadArticles().then(articles => {
       img.height = 374;
       img.classList.add("media-img");                                           // assigns class 'media-img' to the image element
 
-      const text = document.createElement("div");
-      text.classList.add("media-text");                                         // assigns class 'media-text' to the element
+      const text = document.createElement("figcaption");
+      text.classList.add("media-text");                                         // groups descriptive text alongside the image
 
       let consumed = 0;                                                         // tracks paragraphs consumed
       while (consumed < 2) {                                                    // loops till it has consumed 2 paragraphs or runs out
@@ -161,5 +222,7 @@ loadArticles().then(articles => {
       contentSection.appendChild(row);                                          // appends row to content section
     }
     }
+    buildSectionNav(contentSection);
+    setupReadingProgress();
     console.log(article);                                                       // articles outputs the array of article objects (connection test)
 }});

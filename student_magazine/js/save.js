@@ -122,20 +122,26 @@ function attachSaveBtnToArticle() {
     const content = document.getElementById("article-content");
     if (!content) return;
     // avoid duplicates
-    if (document.querySelector(".article-save-wrap")) return;
+    if (document.querySelector(".save-btn--article")) return;
 
     const params = new URLSearchParams(window.location.search);
     const articleId = Number(params.get("id"));
     if (!articleId) return;
 
-    const wrap = document.createElement("div");
-    wrap.className = "article-save-wrap";
-
     const btn = buildSaveBtn(articleId);
     btn.classList.add("save-btn--article");
-    wrap.appendChild(btn);
 
-    content.parentNode.insertBefore(wrap, content);
+    // Place save button inside the article header actions group
+    const actions = document.querySelector(".article-header-actions");
+    if (actions) {
+        actions.insertBefore(btn, actions.firstChild);
+    } else {
+        // fallback: floating wrap before content
+        const wrap = document.createElement("div");
+        wrap.className = "article-save-wrap";
+        wrap.appendChild(btn);
+        content.parentNode.insertBefore(wrap, content);
+    }
 }
 
 /* ── expose a hook so viewall.js can call after render ── */
@@ -143,12 +149,18 @@ window.attachSaveBtnsToCards = attachSaveBtnsToCards;
 
 /* ── init on article page ── */
 if (document.getElementById("article-content")) {
-    const obs = new MutationObserver((_, observer) => {
-        const title = document.getElementById("article-title");
-        if (title && title.textContent.trim()) {
-            observer.disconnect();
-            attachSaveBtnToArticle();
-        }
-    });
-    obs.observe(document.body, { childList: true, subtree: true });
+    // If article.js already populated the title (e.g. from cache), run immediately
+    const existingTitle = document.getElementById("article-title");
+    if (existingTitle && existingTitle.textContent.trim()) {
+        attachSaveBtnToArticle();
+    } else {
+        const obs = new MutationObserver((_, observer) => {
+            const title = document.getElementById("article-title");
+            if (title && title.textContent.trim()) {
+                observer.disconnect();
+                attachSaveBtnToArticle();
+            }
+        });
+        obs.observe(document.body, { childList: true, subtree: true });
+    }
 }

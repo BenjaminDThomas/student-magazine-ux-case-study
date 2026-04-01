@@ -10,6 +10,7 @@
     <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/bundle.css">
+    <link rel="stylesheet" href="css/article-enhancements.css">
     <!-- Preload articles data -->
     <link rel="preload" as="fetch" crossorigin href="data/articles.json">
     <!-- Deferred scripts -->
@@ -72,12 +73,30 @@
                 <!-- Article Author -->
                 <p id="article-author"></p>
             </hgroup>
-            <!-- Return Button -->
-            <a class="return-btn" href="viewall.html">Return →</a>
+            <!-- Action buttons -->
+            <div class="article-header-actions">
+                <a class="return-btn" href="viewall.html">Return →</a>
+            </div>
         </header>
         <!-- Bottom Page Divider-->
         <hr class="header-line bottom">
     </article>
+    <div class="article-progress-wrap" title="Reading progress">
+        <span class="article-progress-label">Reading</span>
+        <div class="article-reading-progress" aria-hidden="true">
+            <span id="article-progress-bar"></span>
+        </div>
+    </div>
+    <!--
+      AI-generated scroller prompts used:
+      1) Create a fixed side reading progress bar for article pages that updates smoothly on scroll and remains visible on desktop and mobile.
+      2) Design an accessible scroll progress indicator with high contrast, reduced-motion support, and minimal visual noise for long-form content.
+      3) Build a responsive article progress tracker UI that uses a slim vertical rail with a fill state tied to viewport progress through the main content.
+    -->
+    <nav class="article-toc" id="article-toc" aria-label="Article sections" hidden>
+        <p class="article-toc-title">Jump to section</p>
+        <ol id="article-toc-list"></ol>
+    </nav>
     <!-- Article Content -->
     <section id="article-content"></section>
     <hr class="header-line bottom article-bottom-line">
