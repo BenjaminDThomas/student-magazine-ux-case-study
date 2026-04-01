@@ -57,10 +57,14 @@ Prompt-engineering summary:
 
 .hero-headline em {
     font-style: normal;
+    display: inline-block;
+    line-height: 0.92;
+    vertical-align: baseline;
+    white-space: nowrap;
     color: #e07b00;
     background: rgba(0, 0, 0, 0.65);
-    padding: 2px 8px 4px;
-    border-radius: 6px;
+    padding: 0 6px 1px;
+    border-radius: 4px;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
 }
@@ -117,32 +121,30 @@ Prompt-engineering summary:
     transform: translateY(-2px);
 }
 
-/* topic capsule sections */
+/* topic indicator list — informational, not interactive */
 .hero-pills {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    align-items: center;
+    gap: 0;
 }
 
 .hero-pills li {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    color: #111;
-    padding: 5px 13px;
-    border-radius: 999px;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    background: rgba(255, 255, 255, 0.45);
-    letter-spacing: 0.03em;
-    transition: border-color 0.18s, background 0.18s;
+    color: rgba(0, 0, 0, 0.75);
+    letter-spacing: 0.02em;
+    padding: 0;
     cursor: default;
 }
 
-.hero-pills li:hover {
-    border-color: #e07b00;
-    background: rgba(255, 255, 255, 0.65);
+.hero-pills li + li::before {
+    content: '·';
+    margin: 0 8px;
+    color: rgba(0, 0, 0, 0.4);
 }
 
 .hero-scrim {

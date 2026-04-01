@@ -8,9 +8,8 @@
     <!-- preconnect so font requests start immediately -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- load Inter non-blocking -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=optional" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=optional"></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=block">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=block"></noscript>
     <!-- preload hero background -->
     <link rel="preload" as="image" href="images/light_mode_background.webp" fetchpriority="high">
     <!-- preload carousel image -->
@@ -177,7 +176,7 @@
     <section class="articles-browse" id="articles-browse" aria-label="Browse articles">
         <h2 class="browse-heading">Discover Articles</h2>
 
-        <!-- Words zigzag alternating left/right — decorative, hidden from screen readers -->
+        <!-- Words zigzag alternating left/right -->
         <div class="browse-tags" aria-hidden="true">
             <div class="browse-tag tag-campus">Campus Events</div>
             <div class="browse-tag tag-careers">Career Events</div>
@@ -202,7 +201,7 @@
     <div class="newsletter-isolate">
     <section class="newsletter-section" id="newsletter-section" aria-label="Newsletter subscription">
         <div class="newsletter-sticky">
-            <!-- Left sticky text — decorative, hidden from screen readers -->
+            <!-- Left sticky text -->
             <div class="newsletter-left" aria-hidden="true">
                 <p class="newsletter-left-text">
                     <span>Be first to hear</span>
@@ -303,14 +302,14 @@
     </footer>
     </main>
 
-    <!-- Mobile hamburger button — fixed bottom-right -->
+    <!-- Mobile hamburger button -->
     <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
     </button>
 
-    <!-- Mobile nav drawer — slides up from bottom -->
+    <!-- Mobile nav drawer -->
     <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" inert>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -328,7 +327,7 @@
         </div>
     </nav>
 
-    <!-- Backdrop overlay behind drawer -->
+    <!-- Backdrop overlay -->
     <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" inert></div>
 </body>
 </html>
