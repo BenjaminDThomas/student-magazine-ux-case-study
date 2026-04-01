@@ -49,6 +49,18 @@
     var slotWidth = 0;
     var labelWidth = 0;
     var poolReady = false;
+    var cachedColor = "";
+
+    function updateCachedColor() {
+        cachedColor = getComputedStyle(section).getPropertyValue("--text-color").trim() || "#111";
+    }
+    updateCachedColor();
+
+    new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+            if (m.attributeName === "class") { updateCachedColor(); }
+        });
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     function measure() {
         allLabels = headingTrack.querySelectorAll(".au-label");
@@ -123,7 +135,7 @@
     function updateLabels(p) {
         if (!poolReady) return;
         var vw = headingRow.clientWidth || window.innerWidth;
-        var color = getComputedStyle(section).getPropertyValue("--text-color").trim() || "#111";
+        var color = cachedColor;
         var tx = p * (vw - labelWidth) - boldIndex * slotWidth;
 
         headingTrack.style.transform = "translateX(" + tx + "px)";
@@ -170,10 +182,8 @@
 
     /* ── animation loop ── */
     function tick() {
-        if (!poolReady) {
-            buildPool();
-            if (!poolReady) { requestAnimationFrame(tick); return; }
-        }
+        // Skip frames until the pool is built — never call getBoundingClientRect here.
+        if (!poolReady) { requestAnimationFrame(tick); return; }
 
         var mobile = isMobile();
         var lerp = mobile ? 0.07 : 0.1;
@@ -193,6 +203,12 @@
         requestAnimationFrame(tick);
     }
 
+    /* ── build pool once, outside the rAF loop, after first paint ── */
+    function tryBuildPool() {
+        buildPool();
+        if (!poolReady) { setTimeout(tryBuildPool, 50); }
+    }
+
     window.addEventListener("scroll", function () {
         targetP = remap(rawProgress());
     }, { passive: true });
@@ -200,8 +216,14 @@
     window.addEventListener("resize", function () {
         poolReady = false;
         targetP = remap(rawProgress());
+        buildPool(); // safe on resize — not inside the animation loop
     });
 
     updateText(0);
-    requestAnimationFrame(tick);
+    requestAnimationFrame(tick); // start loop immediately; skips until poolReady
+    if (typeof requestIdleCallback === "function") {
+        requestIdleCallback(tryBuildPool, { timeout: 300 });
+    } else {
+        setTimeout(tryBuildPool, 0);
+    }
 }());

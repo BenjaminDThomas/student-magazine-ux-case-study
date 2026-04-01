@@ -29,7 +29,7 @@ async function loadArticles() {
 
   for (const url of candidates) {
     try {
-      const response = await fetch(url, { cache: "no-cache" });
+      const response = await fetch(url);
       if (!response.ok) {
         continue;
       }

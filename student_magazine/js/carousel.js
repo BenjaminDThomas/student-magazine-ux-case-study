@@ -79,7 +79,7 @@ Prompt-engineering summary:
 
         for (const url of candidates) {
             try {
-                const response = await fetch(url, { cache: "no-cache" });
+                const response = await fetch(url);
                 if (!response.ok) {
                     continue;
                 }
@@ -120,6 +120,11 @@ Prompt-engineering summary:
         const sections = Array.isArray(article.sections) ? article.sections : [];
         const imageSection = sections.find((section) => section.type === "image");
         return imageSection ? normalizeAssetPath(imageSection.src) : "images/light_mode_background.webp";
+    }
+
+    function getArticleImageSm(article) {
+        // Return the 400-wide WebP variant for use in srcset on mobile.
+        return getArticleImage(article).replace(/\.webp$/, "_sm.webp");
     }
 
     function getArticleExcerpt(article, maxLen) {
@@ -167,7 +172,11 @@ Prompt-engineering summary:
         const excerpt = getArticleExcerpt(article, 120);
         li.innerHTML = `
             <a class="slide-card-link" href="${destination}">
-                <img src="${getArticleImage(article)}" alt="${article.title}" loading="lazy" decoding="async">
+                <img src="${getArticleImage(article)}"
+                     srcset="${getArticleImageSm(article)} 400w, ${getArticleImage(article)} 828w"
+                     sizes="(max-width: 768px) 400px, 828px"
+                     width="828" height="627"
+                     alt="${article.title}" loading="lazy" decoding="async">
                 <span class="slide-overlay">
                     <span class="slide-title">${article.title}</span>
                     ${excerpt ? `<span class="slide-excerpt">${excerpt}</span>` : ""}

@@ -265,6 +265,7 @@ Scroll To Top Button
   border-radius: 100px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   cursor: pointer;
   font-size: 14px;
@@ -369,6 +370,7 @@ html.dark-mode .auth::after {
 .blur-overlay {
     position: fixed;
     inset: 0;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     background: rgba(0, 0, 0, 0.25);
     z-index: -1;
@@ -393,6 +395,7 @@ Close Login
   background: rgba(0, 0, 0, 0.15);                          /* dark transparent background */
   padding: 12px 20px;                                       /* spacing inside bar */
   z-index: 100;                                             /* placed above other content */
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);                              
 }
 
@@ -427,6 +430,7 @@ Authentication Modal
   width: min(92vw, 520px);                                          
   border-radius: 16px;                                      /* rounded corners */
   background: rgba(255, 255, 255, 0.85);                 
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);                                         
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);              /* drop shadow */
 }
