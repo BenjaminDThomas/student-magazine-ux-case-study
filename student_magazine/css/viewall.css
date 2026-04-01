@@ -8,6 +8,8 @@ View All Articles Page
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
+    /* Ensures footer starts off-screen before JS populates articles, preventing CLS */
+    min-height: 100vh;
 }
 
 .viewall-page h1 {

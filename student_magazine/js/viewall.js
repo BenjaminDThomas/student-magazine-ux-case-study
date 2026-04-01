@@ -34,7 +34,7 @@ async function loadArticles() {
 
     for (const url of candidates) {
         try {
-            const res = await fetch(url, { cache: "no-cache" });
+            const res = await fetch(url);
             if (!res.ok) {
                 continue;
             }
@@ -165,6 +165,8 @@ function renderArticles() {
         return;
     }
 
+    let firstImage = true;
+
     entries.forEach(([category, items]) => {
         const heading = document.createElement("h2");
         heading.className = "category-title";
@@ -183,6 +185,10 @@ function renderArticles() {
             const image = document.createElement("img");
             image.src = getArticleImage(article);
             image.alt = article.title;
+            if (firstImage) {
+                image.fetchPriority = "high";
+                firstImage = false;
+            }
 
             const title = document.createElement("h3");
             title.className = "card-title";

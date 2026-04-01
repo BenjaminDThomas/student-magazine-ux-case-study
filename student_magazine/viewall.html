@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Browse all articles on Student Magazine. Discover campus news, student stories, and more.">
     <title>View All Articles</title>
+    <!-- Early theme bootstrap -->
+    <link rel="preload" as="script" href="js/theme-init.js">
     <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/bundle.css">
+    <!-- Preload articles data -->
+    <link rel="preload" as="fetch" crossorigin href="data/articles.json">
+    <!-- Deferred scripts -->
+    <script defer src="js/viewall.js"></script>
+    <script defer src="js/theme-toggle.js"></script>
+    <script defer src="js/logo-cycle.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/save.js"></script>
+    <script defer src="js/newsletter.js"></script>
 </head>
 <body class="viewall-page">
     <!-- Header -->
@@ -48,6 +59,7 @@
     </nav>
     <!-- Page Divider -->
     <hr class="header-line">
+    <main id="main-content">
     <section class="page-container">
         <h1>All Articles</h1>
         <section class="viewall-tools" aria-label="Article filters">
@@ -71,6 +83,7 @@
             </p>
         </section>
     </section>
+    </main>
 
     <!-- Clean bottom blur -->
     <div class="page-bottom-blur" aria-hidden="true"></div>
@@ -184,7 +197,7 @@
     </button>
 
     <!-- Mobile nav drawer — slides up from bottom -->
-    <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true" inert>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html#featured-carousel">About Us</a></li>
@@ -204,12 +217,6 @@
     <!-- Backdrop overlay behind drawer -->
     <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
 
-    <!-- JavaScript File-->
-    <script src="js/viewall.js"></script>
-    <script src="js/theme-toggle.js"></script>
-    <script src="js/logo-cycle.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/save.js"></script>
-    <script src="js/newsletter.js"></script>
+
 </body>
 </html>
