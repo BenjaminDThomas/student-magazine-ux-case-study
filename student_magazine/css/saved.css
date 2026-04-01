@@ -4,6 +4,13 @@ Saved Articles Page
 ----------------------
 */
 
+/* Reserve space while JS populates articles — prevents footer from jumping (CLS fix)
+   100vh ensures the footer always starts below the mobile viewport at first paint,
+   so any shift it makes after JS runs is off-screen and doesn't register as CLS. */
+.saved-page .page-container {
+    min-height: 100vh;
+}
+
 /* empty / login state centred panel — only one shows at a time */
 .saved-empty,
 .saved-login {

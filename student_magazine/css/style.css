@@ -4,6 +4,12 @@ Logo
 --------------------
 */
 
+/* Scroll target anchor for the About Us section */
+.about-us-anchor {
+    height: 0;
+    margin-top: 120px;
+}
+
 /* logo design */
 .logo {
    margin: 0;

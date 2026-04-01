@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="View and manage your saved articles on Student Magazine. Sign in to access your personalized reading list.">
     <title>Saved Articles — Student Magazine</title>
+    <!-- Preload theme script -->
+    <link rel="preload" as="script" href="js/theme-init.js">
+    <!-- Early theme bootstrap -->
     <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/bundle.css">
+    <!-- Scripts deferred -->
+    <script defer src="js/theme-toggle.js"></script>
+    <script defer src="js/logo-cycle.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/save.js"></script>
+    <script defer src="js/saved.js"></script>
+    <script defer src="js/newsletter.js"></script>
 </head>
 <body class="viewall-page saved-page">
     <!-- Header -->
@@ -49,6 +59,7 @@
     <!-- Page Divider -->
     <hr class="header-line">
 
+    <main id="main-content">
     <section class="page-container">
         <h1>Saved Articles</h1>
 
@@ -96,7 +107,7 @@
                 <!-- Card 1: Intro -->
                 <div class="nl-card nl-card-intro">
                     <p class="nl-eyebrow">Student Magazine</p>
-                    <h3>Discover what's happening on campus</h3>
+                    <h2>Discover what's happening on campus</h2>
                     <p>Stay in the loop with the latest student news, events, and opportunities.</p>
                 </div>
                 <!-- Card 2: Explore topics -->
@@ -113,7 +124,7 @@
                 </div>
                 <!-- Card 3: Subscribe -->
                 <div class="nl-card nl-card-subscribe">
-                    <h3>Subscribe now!</h3>
+                    <h2>Subscribe now!</h2>
                     <div class="nl-email-row">
                         <input class="nl-email-input" type="email" placeholder="Enter your email address..." aria-label="Email address" />
                         <button id="nl-submit-btn" class="nl-submit" type="button">Subscribe</button>
@@ -124,6 +135,7 @@
         </div>
     </section>
     </div>
+    </main>
 
     <!-- Footer -->
     <footer class="site-footer" id="site-footer">
@@ -183,7 +195,7 @@
     </button>
 
     <!-- Mobile nav drawer — slides up from bottom -->
-    <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true" inert>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html#about-us-anchor">About Us</a></li>
@@ -203,12 +215,6 @@
     <!-- Backdrop overlay behind drawer -->
     <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
 
-    <!-- JavaScript Files -->
-    <script src="js/theme-toggle.js"></script>
-    <script src="js/logo-cycle.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/save.js"></script>
-    <script src="js/saved.js"></script>
-    <script src="js/newsletter.js"></script>
+    <!-- Scripts moved to <head defer> above — removed from here -->
 </body>
 </html>
