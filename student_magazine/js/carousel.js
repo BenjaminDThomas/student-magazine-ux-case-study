@@ -119,7 +119,7 @@ Prompt-engineering summary:
         // Prefer first image section; use a fallback if article data is incomplete.
         const sections = Array.isArray(article.sections) ? article.sections : [];
         const imageSection = sections.find((section) => section.type === "image");
-        return imageSection ? normalizeAssetPath(imageSection.src) : "images/light_mode_background.png";
+        return imageSection ? normalizeAssetPath(imageSection.src) : "images/light_mode_background.webp";
     }
 
     function getArticleExcerpt(article, maxLen) {
@@ -377,6 +377,9 @@ Prompt-engineering summary:
             dot.className = "carousel-dot" + (i === realIdx ? " active" : "");
             dot.title = `Story ${i + 1} of ${articles.length}`;
             dot.setAttribute("aria-label", `Go to story ${i + 1}`);
+            dot.style.minWidth = "28px";
+            dot.style.minHeight = "28px";
+            dot.style.margin = "2px";
             dot.addEventListener("click", () => {
                 // Jump directly to selected real slide index (+2 offset for leading clones).
                 if (i === realIdx || isTransitioning) {

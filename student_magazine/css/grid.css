@@ -333,7 +333,7 @@ Authentication Pages
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url("../images/light_mode_background.png");
+    background-image: url("../images/light_mode_background.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -347,7 +347,7 @@ Authentication Pages
     content: "";
     position: fixed;
     inset: 0;
-    background-image: url("../images/dark_mode_background.png");
+    background-image: url("../images/dark_mode_background.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

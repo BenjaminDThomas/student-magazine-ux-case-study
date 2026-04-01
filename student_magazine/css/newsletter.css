@@ -13,6 +13,7 @@ Newsletter Subscription Section
     border-top: 1px solid color-mix(in srgb, var(--text-color) 10%, transparent);
 }
 
+
 .newsletter-sticky {
     position: fixed;
     top: 0;
@@ -35,6 +36,9 @@ Newsletter Subscription Section
     opacity: 1;
     pointer-events: auto;
 }
+
+
+/* .nl-active no longer needed for pointer-events */
 
 .newsletter-sticky.nl-dodge-footer {
     top: auto !important;
@@ -97,10 +101,10 @@ html.dark-mode .nl-card {
 .nl-topics li:last-child { border-bottom:none; }
 .nl-tagline { font-size:clamp(12px,1vw,14px); font-weight:600; opacity:.42; color:var(--text-color); margin:0; }
 .nl-card-subscribe h3 { font-size:clamp(20px,2.6vw,36px); font-weight:900; text-transform:uppercase; text-align:center; margin:0 0 clamp(18px,2.5vw,28px); color:var(--text-color); }
-.nl-email-input { width:100%; padding:13px 18px; border-radius:999px; border:1.5px solid color-mix(in srgb,var(--text-color) 18%,transparent); background:color-mix(in srgb,var(--bg-color) 97%,var(--text-color) 3%); color:var(--text-color); font-size:14px; font-family:inherit; outline:none; box-sizing:border-box; margin-bottom:12px; display:block; transition:border-color .2s; }
+.nl-email-input { width:100%; padding:13px 18px; border-radius:999px; border:1.5px solid color-mix(in srgb,var(--text-color) 18%,transparent); background:color-mix(in srgb,var(--bg-color) 97%,var(--text-color) 3%); color:var(--text-color); font-size:14px; font-family:inherit; outline:none; box-sizing:border-box; margin-bottom:12px; display:block; }
 .nl-email-input::placeholder { opacity:.38; }
 .nl-email-input:focus { border-color:orange; }
-/* Pointer for subscribe button */
+/* Always allow pointer and pointer-events for subscribe button */
 .nl-submit {
     display: block;
     width: 100%;
@@ -133,12 +137,12 @@ html.dark-mode .nl-card {
 #site-cursor { pointer-events:none!important; }
 
 @media (max-width:768px) {
-    /* Hide the left-side text on mobile */
+    /* Hide the left-side label text on mobile */
     .newsletter-left {
         display: none;
     }
 
-    /* Panel stays fixed */
+    /* Panel stays fixed — same as desktop, centred over full width */
     .newsletter-sticky {
         position: fixed;
         height: 70vh;
@@ -149,14 +153,14 @@ html.dark-mode .nl-card {
         gap: 0;
     }
 
-    /* Card stack fills the available width */
+    /* Card stack fills the available width, fixed height so all cards are the same size */
     .newsletter-cards {
         width: min(360px, calc(100vw - 48px));
         height: 380px;
         flex: 0 0 auto;
     }
 
-    /* Cards are positioned inside the stack */
+    /* Cards are absolutely positioned inside the stack — same as desktop */
     .nl-card {
         position: absolute;
         inset: 0;

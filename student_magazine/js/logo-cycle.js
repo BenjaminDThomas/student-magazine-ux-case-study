@@ -41,14 +41,13 @@ Logo Word Cycle
         }
 
         function setWord(word) {
-            /* hard reset clears any residual width left over from the previous word */
+            /* hard reset clears any residual transform from the previous word */
             rest.classList.add("is-reset");
             first.textContent = word.charAt(0);
             rest.textContent = word.slice(1);
             rest.classList.remove("is-open");
-            rest.style.setProperty("--rest-open-width", `${Math.ceil(rest.scrollWidth)}px`);
             /* force a layout flush so the reset state commits before the next animation */
-            void rest.offsetWidth;
+            void rest.getBoundingClientRect();
             rest.classList.remove("is-reset");
         }
 

@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Magazine: Explore campus news, events, and stories written by students for students.">
     <title>Student Magazine</title>
+    <!-- preconnect so font requests start immediately -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- load Inter non-blocking — media=print means it won't block render, onload swaps to all -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"></noscript>
+    <!-- preload hero background so it fetches in parallel with CSS -->
+    <link rel="preload" as="image" href="images/light_mode_background.webp" fetchpriority="high">
     <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/style.css">
@@ -21,6 +30,7 @@
     <link rel="stylesheet" href="css/hero.css">
 </head>
 <body class="home-page">
+    <main id="main-content">
     <!-- Hero Image -->
     <section class="hero">
         <div class="hero-scrim" aria-hidden="true"></div>
@@ -53,10 +63,10 @@
             <!-- Navigation Bar Icons -->
             <div class="navbar-icons">
                 <a href="saved.html" class="icon-btn" title="Saved articles">
-                    <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
+                    <img src="images/save_articles_logo.webp" alt="Saved articles" class="heart-icon"/>
                 </a>
                 <a href="login.html" class="icon-btn" title="Profile">
-                    <img src="images/profile_picture_image.png" alt="Profile" class="profile-icon"/>
+                    <img src="images/profile_picture_image.webp" alt="Profile" class="profile-icon"/>
                 </a>
             </div>
         </nav>
@@ -87,7 +97,6 @@
     Homepage Featured Carousel
     ----------------------
     -->
-
     <section class="featured-carousel" id="featured-carousel">
         <h2 class="featured-title">Featured Stories</h2>
         <p class="featured-subtitle">Explore the latest highlights from Student Magazine.</p>
@@ -100,7 +109,6 @@
             <progress id="carousel-progress" class="carousel-progress" value="0" max="100">0%</progress>
             <div class="carousel-dots" id="carousel-dots"></div>
         </div>
-
     </section>
 
     <!-- About Us Anchor for scroll targeting -->
@@ -111,7 +119,7 @@
     About Us Scroll Section
     ----------------------
     -->
-     <section class="about-us-section" id="about-us" aria-label="About us">
+    <section class="about-us-section" id="about-us" aria-label="About us">
         <div class="about-us-sticky">
             <h2 class="visually-hidden">About Us</h2>
             <div class="about-us-heading-row" aria-hidden="true">
@@ -165,7 +173,7 @@
     <section class="articles-browse" id="articles-browse" aria-label="Browse articles">
         <h2 class="browse-heading">Discover Articles</h2>
 
-        <!-- Words zigzag alternating left/right -->
+        <!-- Words zigzag alternating left/right — decorative, hidden from screen readers -->
         <div class="browse-tags" aria-hidden="true">
             <div class="browse-tag tag-campus">Campus Events</div>
             <div class="browse-tag tag-careers">Career Events</div>
@@ -182,7 +190,6 @@
         </div>
     </section>
 
-
     <!--
     ----------------------
     Newsletter Subscription Section
@@ -191,7 +198,7 @@
     <div class="newsletter-isolate">
     <section class="newsletter-section" id="newsletter-section" aria-label="Newsletter subscription">
         <div class="newsletter-sticky">
-            <!-- Left sticky text -->
+            <!-- Left sticky text — decorative, hidden from screen readers -->
             <div class="newsletter-left" aria-hidden="true">
                 <p class="newsletter-left-text">
                     <span>Be first to hear</span>
@@ -236,7 +243,6 @@
                 </div>
 
             </div>
-            </div>
         </div>
     </section>
     </div>
@@ -246,7 +252,6 @@
 
     <!-- Footer -->
     <footer class="site-footer" id="site-footer">
-        <!-- Logo + flat nav columns -->
         <nav class="footer-nav" aria-label="Footer">
             <p class="footer-animated-logo">
                 <span class="footer-sm">S M</span>
@@ -273,7 +278,6 @@
             </div>
         </nav>
         <hr class="footer-divider">
-        <!-- Contact typewriter + socials -->
         <div class="footer-bottom">
             <div class="footer-contact-area" id="footer-contact-area">
                 <div class="footer-typewriter" aria-live="polite">
@@ -293,40 +297,44 @@
             Student Magazine 2026
         </p>
     </footer>
-    <!-- Mobile hamburger button — fixed bottom-right (thumb zone) -->
+    </main>
+
+    <!-- Mobile hamburger button — fixed bottom-right -->
     <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
     </button>
 
     <!-- Mobile nav drawer — slides up from bottom -->
-    <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile navigation" inert>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="#featured-carousel">About Us</a></li>
             <li><a href="viewall.html">News</a></li>
             <li><a href="#site-footer">Contact</a></li>
         </ul>
+        <!-- links are real anchors so screen readers and keyboard users can reach them -->
         <div class="mobile-drawer-icons">
             <a href="saved.html" class="icon-btn" title="Saved articles">
-                <img src="images/save_articles_logo.png" alt="Saved articles" class="heart-icon"/>
+                <img src="images/save_articles_logo.webp" alt="Saved articles" class="heart-icon"/>
             </a>
             <a href="login.html" class="icon-btn" title="Profile">
-                <img src="images/profile_picture_image.png" alt="Profile" class="profile-icon"/>
+                <img src="images/profile_picture_image.webp" alt="Profile" class="profile-icon"/>
             </a>
         </div>
     </nav>
 
     <!-- Backdrop overlay behind drawer -->
-    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
+    <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" inert></div>
 
-    <!-- JavaScript File-->
+    <!-- JavaScript Files -->
     <script src="js/theme-toggle.js"></script>
     <script src="js/logo-cycle.js"></script>
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/about-us.js"></script>
     <script src="js/discover.js"></script>
-    <script src="js/newsletter.js"></script></body>
+    <script src="js/newsletter.js"></script>
+</body>
 </html>

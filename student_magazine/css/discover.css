@@ -17,7 +17,6 @@
 }
 .page-bottom-blur.over-dark      { --blur-color: #1a1a1a; }
 html.dark-mode .page-bottom-blur { --blur-color: #1a1a1a; }
-.bottom-blur { display: none !important; }
 
 /* Discover section */
 .articles-browse {
@@ -59,14 +58,12 @@ html.dark-mode .page-bottom-blur { --blur-color: #1a1a1a; }
     will-change: transform, opacity;
 }
 
-/* Vertical positions */
-.tag-campus  { top: 0%; }
-.tag-careers  { top: 22%; }
-.tag-societies      { top: 44%; }
-.tag-support        { top: 66%; }
-.tag-offers { top: 86%; }
+.tag-campus    { top: 0%; }
+.tag-careers   { top: 22%; }
+.tag-societies { top: 44%; }
+.tag-support   { top: 66%; }
+.tag-offers    { top: 86%; }
 
-/* CTA */
 .browse-cta {
     max-width: 680px;
     margin: 0 auto;

@@ -24,9 +24,7 @@ if (btn) {
 
     function positionBtn() {
         var hamRect = hamburger.getBoundingClientRect();
-        var btnHeight = scrollBtn.offsetHeight || 36;
         var gap = 10;
-        /* position above the hamburger using fixed coords */
         scrollBtn.style.bottom = (window.innerHeight - hamRect.top + gap) + "px";
         scrollBtn.style.right = (window.innerWidth - hamRect.right) + "px";
         scrollBtn.style.left = "auto";
@@ -44,9 +42,8 @@ Desktop Scroll-triggered Hamburger
 */
 
 (function () {
-    // only applies on non-homepage, non-auth desktop
     if (document.body.classList.contains("home-page")) {
-        // homepage — hamburger appears when the hero navbar scrolls out of view
+        /* homepage — hamburger appears when the hero navbar scrolls out of view */
         var menuBtn = document.getElementById("mobile-menu-btn");
         var navbar  = document.querySelector(".hero .navbar");
         if (!menuBtn || !navbar) return;
@@ -73,7 +70,7 @@ Desktop Scroll-triggered Hamburger
     if (!menuBtn || !navbar) return;
 
     function updateHamburger() {
-        if (window.innerWidth < 769) return;                        // mobile handles its own display
+        if (window.innerWidth < 769) return;                        /* mobile handles its own display */
         var navBottom = navbar.getBoundingClientRect().bottom;
         if (navBottom <= 0) {
             menuBtn.classList.add("desktop-visible");
@@ -163,7 +160,6 @@ if (toggleButton) {
 document.querySelectorAll(".logo").forEach((logo) => {
     if (logo.tagName === "A") return;
     logo.classList.add("logo-clickable");
-    logo.setAttribute("role", "link");
     logo.setAttribute("tabindex", "0");
     logo.setAttribute("aria-label", "Go to home page");
     logo.addEventListener("click", () => { window.location.href = "index.html"; });
@@ -190,8 +186,11 @@ if (mobileMenuBtn && mobileNavDrawer) {
         mobileMenuBtn.classList.add("is-open");
         mobileMenuBtn.setAttribute("aria-expanded", "true");
         mobileNavDrawer.classList.add("is-open");
-        mobileNavDrawer.setAttribute("aria-hidden", "false");
-        if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add("is-open");
+        mobileNavDrawer.removeAttribute("inert");
+        if (mobileDrawerOverlay) {
+            mobileDrawerOverlay.classList.add("is-open");
+            mobileDrawerOverlay.removeAttribute("inert");
+        }
         document.body.style.overflow = "hidden";
     }
 
@@ -199,10 +198,12 @@ if (mobileMenuBtn && mobileNavDrawer) {
         mobileMenuBtn.classList.remove("is-open");
         mobileMenuBtn.setAttribute("aria-expanded", "false");
         mobileNavDrawer.classList.remove("is-open");
-        mobileNavDrawer.setAttribute("aria-hidden", "true");
-        if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove("is-open");
+        mobileNavDrawer.setAttribute("inert", "");
+        if (mobileDrawerOverlay) {
+            mobileDrawerOverlay.classList.remove("is-open");
+            mobileDrawerOverlay.setAttribute("inert", "");
+        }
         document.body.style.overflow = "";
-        // reset to main nav view when closing — safe because window.showDrawerMain is set below
         if (typeof window.showDrawerMain === "function") window.showDrawerMain();
     }
 
@@ -212,7 +213,7 @@ if (mobileMenuBtn && mobileNavDrawer) {
 
     if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener("click", closeDrawer);
 
-    // only add closeDrawer to nav links, not icon buttons (icons handle their own clicks)
+    /* only close on nav links — icon buttons handle their own clicks */
     mobileNavDrawer.querySelectorAll("ul a").forEach((link) => {
         link.addEventListener("click", closeDrawer);
     });
@@ -231,10 +232,8 @@ Mobile Drawer — Profile Panel
     var user = null;
     try { user = JSON.parse(localStorage.getItem("currentUser")); } catch {}
 
-    /* ── profile panel element ── */
     var profilePanel = document.createElement("div");
     profilePanel.id = "mobile-profile-panel";
-    profilePanel.setAttribute("aria-hidden", "true");
     profilePanel.style.display = "none";
     drawer.appendChild(profilePanel);
 
@@ -252,14 +251,13 @@ Mobile Drawer — Profile Panel
         try { return localStorage.getItem("userAvatar_" + user.email) || null; } catch { return null; }
     }
 
-    /* ── show/hide helpers — exposed globally so closeDrawer can call showDrawerMain ── */
+    /* exposed globally so closeDrawer can reset to the main nav view */
     window.showDrawerMain = function () {
         var mainContent = drawer.querySelector("ul");
         var drawerIcons = drawer.querySelector(".mobile-drawer-icons");
         if (mainContent) mainContent.style.display = "";
         if (drawerIcons) drawerIcons.style.display = "";
         profilePanel.style.display = "none";
-        profilePanel.setAttribute("aria-hidden", "true");
     };
 
     function showProfilePanel() {
@@ -268,7 +266,6 @@ Mobile Drawer — Profile Panel
         if (mainContent) mainContent.style.display = "none";
         if (drawerIcons) drawerIcons.style.display = "none";
         profilePanel.style.display = "block";
-        profilePanel.setAttribute("aria-hidden", "false");
     }
 
     function renderProfilePanel() {
@@ -344,13 +341,12 @@ Mobile Drawer — Profile Panel
         });
     }
 
-    /* ── wire up drawer icons when logged in ── */
+    /* wire up drawer icons when logged in */
     if (user) {
         renderProfilePanel();
 
         var drawerIcons = drawer.querySelector(".mobile-drawer-icons");
         if (drawerIcons) {
-            /* profile icon → open profile panel */
             var profileBtn = drawerIcons.querySelector('a[title="Profile"]');
             if (profileBtn) {
                 profileBtn.removeAttribute("href");
@@ -371,7 +367,6 @@ Mobile Drawer — Profile Panel
                 }
             }
 
-            /* saved articles icon → always goes straight to saved.html */
             var savedBtn = drawerIcons.querySelector('a[title="Saved articles"]');
             if (savedBtn) savedBtn.href = "saved.html";
         }
@@ -460,11 +455,11 @@ Bottom Blur — adaptive colour + footer fade
     var footer = document.querySelector(".site-footer");
 
     function update() {
-        /* adaptive colour — match blur to whatever bg colour sits beneath it */
+        /* match blur colour to whatever background sits beneath it */
         blurEl.classList.toggle("over-dark",
             isBgDark(bgElAtPoint(window.innerWidth / 2, window.innerHeight - 8)));
 
-        /* fade out as footer scrolls into view so it never overlaps footer content */
+        /* fade out as the footer scrolls into view */
         if (footer) {
             var footerTop = footer.getBoundingClientRect().top;
             var vh        = window.innerHeight;
@@ -494,7 +489,7 @@ Profile Dropdown (desktop navbar only)
     var user = null;
     try { user = JSON.parse(localStorage.getItem("currentUser")); } catch {}
 
-    /* desktop navbar profile icon only — mobile drawer handles its own */
+    /* desktop navbar only — mobile drawer handles its own profile panel */
     var profileBtns = document.querySelectorAll('.navbar-icons a.icon-btn[title="Profile"]');
     if (!profileBtns.length) return;
 
