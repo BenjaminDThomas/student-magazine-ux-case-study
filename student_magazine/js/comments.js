@@ -99,7 +99,7 @@ function buildCommentCard(comment, editable, articleId, index) {
             <div class="comment-avatar" aria-hidden="true">${avatarHtml}</div>
             <div class="comment-identity">
                 <span class="comment-name">${comment.name}</span>
-                <span class="comment-stars" aria-label="${comment.rating} out of 5 stars">${buildStars(comment.rating)}</span>
+                <span class="comment-stars" role="img" aria-label="${comment.rating} out of 5 stars">${buildStars(comment.rating)}</span>
             </div>
         </div>
         <div class="comment-divider" aria-hidden="true"></div>

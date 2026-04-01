@@ -122,6 +122,10 @@ loadArticles().then(articles => {
     if (imageCount === 1) {
       const img = document.createElement("img");                                // creates image element
       img.src = normalizeAssetPath(section.src);
+      img.alt = article.title;                                                  // alt text for accessibility/SEO
+      img.fetchPriority = "high";                                               // LCP priority hint
+      img.width = 1100;                                                         // intrinsic size hint prevents layout shift
+      img.height = 628;
       img.classList.add("article-banner");                                      
       contentSection.appendChild(img);                                          // appends content to image
     } else {
@@ -131,6 +135,9 @@ loadArticles().then(articles => {
 
       const img = document.createElement("img");                                // creates image element
       img.src = normalizeAssetPath(section.src);
+      img.alt = section.alt || "";                                              // alt text for accessibility/SEO
+      img.width = 654;                                                          // intrinsic size hints prevent layout shift
+      img.height = 374;
       img.classList.add("media-img");                                           // assigns class 'media-img' to the image element
 
       const text = document.createElement("div");

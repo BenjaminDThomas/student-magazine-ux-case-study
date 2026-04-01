@@ -8,22 +8,22 @@
     <!-- preconnect so font requests start immediately -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- load Inter non-blocking — display=optional avoids font-swap CLS -->
+    <!-- load Inter non-blocking -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=optional" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=optional"></noscript>
-    <!-- preload hero background so it fetches in parallel with CSS -->
+    <!-- preload hero background -->
     <link rel="preload" as="image" href="images/light_mode_background.webp" fetchpriority="high">
-    <!-- preload first carousel image — LCP element, discovered late by JS -->
+    <!-- preload carousel image -->
     <link rel="preload" as="image"
           href="images/finanical_support_banner.webp"
           imagesrcset="images/finanical_support_banner_sm.webp 400w, images/finanical_support_banner.webp 828w"
           imagesizes="(max-width: 768px) 400px, 828px"
           fetchpriority="high">
-    <!-- preload article data so carousel and newsletter JS don't wait on the network chain -->
+    <!-- preload article data -->
     <link rel="preload" as="fetch" crossorigin href="data/articles.json">
-    <!-- Early theme bootstrap — no defer, must run before paint to prevent flash of light mode -->
+    <!-- Early theme bootstrap -->
     <script src="js/theme-init.js"></script>
-    <!-- Scripts deferred here so they download in parallel with CSS (mobile benefit) -->
+    <!-- Scripts deferred -->
     <script defer src="js/theme-toggle.js"></script>
     <script defer src="js/logo-cycle.js"></script>
     <script defer src="js/main.js"></script>
@@ -251,7 +251,7 @@
     </section>
     </div>
 
-    <!-- Clean bottom blur -->
+    <!-- Bottom blur -->
     <div class="page-bottom-blur" aria-hidden="true"></div>
 
     <!-- Footer -->
@@ -318,7 +318,6 @@
             <li><a href="viewall.html">News</a></li>
             <li><a href="#site-footer">Contact</a></li>
         </ul>
-        <!-- links are real anchors so screen readers and keyboard users can reach them -->
         <div class="mobile-drawer-icons">
             <a href="saved.html" class="icon-btn" title="Saved articles">
                 <img src="images/save_articles_logo.webp" alt="Saved articles" class="heart-icon"/>
@@ -331,7 +330,5 @@
 
     <!-- Backdrop overlay behind drawer -->
     <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" inert></div>
-
-    <!-- Scripts moved to <head defer> above — removed from here -->
 </body>
 </html>

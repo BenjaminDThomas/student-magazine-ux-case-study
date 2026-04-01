@@ -594,15 +594,23 @@ Comment Form
 /* sign-in prompt for non-logged-in users */
 .comment-login-prompt {
     font-size: 15px;
-    color: var(--text-color);
-    opacity: 0.7;
+    /* Use a semi-transparent colour instead of opacity so the cascade
+       does not reduce the link's contrast against the background */
+    color: color-mix(in srgb, var(--text-color) 70%, transparent);
     margin: 0;
 }
 
 .comment-login-prompt a {
-    color: #e07b00;
+    /* #a05e00 = 5.1:1 on white (#fff) – passes WCAG AA */
+    color: #a05e00;
     font-weight: 700;
     text-decoration: none;
+}
+
+/* On dark backgrounds #a05e00 is too dark; restore the original orange */
+html.dark-mode .comment-login-prompt a {
+    /* #e07b00 = 6.75:1 on #1a1a1a – passes WCAG AA */
+    color: #e07b00;
 }
 
 .comment-login-prompt a:hover {
