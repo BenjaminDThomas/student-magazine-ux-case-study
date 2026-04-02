@@ -1,0 +1,107 @@
+@supports (grid-template-columns: subgrid) {
+	.page-grid {
+		display: grid;
+		grid-template-columns: minmax(24px, 1fr) minmax(0, 1100px) minmax(24px, 1fr);
+	}
+
+	.page-grid > header,
+	.page-grid > .navbar,
+	.page-grid > main {
+		grid-column: 1 / -1;
+	}
+
+	.page-grid > main {
+		display: grid;
+		grid-template-columns: subgrid;
+	}
+
+	.article-header-wrap,
+	.article-toc,
+	#article-content,
+	.article-bottom-line,
+	.article-save-wrap,
+	.comments-section,
+	.article-nav {
+		grid-column: 1 / -1;
+	}
+
+	#article-content {
+		display: grid;
+		grid-template-columns: subgrid;
+		row-gap: 18px;
+	}
+
+	#article-content > p,
+	#article-content > h2,
+	#article-content > h3,
+	#article-content > .article-category-heading {
+		grid-column: 2;
+		width: auto;
+		max-width: none;
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	#article-content > .intro-box,
+	#article-content > .media-row,
+	#article-content > .article-banner,
+	#article-content > .article-bottom-line {
+		grid-column: 1 / -1;
+	}
+
+	.article-header-wrap,
+	.article-toc,
+	.article-save-wrap,
+	.comments-section,
+	.article-nav,
+	.article-bottom-line {
+		width: auto;
+		max-width: none;
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 24px;
+		padding-right: 24px;
+	}
+
+	/* Keep TOC pills clear of the fixed reading rail on desktop */
+	.article-toc {
+		padding-left: 72px;
+	}
+
+	/* Keep comments and comment form comfortably inset from viewport edges */
+	.comments-section {
+		width: min(80%, 1100px);
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	@media (max-width: 768px) {
+		.article-toc {
+			padding-left: 24px;
+		}
+
+		.comments-section {
+			width: min(92%, 1100px);
+		}
+	}
+
+	.site-footer {
+		display: grid;
+		grid-template-columns: minmax(24px, 1fr) minmax(0, 1200px) minmax(24px, 1fr);
+	}
+
+	.site-footer > * {
+		grid-column: 2;
+	}
+
+	.footer-col {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: span 1;
+	}
+}
