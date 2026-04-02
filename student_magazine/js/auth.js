@@ -256,7 +256,7 @@ if (regPassword && createBtn) {
     });
 }
 
-/* ── register password visibility toggle ── */
+/* register password visibility toggle */
 
 if (toggleRegPw && regPassword) {
     toggleRegPw.addEventListener("click", () => {

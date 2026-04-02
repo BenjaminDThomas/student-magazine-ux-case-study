@@ -19,7 +19,6 @@ Prompt-engineering summary:
 */
 
 (() => {
-    // Guard: only initialise on pages that include the featured carousel section.
     const carouselRoot = document.querySelector("#featured-carousel");
 
     if (!carouselRoot) {
@@ -34,11 +33,11 @@ Prompt-engineering summary:
     const cycleDuration = 7000;
     const TRANSITION_MS = 550;
 
-    // Touch coordinates for swipe gesture detection.
+    // Touch area for swipe detection
     let touchStartX = 0;
     let touchStartY = 0;
 
-    // Contextual cursor chip that follows pointer over the carousel.
+    // Contextual cursor that follows pointer
     const cursorLabel = document.createElement("div");
     cursorLabel.id = "carousel-cursor";
     document.body.appendChild(cursorLabel);
@@ -59,7 +58,7 @@ Prompt-engineering summary:
 
     let articles = [];
     let slides = [];
-    // Track index starts at 2 because we prepend two clone slides for seamless looping.
+    // Track index starts at 2 for seamless looping
     let trackIndex = 2;
     let cycleStart = 0;
     let elapsedBeforePause = 0;
@@ -92,7 +91,6 @@ Prompt-engineering summary:
                 const data = await response.json();
                 return Array.isArray(data) ? data : [];
             } catch {
-                // Try the next candidate path.
             }
         }
 
@@ -100,7 +98,7 @@ Prompt-engineering summary:
     }
 
     function getRealIndex() {
-        // Map current track index (with clones) to the real article index.
+        // Map current track index to the article index
         return ((trackIndex - 2) + articles.length) % articles.length;
     }
 
@@ -116,19 +114,19 @@ Prompt-engineering summary:
     }
 
     function getArticleImage(article) {
-        // Prefer first image section; use a fallback if article data is incomplete.
+        // Prefer first image section and use a fallback if article data is incomplete.
         const sections = Array.isArray(article.sections) ? article.sections : [];
         const imageSection = sections.find((section) => section.type === "image");
         return imageSection ? normalizeAssetPath(imageSection.src) : "images/light_mode_background.webp";
     }
 
     function getArticleImageSm(article) {
-        // Return the 400-wide WebP variant for use in srcset on mobile.
+        // Return the WebP variant
         return getArticleImage(article).replace(/\.webp$/, "_sm.webp");
     }
 
     function getArticleExcerpt(article, maxLen) {
-        // Use first paragraph as preview text and trim to a safe word boundary.
+        // Use first paragraph as preview text and trim to a safe word boundary
         const sections = Array.isArray(article.sections) ? article.sections : [];
         const para = sections.find((s) => s.type === "paragraph");
         if (!para || !para.text) {
@@ -146,7 +144,7 @@ Prompt-engineering summary:
     }
 
     function getSlideRole(slideIndex) {
-        // Only adjacent slides are marked as near; everything else is far.
+        // Only adjacent slides are marked as near whereas everything else is far
         if (slideIndex === trackIndex) {
             return "active";
         }
@@ -204,7 +202,6 @@ Prompt-engineering summary:
         });
 
         li.addEventListener("mouseenter", () => {
-            // Cursor labels communicate available action based on slide position.
             const role = getSlideRole(slides.indexOf(li));
             if (role === "active") {
                 showCursorLabel("Explore article");
@@ -240,13 +237,13 @@ Prompt-engineering summary:
     }
 
     function buildTrack() {
-        // Build infinite track: [clone(n-2), clone(n-1), real..., clone(0), clone(1)].
+        // Build infinite track:
         track.innerHTML = "";
         slides = [];
         const n = articles.length;
 
         [n - 2, n - 1].forEach((idx) => {
-            // Leading clones support smooth previous transition from first real slide.
+            // Clones support smooth transition from first slide
             const clone = createSlideElement(articles[(idx + n) % n], (idx + n) % n);
             clone.classList.add("is-clone");
             slides.push(clone);
@@ -260,7 +257,7 @@ Prompt-engineering summary:
         });
 
         [0, 1].forEach((idx) => {
-            // Trailing clones support smooth next transition from last real slide.
+            // Trailing clones support smooth next transition from last slide
             const clone = createSlideElement(articles[idx % n], idx % n);
             clone.classList.add("is-clone");
             slides.push(clone);
@@ -274,7 +271,7 @@ Prompt-engineering summary:
     }
 
     function centerOnSlide(idx, animate) {
-        // Translate track so selected slide's centre aligns with shell centre.
+        // Translate track so selected slide's centre aligns with centre
         const shell = track.parentElement;
         if (!shell || !slides.length) {
             return;
@@ -292,7 +289,7 @@ Prompt-engineering summary:
         track.style.transform = `translateX(${x}px)`;
 
         if (!animate) {
-            // Force layout flush so transition state changes apply immediately.
+            // Force layout flush so transition state changes apply immediately
             void track.offsetWidth;
         }
     }
@@ -311,7 +308,7 @@ Prompt-engineering summary:
 
             const img = li.querySelector("img");
             if (img) {
-                // Favour active image for perceived performance.
+                // Favour active image
                 img.loading = role === "active" ? "eager" : "lazy";
                 img.fetchPriority = role === "active" ? "high" : "low";
             }
@@ -319,7 +316,7 @@ Prompt-engineering summary:
     }
 
     function goTo(direction) {
-        // Ignore empty requests and queue input while a transition is running.
+        // Ignore empty requests
         if (!direction) {
             return;
         }
@@ -337,11 +334,10 @@ Prompt-engineering summary:
 
         setTimeout(() => {
             const n = articles.length;
-            // If we landed on boundary clones, jump back to equivalent real slide.
             const needsReset = trackIndex <= 1 || trackIndex >= n + 2;
 
             if (needsReset) {
-                // Disable transitions during reset to avoid visible flash/flicker.
+                // Disable transitions during reset to avoid visible flash/flicker
                 slides.forEach((s) => {
                     s.style.transition = "none";
                 });
@@ -364,7 +360,7 @@ Prompt-engineering summary:
             renderDots();
 
             if (pendingDirection) {
-                // Replay one queued input after transition settles.
+                // Replay queued input after transition
                 const queued = pendingDirection;
                 pendingDirection = 0;
                 goTo(queued);
@@ -373,7 +369,6 @@ Prompt-engineering summary:
     }
 
     function renderDots() {
-        // Recreate dots each update to reflect active index and keep bindings simple.
         if (!dotsContainer || !articles.length) {
             return;
         }
@@ -390,7 +385,7 @@ Prompt-engineering summary:
             dot.style.minHeight = "28px";
             dot.style.margin = "2px";
             dot.addEventListener("click", () => {
-                // Jump directly to selected real slide index (+2 offset for leading clones).
+                // Jump directly to selected slide index
                 if (i === realIdx || isTransitioning) {
                     return;
                 }
@@ -409,7 +404,7 @@ Prompt-engineering summary:
     }
 
     function tick(now) {
-        // RAF-driven autoplay timer; pauses itself when carousel is not eligible.
+        // Autoplay timer that pauses itself when carousel is not visible
         if (!progressBar || !isCarouselVisible || document.hidden) {
             rafId = null;
             return;
@@ -429,7 +424,7 @@ Prompt-engineering summary:
     }
 
     function startCycle() {
-        // Start timer only when there are slides and carousel is visible.
+        // Start timer only when there are slides and carousel is visible
         if (rafId || !articles.length || !isCarouselVisible || document.hidden) {
             return;
         }
@@ -439,7 +434,7 @@ Prompt-engineering summary:
     }
 
     function pauseCycle() {
-        // Preserve elapsed time so autoplay resumes smoothly.
+        // Preserve elapsed time so autoplay resumes smoothly
         if (!rafId) {
             return;
         }
@@ -450,7 +445,7 @@ Prompt-engineering summary:
     }
 
     function restartCycle() {
-        // Reset progress after any manual or automatic navigation.
+        // Reset progress after any manual or automatic navigation
         elapsedBeforePause = 0;
         if (progressBar) {
             progressBar.value = 0;
@@ -465,7 +460,6 @@ Prompt-engineering summary:
     }
 
     function setupVisibilityObserver() {
-        // Fallback visibility check for environments without IntersectionObserver.
         const setVisibilityFromViewport = () => {
             const rect = carouselRoot.getBoundingClientRect();
             const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -484,7 +478,7 @@ Prompt-engineering summary:
 
         const sectionObserver = new IntersectionObserver((entries) => {
             const [entry] = entries;
-            // Carousel animates only while meaningfully visible.
+            // Carousel animates only while visible.
             isCarouselVisible = entry.isIntersecting && entry.intersectionRatio >= visibilityThreshold;
 
             if (isCarouselVisible) {
@@ -501,13 +495,13 @@ Prompt-engineering summary:
     }
 
     carouselRoot.addEventListener("touchstart", (e) => {
-        // Capture starting touch point for horizontal swipe detection.
+        // Capture starting touch point for horizontal swipe detection
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
     }, { passive: true });
 
     carouselRoot.addEventListener("touchend", (e) => {
-        // Trigger slide movement on strong horizontal swipe.
+        // Trigger slide movement on horizontal swipe
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) {
@@ -516,7 +510,7 @@ Prompt-engineering summary:
     }, { passive: true });
 
     document.addEventListener("visibilitychange", () => {
-        // Suspend animation work in background tabs.
+        // Suspend animation in background tabs
         if (document.hidden) {
             pauseCycle();
             return;
@@ -527,7 +521,7 @@ Prompt-engineering summary:
 
     loadArticles()
         .then((data) => {
-            // Require at least 3 stories so side previews remain meaningful.
+            // Require at least 3 stories
             articles = Array.isArray(data) ? data.slice(0, Math.max(data.length, 3)) : [];
 
             if (!articles.length) {
@@ -542,7 +536,7 @@ Prompt-engineering summary:
             }
 
             window.addEventListener("resize", () => {
-                // Keep active card centred after layout changes.
+                // Keep active card centred after layout changes
                 centerOnSlide(trackIndex, false);
             });
         })
