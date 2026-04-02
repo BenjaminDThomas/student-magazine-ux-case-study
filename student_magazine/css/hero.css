@@ -187,6 +187,10 @@ Mobile
         flex: 0 0 auto;
         padding: 11px 22px;
     }
+
+    .hero-pills {
+        display: none;
+    }
 }
 
 /*
