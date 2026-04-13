@@ -156,6 +156,14 @@ Prompts:
 2. "Save the article order to sessionStorage so the article page knows which
    article comes before and after."
 3. "Attach the save buttons to cards right after they render."
+4. "Refine the search experience so the results update only when the user
+   clicks Apply filters, making the interaction clearer and easier to
+   understand."
+5. "Replace the plain keyword suggestions with richer article previews that
+   include an image, title, author, and short excerpt so the search feels
+   more engaging."
+6. "Keep the suggestions panel hidden when the search field is empty and show
+   clear helper text when filter changes are waiting to be applied."
 
 ----------------------------------------------
 css/style.css
@@ -222,11 +230,16 @@ Prompts:
 ----------------------------------------------
 viewall.html
 ----------------------------------------------
-Updated with Claude (Anthropic).
+Updated with Claude (Anthropic) and GitHub Copilot.
 
 Prompts:
 1. "Add the newsletter section above the footer on the view all page."
 2. "Add save.js so the heart buttons show up on the article cards."
+3. "Add a clearer search and filter area to the view all page with Apply
+   filters and Clear actions so users know exactly when the article list
+   will change."
+4. "Add a dedicated suggestions container beneath the search field so article
+   previews can appear without disrupting the rest of the page layout."
 
 ----------------------------------------------
 saved.html

@@ -10,6 +10,7 @@
     <script src="js/theme-init.js"></script>
     <!-- CSS Styles File-->
     <link rel="stylesheet" href="css/bundle.css">
+    <link rel="stylesheet" href="css/viewall.css">
     <link rel="stylesheet" href="css/subgrid.css">
     <!-- Preload articles data -->
     <link rel="preload" as="fetch" crossorigin href="data/articles.json">
@@ -63,15 +64,35 @@
     <main id="main-content">
     <section class="page-container">
         <h1>All Articles</h1>
+        <!-- Search and filter experience updated with GitHub Copilot. -->
         <section class="viewall-tools" aria-label="Article filters">
-            <label class="visually-hidden" for="article-search">Search articles</label>
-            <input id="article-search" class="viewall-search" type="search" placeholder="Search by title, author or keyword" list="article-suggestions" autocomplete="off">
-            <datalist id="article-suggestions"></datalist>
+            <div class="viewall-tools-copy">
+                <p class="viewall-tools-eyebrow">Find your next read</p>
+                <p class="viewall-tools-intro">Search by title, author, or topic, then apply your filters when you want to update the list.</p>
+            </div>
 
-            <label class="visually-hidden" for="category-filter">Filter by category</label>
-            <select id="category-filter" class="viewall-filter">
-                <option value="all">All categories</option>
-            </select>
+            <form id="viewall-filters-form" class="viewall-filters-form">
+                <div class="viewall-search-shell">
+                    <label class="visually-hidden" for="article-search">Search articles</label>
+                    <input id="article-search" class="viewall-search" type="search" placeholder="Search by title, author or keyword" autocomplete="off" aria-describedby="article-search-hint" aria-controls="article-search-suggestions">
+                    <p id="article-search-hint" class="viewall-search-hint">Search by title, author, category, or a keyword from the article. Click Apply filters to update the list.</p>
+                    <div id="article-search-suggestions" class="viewall-suggestions" hidden></div>
+                </div>
+
+                <div class="viewall-actions-row">
+                    <div class="viewall-filter-shell">
+                        <label class="visually-hidden" for="category-filter">Filter by category</label>
+                        <select id="category-filter" class="viewall-filter">
+                            <option value="all">All categories</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="viewall-apply">Apply filters</button>
+                    <button type="button" id="viewall-clear" class="viewall-clear">Clear</button>
+                </div>
+            </form>
+
+            <p id="articles-results-summary" class="viewall-results-summary" aria-live="polite"></p>
         </section>
         <!-- All Articles-->
         <section id="articles-list"></section>

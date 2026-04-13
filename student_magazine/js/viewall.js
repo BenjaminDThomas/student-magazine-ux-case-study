@@ -19,9 +19,18 @@ Prompt-engineering summary:
 const listRoot = document.querySelector("#articles-list");
 const searchInput = document.querySelector("#article-search");
 const categoryFilter = document.querySelector("#category-filter");
-const suggestionList = document.querySelector("#article-suggestions");
+const filterForm = document.querySelector("#viewall-filters-form");
+const clearFiltersBtn = document.querySelector("#viewall-clear");
+const suggestionsRoot = document.querySelector("#article-search-suggestions");
+const resultsSummary = document.querySelector("#articles-results-summary");
+const searchHint = document.querySelector("#article-search-hint");
+const toolsPanel = document.querySelector(".viewall-tools");
 
 let allArticles = [];
+let appliedFilters = {
+    query: "",
+    category: "all"
+};
 
 async function loadArticles() {
     const candidates = [
@@ -83,6 +92,172 @@ function getArticleExcerpt(article) {
     return text.length > 150 ? `${text.slice(0, 147)}...` : text;
 }
 
+function getArticleKeywords(article) {
+    if (!Array.isArray(article.sections)) {
+        return "";
+    }
+
+    return article.sections
+        .filter((section) => section.type === "paragraph" || section.type === "subheading")
+        .map((section) => section.text || "")
+        .join(" ");
+}
+
+function matchesArticle(article, rawQuery) {
+    const query = rawQuery.trim().toLowerCase();
+    if (!query) {
+        return true;
+    }
+
+    const category = article.category || "Other";
+    const searchableText = [
+        article.title,
+        article.author,
+        category,
+        getArticleExcerpt(article),
+        getArticleKeywords(article)
+    ].join(" ").toLowerCase();
+
+    return searchableText.includes(query);
+}
+
+function getPendingFilters() {
+    return {
+        query: searchInput ? searchInput.value.trim() : "",
+        category: categoryFilter ? categoryFilter.value : "all"
+    };
+}
+
+function hasPendingChanges() {
+    const pending = getPendingFilters();
+    return pending.query !== appliedFilters.query || pending.category !== appliedFilters.category;
+}
+
+function updateFilterStatus() {
+    const pending = hasPendingChanges();
+
+    if (toolsPanel) {
+        toolsPanel.classList.toggle("has-pending-changes", pending);
+    }
+
+    if (!searchHint) {
+        return;
+    }
+
+    searchHint.textContent = pending
+        ? "Your changes are ready. Click Apply filters to update the list."
+        : "Search by title, author, category, or a keyword from the article. Click Apply filters to update the list.";
+}
+
+function updateResultsSummary(filteredCount) {
+    if (!resultsSummary) {
+        return;
+    }
+
+    const queryPart = appliedFilters.query
+        ? ` for \"${appliedFilters.query}\"`
+        : "";
+    const categoryPart = appliedFilters.category !== "all"
+        ? ` in ${appliedFilters.category}`
+        : " across all categories";
+
+    resultsSummary.textContent = `Showing ${filteredCount} article${filteredCount === 1 ? "" : "s"}${queryPart}${categoryPart}.`;
+}
+
+function hideSuggestions() {
+    if (suggestionsRoot) {
+        suggestionsRoot.hidden = true;
+    }
+}
+
+function renderSuggestions() {
+    if (!suggestionsRoot || !searchInput) {
+        return;
+    }
+
+    const query = searchInput.value.trim();
+    suggestionsRoot.innerHTML = "";
+    suggestionsRoot.hidden = false;
+
+    if (!query) {
+        hideSuggestions();
+        return;
+    }
+
+    if (query.length < 2) {
+        suggestionsRoot.innerHTML = '<p class="viewall-suggestions-empty">Type at least 2 characters to preview matching articles.</p>';
+        return;
+    }
+
+    const matches = allArticles.filter((article) => matchesArticle(article, query)).slice(0, 4);
+
+    if (!matches.length) {
+        suggestionsRoot.innerHTML = '<p class="viewall-suggestions-empty">No article previews match that search yet.</p>';
+        return;
+    }
+
+    matches.forEach((article) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "viewall-suggestion-card";
+        button.dataset.suggestionValue = article.title;
+        button.setAttribute("aria-label", `Use ${article.title} as the search term`);
+
+        const image = document.createElement("img");
+        image.className = "viewall-suggestion-image";
+        image.src = getArticleImage(article);
+        image.alt = article.title;
+
+        const content = document.createElement("span");
+        content.className = "viewall-suggestion-copy";
+
+        const meta = document.createElement("span");
+        meta.className = "viewall-suggestion-meta";
+        meta.textContent = `${article.author} • ${article.category || "Other"}`;
+
+        const title = document.createElement("span");
+        title.className = "viewall-suggestion-title";
+        title.textContent = article.title;
+
+        const excerpt = document.createElement("span");
+        excerpt.className = "viewall-suggestion-excerpt";
+        excerpt.textContent = getArticleExcerpt(article);
+
+        content.appendChild(meta);
+        content.appendChild(title);
+        content.appendChild(excerpt);
+        button.appendChild(image);
+        button.appendChild(content);
+        suggestionsRoot.appendChild(button);
+    });
+}
+
+function applyFilters() {
+    appliedFilters = getPendingFilters();
+    renderArticles();
+    updateFilterStatus();
+    hideSuggestions();
+}
+
+function clearFilters() {
+    if (searchInput) {
+        searchInput.value = "";
+    }
+
+    if (categoryFilter) {
+        categoryFilter.value = "all";
+    }
+
+    appliedFilters = {
+        query: "",
+        category: "all"
+    };
+
+    renderArticles();
+    updateFilterStatus();
+    hideSuggestions();
+}
+
 function populateCategories(articles) {
     if (!categoryFilter) {
         return;
@@ -99,34 +274,13 @@ function populateCategories(articles) {
     });
 }
 
-function populateSuggestions(articles) {
-    if (!suggestionList) {
-        return;
-    }
-
-    suggestionList.innerHTML = "";
-    const values = new Set();
-
-    articles.forEach((article) => {
-        values.add(article.title);
-        values.add(article.author);
-        values.add(article.category || "Other");
-    });
-
-    [...values].filter(Boolean).slice(0, 40).forEach((value) => {
-        const option = document.createElement("option");
-        option.value = value;
-        suggestionList.appendChild(option);
-    });
-}
-
 function renderArticles() {
     if (!listRoot) {
         return;
     }
 
-    const query = (searchInput ? searchInput.value : "").trim().toLowerCase();
-    const selectedCategory = categoryFilter ? categoryFilter.value : "all";
+    const query = appliedFilters.query;
+    const selectedCategory = appliedFilters.category;
 
     const filtered = allArticles.filter((article) => {
         const category = article.category || "Other";
@@ -134,18 +288,7 @@ function renderArticles() {
             return false;
         }
 
-        if (!query) {
-            return true;
-        }
-
-        const searchableText = [
-            article.title,
-            article.author,
-            category,
-            getArticleExcerpt(article)
-        ].join(" ").toLowerCase();
-
-        return searchableText.includes(query);
+        return matchesArticle(article, query);
     });
 
     const groups = filtered.reduce((acc, article) => {
@@ -162,6 +305,7 @@ function renderArticles() {
     const entries = Object.entries(groups);
     if (!entries.length) {
         listRoot.innerHTML = '<p class="viewall-empty">No articles match your search.</p>';
+        updateResultsSummary(0);
         return;
     }
 
@@ -194,6 +338,10 @@ function renderArticles() {
             title.className = "card-title";
             title.textContent = article.title;
 
+            const meta = document.createElement("p");
+            meta.className = "card-meta";
+            meta.textContent = `${article.author} • ${article.category || "Other"}`;
+
             const excerpt = document.createElement("p");
             excerpt.className = "card-excerpt";
             excerpt.textContent = getArticleExcerpt(article);
@@ -204,6 +352,7 @@ function renderArticles() {
 
             link.appendChild(image);
             link.appendChild(title);
+            link.appendChild(meta);
             link.appendChild(excerpt);
             link.appendChild(readMore);
             card.appendChild(link);
@@ -214,6 +363,7 @@ function renderArticles() {
 
     // store ordered article IDs for prev/next navigation on article pages
     sessionStorage.setItem("articleIds", JSON.stringify(filtered.map((a) => a.id)));
+    updateResultsSummary(filtered.length);
 
     // attach save buttons if save.js is loaded
     if (typeof window.attachSaveBtnsToCards === "function") {
@@ -224,14 +374,54 @@ function renderArticles() {
 loadArticles().then((articles) => {
     allArticles = articles;
     populateCategories(allArticles);
-    populateSuggestions(allArticles);
+    updateFilterStatus();
     renderArticles();
 });
 
+if (filterForm) {
+    filterForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        applyFilters();
+    });
+}
+
 if (searchInput) {
-    searchInput.addEventListener("input", renderArticles);
+    searchInput.addEventListener("focus", renderSuggestions);
+    searchInput.addEventListener("input", () => {
+        renderSuggestions();
+        updateFilterStatus();
+    });
+    searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            hideSuggestions();
+        }
+    });
 }
 
 if (categoryFilter) {
-    categoryFilter.addEventListener("change", renderArticles);
+    categoryFilter.addEventListener("change", updateFilterStatus);
 }
+
+if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener("click", clearFilters);
+}
+
+if (suggestionsRoot) {
+    suggestionsRoot.addEventListener("click", (event) => {
+        const suggestion = event.target.closest("[data-suggestion-value]");
+        if (!suggestion || !searchInput) {
+            return;
+        }
+
+        searchInput.value = suggestion.dataset.suggestionValue || "";
+        updateFilterStatus();
+        hideSuggestions();
+        searchInput.focus();
+    });
+}
+
+document.addEventListener("click", (event) => {
+    if (!filterForm || !filterForm.contains(event.target)) {
+        hideSuggestions();
+    }
+});
