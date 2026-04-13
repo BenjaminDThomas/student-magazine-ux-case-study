@@ -92,6 +92,7 @@ Global Custom Cursor Labels
 
 const siteCursor = document.createElement("div");
 siteCursor.id = "site-cursor";
+siteCursor.style.transform = "none";
 document.body.appendChild(siteCursor);
 
 function showSiteCursor(text) {
@@ -109,6 +110,12 @@ function hideSiteCursor() {
 
 function inferCursorLabel(target) {
     if (!target) return "";
+    if (target.closest("#mobile-menu-btn")) {
+        const menuBtn = target.closest("#mobile-menu-btn");
+        return menuBtn && menuBtn.classList.contains("is-open")
+            ? "Close menu"
+            : "Open menu";
+    }
     if (target.dataset.cursorLabel) return target.dataset.cursorLabel;
 
     if (target.closest(".theme-toggle")) {
@@ -125,9 +132,14 @@ function inferCursorLabel(target) {
     if (target.classList.contains("icon-btn"))                             return target.getAttribute("title") || "Open";
     if (target.tagName === "A") {
         const text = (target.textContent || "").trim();
-        return text ? `Open ${text}` : "Open link";
+        if (text) {
+            return target.target === "_blank" ? `Open ${text} (ext.)` : `Open ${text}`;
+        }
+        return target.target === "_blank" ? "Open external link" : "Open link";
     }
     if (target.tagName === "BUTTON") {
+        const ariaLabel = (target.getAttribute("aria-label") || "").trim();
+        if (ariaLabel) return ariaLabel;
         const text = (target.textContent || "").trim();
         return text || "Click";
     }
@@ -135,15 +147,36 @@ function inferCursorLabel(target) {
 }
 
 document.addEventListener("mousemove", (e) => {
-    siteCursor.style.left = e.clientX + "px";
-    siteCursor.style.top  = e.clientY + "px";
-
     if (e.target.closest("#featured-carousel")) {
         hideSiteCursor();
         return;
     }
     const interactive = e.target.closest("[data-cursor-label], a, button, .logo, [role='button']");
-    showSiteCursor(inferCursorLabel(interactive));
+    const label = inferCursorLabel(interactive);
+    showSiteCursor(label);
+
+    if (!label) {
+        return;
+    }
+
+    const offsetX = 16;
+    const offsetY = -42;
+    const padding = 12;
+    const cursorWidth = siteCursor.offsetWidth;
+    const cursorHeight = siteCursor.offsetHeight;
+
+    const maxLeft = window.innerWidth - cursorWidth - padding;
+    const minLeft = padding;
+    const desiredLeft = e.clientX + offsetX;
+    const clampedLeft = Math.min(Math.max(desiredLeft, minLeft), maxLeft);
+
+    const desiredTop = e.clientY + offsetY;
+    const minTop = padding;
+    const maxTop = window.innerHeight - cursorHeight - padding;
+    const clampedTop = Math.min(Math.max(desiredTop, minTop), maxTop);
+
+    siteCursor.style.left = clampedLeft + "px";
+    siteCursor.style.top = clampedTop + "px";
 });
 
 document.addEventListener("mouseleave", hideSiteCursor);
