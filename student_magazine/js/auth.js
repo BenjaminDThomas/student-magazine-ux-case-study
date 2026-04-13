@@ -14,6 +14,36 @@ const stayNext      = document.querySelector("#stayNext");
 const stayChoices   = document.querySelectorAll(".stay-choice");
 const stayEmailText = document.querySelector("#stayEmailText");
 
+const authParams = new URLSearchParams(window.location.search);
+const authReturnTo = authParams.get("returnTo");
+
+function authPathWithReturnTo(path) {
+    const url = new URL(path, window.location.href);
+    if (authReturnTo) {
+        url.searchParams.set("returnTo", authReturnTo);
+    }
+    return `${url.pathname.split("/").pop()}${url.search}`;
+}
+
+(function preserveAuthLinks() {
+    const closeLink = document.querySelector(".auth-close");
+    if (closeLink) {
+        closeLink.href = authReturnTo || "index.html";
+    }
+
+    document.querySelectorAll('a[href="login.html"]').forEach((link) => {
+        link.href = authPathWithReturnTo("login.html");
+    });
+
+    document.querySelectorAll('a[href="register.html"]').forEach((link) => {
+        link.href = authPathWithReturnTo("register.html");
+    });
+
+    document.querySelectorAll('a[href="forgot.html"]').forEach((link) => {
+        link.href = authPathWithReturnTo("forgot.html");
+    });
+}());
+
 /* ── user store helpers ── */
 
 // returns all registered users array from localStorage
@@ -222,7 +252,7 @@ if (regPassword && createBtn) {
     // already have an account link below create button
     const regSwitch = document.createElement("p");
     regSwitch.className = "auth-switch";
-    regSwitch.innerHTML = 'Already have an account? <a href="login.html">Sign in</a>';
+    regSwitch.innerHTML = `Already have an account? <a href="${authPathWithReturnTo("login.html")}">Sign in</a>`;
     createBtn.after(regSwitch);
 
     regPwBack.addEventListener("click", () => {                                 // returns to email step
@@ -285,6 +315,6 @@ if (forgotEmail && resetBtn) {
 
     resetBtn.addEventListener("click", () => {
         alert("Reset link sent (simulated).");                                  // popup indicating reset link sent
-        window.location.href = "login.html";                                    // returns to login page
+        window.location.href = authPathWithReturnTo("login.html");              // returns to login page
     });
 }

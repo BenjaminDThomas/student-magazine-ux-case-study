@@ -95,6 +95,23 @@ siteCursor.id = "site-cursor";
 siteCursor.style.transform = "none";
 document.body.appendChild(siteCursor);
 
+function withReturnTo(path) {
+    const currentUrl = window.location.href;
+    const url = new URL(path, window.location.href);
+    url.searchParams.set("returnTo", currentUrl);
+    return `${url.pathname.split("/").pop()}${url.search}`;
+}
+
+(function () {
+    if (document.body.classList.contains("auth")) return;
+
+    document.querySelectorAll('a[href="login.html"], a[href="register.html"], a[href="forgot.html"]').forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href) return;
+        link.href = withReturnTo(href);
+    });
+}());
+
 function showSiteCursor(text) {
     if (!text) {
         siteCursor.classList.remove("visible");
@@ -527,7 +544,7 @@ Profile Dropdown (desktop navbar only)
     if (!profileBtns.length) return;
 
     if (!user) {
-        profileBtns.forEach(function (btn) { btn.href = "login.html"; });
+        profileBtns.forEach(function (btn) { btn.href = withReturnTo("login.html"); });
         return;
     }
 

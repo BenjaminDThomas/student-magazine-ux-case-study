@@ -87,12 +87,46 @@ function buildSaveBtn(articleId) {
 
 // applies the visual saved/unsaved state to a button
 function applySaveState(btn, saved) {
+    const signedIn = !!getCurrentUser();
+    const isArticleButton = btn.classList.contains("save-btn--article");
+
     btn.classList.toggle("is-saved", saved);
+    btn.classList.toggle("is-signed-in", signedIn);
     btn.setAttribute("aria-pressed", String(saved));
     btn.setAttribute("aria-label", saved ? "Unsave article" : "Save article");
     btn.innerHTML = saved
         ? `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`
         : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+
+    if (!signedIn) {
+        btn.style.color = "";
+        btn.style.background = "";
+        btn.style.borderColor = "";
+        btn.style.boxShadow = "";
+        return;
+    }
+
+    if (saved) {
+        if (isArticleButton) {
+            btn.style.background = "rgba(224, 123, 0, 0.12)";
+            btn.style.borderColor = "rgba(224, 123, 0, 0.46)";
+            btn.style.boxShadow = "0 8px 20px rgba(224, 123, 0, 0.16)";
+        } else {
+            btn.style.background = "#fff";
+            btn.style.boxShadow = "0 6px 18px rgba(224, 123, 0, 0.24)";
+        }
+        return;
+    }
+
+    btn.style.color = "#c86500";
+    if (isArticleButton) {
+        btn.style.background = "rgba(224, 123, 0, 0.08)";
+        btn.style.borderColor = "rgba(224, 123, 0, 0.45)";
+        btn.style.boxShadow = "0 6px 16px rgba(224, 123, 0, 0.14)";
+    } else {
+        btn.style.background = "#fff";
+        btn.style.boxShadow = "0 6px 18px rgba(224, 123, 0, 0.22)";
+    }
 }
 
 /* ── attach save buttons to all rendered cards ── */
@@ -130,6 +164,7 @@ function attachSaveBtnToArticle() {
 
     const btn = buildSaveBtn(articleId);
     btn.classList.add("save-btn--article");
+    applySaveState(btn, isArticleSaved(articleId));
 
     // Place save button inside the article header actions group
     const actions = document.querySelector(".article-header-actions");

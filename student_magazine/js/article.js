@@ -61,8 +61,45 @@ function slugify(text) {
 function setupReadingProgress() {
   const bar = document.querySelector("#article-progress-bar");
   const content = document.querySelector("#article-content");
-  if (!bar || !content) {
+  const progressTrack = document.querySelector(".article-reading-progress");
+  if (!bar || !content || !progressTrack) {
     return;
+  }
+
+  progressTrack.setAttribute("role", "slider");
+  progressTrack.setAttribute("tabindex", "0");
+  progressTrack.setAttribute("aria-label", "Article reading progress");
+  progressTrack.setAttribute("aria-valuemin", "0");
+  progressTrack.setAttribute("aria-valuemax", "100");
+  progressTrack.setAttribute("title", "Click to jump to that point in the article");
+  progressTrack.dataset.cursorLabel = "Jump to reading point";
+
+  function getScrollTargetForRatio(ratio) {
+    const rect = content.getBoundingClientRect();
+    const viewport = window.innerHeight || document.documentElement.clientHeight;
+    const contentHeight = content.offsetHeight;
+    const contentStart = window.scrollY + rect.top;
+    const unclampedTarget = contentStart - viewport + ratio * (contentHeight + viewport);
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - viewport);
+    return Math.max(0, Math.min(maxScroll, unclampedTarget));
+  }
+
+  function scrollToRatio(ratio) {
+    const target = getScrollTargetForRatio(Math.max(0, Math.min(1, ratio)));
+    window.scrollTo({ top: target, behavior: "smooth" });
+  }
+
+  function getRatioFromPointer(clientX, clientY) {
+    const rect = progressTrack.getBoundingClientRect();
+    const isHorizontal = rect.width > rect.height;
+
+    if (isHorizontal) {
+      const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+      return rect.width ? x / rect.width : 0;
+    }
+
+    const y = Math.max(0, Math.min(rect.height, clientY - rect.top));
+    return rect.height ? y / rect.height : 0;
   }
 
   const updateProgress = () => {
@@ -72,7 +109,35 @@ function setupReadingProgress() {
     const traversed = viewport - rect.top;
     const ratio = Math.max(0, Math.min(1, traversed / Math.max(1, total)));
     bar.style.setProperty("--prog", ratio);
+    progressTrack.setAttribute("aria-valuenow", String(Math.round(ratio * 100)));
+    progressTrack.setAttribute("aria-valuetext", `${Math.round(ratio * 100)}% read`);
   };
+
+  progressTrack.addEventListener("click", (event) => {
+    scrollToRatio(getRatioFromPointer(event.clientX, event.clientY));
+  });
+
+  progressTrack.addEventListener("keydown", (event) => {
+    const current = Number(progressTrack.getAttribute("aria-valuenow") || "0") / 100;
+    let nextRatio = null;
+
+    if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      nextRatio = current - 0.05;
+    } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      nextRatio = current + 0.05;
+    } else if (event.key === "Home") {
+      nextRatio = 0;
+    } else if (event.key === "End") {
+      nextRatio = 1;
+    }
+
+    if (nextRatio === null) {
+      return;
+    }
+
+    event.preventDefault();
+    scrollToRatio(nextRatio);
+  });
 
   updateProgress();
   window.addEventListener("scroll", updateProgress, { passive: true });

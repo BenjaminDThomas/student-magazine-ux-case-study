@@ -196,6 +196,7 @@ html.dark-mode #article-content h3::after {
     text-transform: none;
     letter-spacing: 0.01em;
     color: var(--text-color);
+    text-align: center;
     margin: 0 auto 12px;
     padding: 0 24px;
     width: 90%;
@@ -340,8 +341,8 @@ html.dark-mode #article-content h3::after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 12px 8px;
+    gap: 6px;
+    padding: 10px 6px;
     border-radius: 999px;
     background: color-mix(in srgb, var(--bg-color) 85%, transparent);
     backdrop-filter: blur(6px);
@@ -371,6 +372,19 @@ html.dark-mode #article-content h3::after {
     border: 1px solid color-mix(in srgb, var(--text-color) 36%, transparent);
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--bg-color) 70%, transparent);
     overflow: hidden;
+    cursor: pointer;
+    touch-action: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.article-reading-progress:hover {
+    border-color: color-mix(in srgb, #e07b00 70%, var(--text-color) 30%);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--bg-color) 70%, transparent);
+}
+
+.article-reading-progress:focus-visible {
+    outline: 2px solid #e07b00;
+    outline-offset: 4px;
 }
 
 .article-reading-progress span {
