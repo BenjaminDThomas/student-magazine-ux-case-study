@@ -28,7 +28,7 @@ html.dark-mode .header-line {
 .article-header-wrap {
     width: 90%;
     max-width: 1100px;
-    margin: 0 auto 24px;
+    margin: 0 auto 18px;
     padding: 0 24px;
 }
 
@@ -69,6 +69,29 @@ html.dark-mode .header-line {
     justify-content: flex-start;
     gap: 12px;
     width: 100%;
+}
+
+/* ---- Save Button Contrast (Light Mode) ---- */
+html:not(.dark-mode) .save-btn--article {
+    color: #08486d;
+    background: #eff7fd;
+    border-color: #0b5e8e;
+}
+
+html:not(.dark-mode) .save-btn--article:hover {
+    background: #e3f0f9;
+    border-color: #08486d;
+}
+
+html:not(.dark-mode) .save-btn--article.is-saved {
+    color: #073a58;
+    background: #dbeefe;
+    border-color: #073a58;
+}
+
+.save-btn--article:focus-visible {
+    outline: 2px solid #0b5e8e;
+    outline-offset: 3px;
 }
 
 /* ---- Return Button ---- */
@@ -126,39 +149,39 @@ html.dark-mode .return-btn:hover {
 }
 
 #article-content p {
-    max-width: 70ch;
+    max-width: 68ch;
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
-    margin: 0 0 18px;
-    font-size: clamp(16px, 1.3vw, 20px);
-    line-height: 1.7;
+    margin: 0 0 14px;
+    font-size: clamp(15.5px, 1.08vw, 18.5px);
+    line-height: 1.68;
 }
 
 #article-content > p {
-    margin: 0 auto 18px;
+    margin: 0 auto 14px;
 }
 
 #article-content > p:first-of-type {
     margin-top: 0;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 #article-content h2 {
     letter-spacing: 0.04em;
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
-    margin: 22px 0 14px;
+    margin: 18px 0 10px;
 }
 
 #article-content h3 {
     color: var(--text-color);
     transition: color var(--transition-speed) ease;
-    margin: 50px auto 14px;
+    margin: 34px auto 12px;
     width: 90%;
     max-width: 1100px;
     box-sizing: border-box;
-    padding: 0 24px 20px;
-    font-size: clamp(22px, 2.4vw, 34px);
+    padding: 0 24px 12px;
+    font-size: clamp(20px, 2.1vw, 30px);
     line-height: 1.2;
     position: relative;
 }
@@ -197,7 +220,7 @@ html.dark-mode #article-content h3::after {
     letter-spacing: 0.01em;
     color: var(--text-color);
     text-align: center;
-    margin: 0 auto 12px;
+    margin: 0 auto 8px;
     padding: 0 24px;
     width: 90%;
     max-width: 1100px;
@@ -207,21 +230,22 @@ html.dark-mode #article-content h3::after {
 
 /* ---- Article Banner ---- */
 .article-banner {
-    width: 64%;
-    max-width: none;
-    border-radius: 0;
+    width: min(980px, 82%);
+    max-width: 980px;
+    max-height: min(56vh, 560px);
+    border-radius: 12px;
     background: transparent;
     box-shadow: none;
     object-fit: contain;
     height: auto;
-    margin: 0 auto 40px;
+    margin: 0 auto 26px;
     display: block;
 }
 
 .article-bottom-line {
     width: 100%;
     max-width: 1100px;
-    margin: 40px auto;
+    margin: 28px auto;
     display: block;
 }
 
@@ -233,8 +257,8 @@ html.dark-mode #article-content h3::after {
     max-width: none;
     left: 0;
     right: 0;
-    margin: 24px 0 32px;
-    padding: 32px clamp(12px, 8vw, 80px);
+    margin: 16px 0 24px;
+    padding: 24px clamp(12px, 7vw, 72px);
     position: relative;
 }
 
@@ -274,11 +298,11 @@ html.dark-mode #article-content h3::after {
 
 .intro-box p {
     color: #fff !important;
-    font-size: clamp(16px, 2vw, 25px) !important;
+    font-size: clamp(16px, 1.45vw, 21px) !important;
 }
 
 .intro-box-inner {
-    width: min(1100px, 90%);
+    width: min(980px, 90%);
     margin: 0 auto;
     padding: clamp(10px, 1.2vw, 18px) 0;
 }
@@ -286,20 +310,20 @@ html.dark-mode #article-content h3::after {
 /* ---- Media Rows ---- */
 .media-row {
     width: 100%;
-    margin: 40px 0;
+    margin: 24px 0;
     display: flex;
-    align-items: stretch;
-    gap: 0;
-    min-height: 420px;
+    align-items: center;
+    gap: clamp(16px, 2.6vw, 32px);
+    min-height: auto;
 }
 
 .media-text {
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
     display: flex;
-    padding: 40px clamp(28px, 6vw, 80px);
+    padding: 6px clamp(20px, 6vw, 92px);
 }
 
 .media-text p {
@@ -308,10 +332,11 @@ html.dark-mode #article-content h3::after {
 }
 
 .media-img {
-    object-fit: contain;
-    width: 50%;
+    object-fit: cover;
+    width: 47%;
+    max-height: 360px;
     flex-shrink: 0;
-    border-radius: 0;
+    border-radius: 12px;
     background: transparent;
 }
 
@@ -320,7 +345,7 @@ html.dark-mode #article-content h3::after {
 }
 
 .media-row.left .media-img {
-    border-radius: 0;
+    border-radius: 0 12px 12px 0;
 }
 
 .media-row.right {
@@ -328,7 +353,7 @@ html.dark-mode #article-content h3::after {
 }
 
 .media-row.right .media-img {
-    border-radius: 0;
+    border-radius: 12px 0 0 12px;
 }
 
 /* ---- Reading Progress (Desktop: fixed left vertical rail) ---- */
@@ -463,19 +488,22 @@ html.dark-mode #article-content h3::after {
 
     .media-text {
         gap: 10px;
-        padding: 24px 20px;
+        padding: 8px 0;
     }
 
     .media-img {
-        border-radius: 0;
-        width: 94%;
+        border-radius: 10px;
+        width: 100%;
         height: auto;
-        margin: 0 auto;
+        margin: 0;
+        max-height: none;
     }
 
     .article-banner {
-        width: 92%;
+        width: 94%;
         height: auto;
+        border-radius: 10px;
+        max-height: none;
     }
 
     #article-content p {

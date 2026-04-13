@@ -101,6 +101,7 @@ function applySaveState(btn, saved) {
     if (!signedIn) {
         btn.style.color = "";
         btn.style.background = "";
+        btn.style.border = "";
         btn.style.borderColor = "";
         btn.style.boxShadow = "";
         return;
@@ -108,24 +109,28 @@ function applySaveState(btn, saved) {
 
     if (saved) {
         if (isArticleButton) {
-            btn.style.background = "rgba(224, 123, 0, 0.12)";
-            btn.style.borderColor = "rgba(224, 123, 0, 0.46)";
-            btn.style.boxShadow = "0 8px 20px rgba(224, 123, 0, 0.16)";
+            btn.style.color = "#073a58";
+            btn.style.background = "#dbeefe";
+            btn.style.borderColor = "#073a58";
+            btn.style.boxShadow = "0 6px 16px rgba(7, 58, 88, 0.16)";
         } else {
-            btn.style.background = "#fff";
-            btn.style.boxShadow = "0 6px 18px rgba(224, 123, 0, 0.24)";
+            btn.style.color = "#08486d";
+            btn.style.background = "#dbeefe";
+            btn.style.border = "1.5px solid rgba(8, 72, 109, 0.72)";
+            btn.style.boxShadow = "0 4px 14px rgba(8, 72, 109, 0.2)";
         }
         return;
     }
 
-    btn.style.color = "#c86500";
+    btn.style.color = "#0b5e8e";
     if (isArticleButton) {
-        btn.style.background = "rgba(224, 123, 0, 0.08)";
-        btn.style.borderColor = "rgba(224, 123, 0, 0.45)";
-        btn.style.boxShadow = "0 6px 16px rgba(224, 123, 0, 0.14)";
+        btn.style.background = "#eff7fd";
+        btn.style.borderColor = "#0b5e8e";
+        btn.style.boxShadow = "0 4px 12px rgba(11, 94, 142, 0.14)";
     } else {
-        btn.style.background = "#fff";
-        btn.style.boxShadow = "0 6px 18px rgba(224, 123, 0, 0.22)";
+        btn.style.background = "#eef6fb";
+        btn.style.border = "1.5px solid rgba(11, 94, 142, 0.55)";
+        btn.style.boxShadow = "0 4px 12px rgba(11, 94, 142, 0.16)";
     }
 }
 
