@@ -232,16 +232,35 @@ const mobileNavDrawer     = document.getElementById("mobile-nav-drawer");
 const mobileDrawerOverlay = document.getElementById("mobile-drawer-overlay");
 
 if (mobileMenuBtn && mobileNavDrawer) {
+    let lastFocusedBeforeDrawer = null;
+
+    function getDrawerFocusableElements() {
+        return Array.from(
+            mobileNavDrawer.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
+        ).filter((element) => !element.hasAttribute("hidden") && element.getAttribute("aria-hidden") !== "true");
+    }
+
     function openDrawer() {
+        lastFocusedBeforeDrawer = document.activeElement instanceof HTMLElement
+            ? document.activeElement
+            : null;
         mobileMenuBtn.classList.add("is-open");
         mobileMenuBtn.setAttribute("aria-expanded", "true");
         mobileNavDrawer.classList.add("is-open");
         mobileNavDrawer.removeAttribute("inert");
+        mobileNavDrawer.setAttribute("aria-hidden", "false");
         if (mobileDrawerOverlay) {
             mobileDrawerOverlay.classList.add("is-open");
             mobileDrawerOverlay.removeAttribute("inert");
+            mobileDrawerOverlay.setAttribute("aria-hidden", "false");
         }
         document.body.style.overflow = "hidden";
+        requestAnimationFrame(() => {
+            const firstFocusable = getDrawerFocusableElements()[0];
+            if (firstFocusable) {
+                firstFocusable.focus();
+            }
+        });
     }
 
     function closeDrawer() {
@@ -249,12 +268,17 @@ if (mobileMenuBtn && mobileNavDrawer) {
         mobileMenuBtn.setAttribute("aria-expanded", "false");
         mobileNavDrawer.classList.remove("is-open");
         mobileNavDrawer.setAttribute("inert", "");
+        mobileNavDrawer.setAttribute("aria-hidden", "true");
         if (mobileDrawerOverlay) {
             mobileDrawerOverlay.classList.remove("is-open");
             mobileDrawerOverlay.setAttribute("inert", "");
+            mobileDrawerOverlay.setAttribute("aria-hidden", "true");
         }
         document.body.style.overflow = "";
         if (typeof window.showDrawerMain === "function") window.showDrawerMain();
+        if (lastFocusedBeforeDrawer && document.contains(lastFocusedBeforeDrawer)) {
+            lastFocusedBeforeDrawer.focus();
+        }
     }
 
     mobileMenuBtn.addEventListener("click", () => {
@@ -262,6 +286,38 @@ if (mobileMenuBtn && mobileNavDrawer) {
     });
 
     if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", (event) => {
+        if (!mobileMenuBtn.classList.contains("is-open")) {
+            return;
+        }
+
+        if (event.key === "Escape") {
+            event.preventDefault();
+            closeDrawer();
+            return;
+        }
+
+        if (event.key !== "Tab") {
+            return;
+        }
+
+        const focusable = getDrawerFocusableElements();
+        if (!focusable.length) {
+            return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    });
 
     /* only close on nav links — icon buttons handle their own clicks */
     mobileNavDrawer.querySelectorAll("ul a").forEach((link) => {
@@ -316,6 +372,10 @@ Mobile Drawer — Profile Panel
         if (mainContent) mainContent.style.display = "none";
         if (drawerIcons) drawerIcons.style.display = "none";
         profilePanel.style.display = "block";
+        requestAnimationFrame(function () {
+            var backButton = document.getElementById("mpanel-back");
+            if (backButton) backButton.focus();
+        });
     }
 
     function renderProfilePanel() {

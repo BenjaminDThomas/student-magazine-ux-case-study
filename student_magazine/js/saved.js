@@ -58,7 +58,7 @@ function renderSaved(articles, savedIds) {
         return;
     }
 
-    saved.forEach((article) => {
+    saved.forEach((article, index) => {
         const card = document.createElement("article");
         card.className = "article-card";
 
@@ -70,6 +70,10 @@ function renderSaved(articles, savedIds) {
         const img = document.createElement("img");
         img.src = getArticleImage(article);
         img.alt = article.title;
+        img.loading = index === 0 ? "eager" : "lazy";
+        img.decoding = "async";
+        img.fetchPriority = index === 0 ? "high" : "low";
+        img.sizes = "(max-width: 768px) 92vw, 44vw";
 
         const title = document.createElement("h3");
         title.className = "card-title";

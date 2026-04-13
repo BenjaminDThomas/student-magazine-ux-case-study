@@ -162,13 +162,11 @@ View All Articles Page
 }
 
 .viewall-page .viewall-suggestions {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    right: 0;
+    position: static;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 2px;
     padding: 12px;
     border: 1px solid color-mix(in srgb, var(--border-color) 78%, var(--text-color) 22%);
     border-radius: 18px;

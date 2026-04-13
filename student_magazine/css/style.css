@@ -211,6 +211,30 @@ body:not(.home-page) .auth {
     padding: 0;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid #0b5e8e;
+    outline-offset: 3px;
+}
+
+html.dark-mode a:focus-visible,
+html.dark-mode button:focus-visible,
+html.dark-mode input:focus-visible,
+html.dark-mode select:focus-visible,
+html.dark-mode textarea:focus-visible,
+html.dark-mode [tabindex]:focus-visible {
+    outline-color: #7dc4ef;
+}
+
+#main-content,
+.auth-modal {
+    scroll-margin-top: 18px;
+}
+
 /* keeps scroll-to-top / back button fixed so it never adds page height */
 #scrollTopBtn {
     position: fixed;

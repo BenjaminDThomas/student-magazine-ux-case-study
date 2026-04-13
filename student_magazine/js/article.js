@@ -250,6 +250,9 @@ loadArticles().then(articles => {
       img.src = normalizeAssetPath(section.src);
       img.alt = article.title;                                                  // alt text for accessibility/SEO
       img.fetchPriority = "high";                                               // LCP priority hint
+      img.loading = "eager";
+      img.decoding = "async";
+      img.sizes = "(max-width: 768px) 94vw, 82vw";
       img.width = 1100;                                                         // intrinsic size hint prevents layout shift
       img.height = 628;
       img.classList.add("article-banner");                                      
@@ -262,6 +265,10 @@ loadArticles().then(articles => {
       const img = document.createElement("img");                                // creates image element
       img.src = normalizeAssetPath(section.src);
       img.alt = section.alt || "";                                              // alt text for accessibility/SEO
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.fetchPriority = "low";
+      img.sizes = "(max-width: 768px) 94vw, 47vw";
       img.width = 654;                                                          // intrinsic size hints prevent layout shift
       img.height = 374;
       img.classList.add("media-img");                                           // assigns class 'media-img' to the image element

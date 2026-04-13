@@ -207,6 +207,10 @@ function renderSuggestions() {
         image.className = "viewall-suggestion-image";
         image.src = getArticleImage(article);
         image.alt = article.title;
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.width = 72;
+        image.height = 72;
 
         const content = document.createElement("span");
         content.className = "viewall-suggestion-copy";
@@ -329,9 +333,14 @@ function renderArticles() {
             const image = document.createElement("img");
             image.src = getArticleImage(article);
             image.alt = article.title;
+            image.loading = firstImage ? "eager" : "lazy";
+            image.decoding = "async";
+            image.sizes = "(max-width: 768px) 92vw, 44vw";
             if (firstImage) {
                 image.fetchPriority = "high";
                 firstImage = false;
+            } else {
+                image.fetchPriority = "low";
             }
 
             const title = document.createElement("h3");
@@ -419,6 +428,18 @@ if (suggestionsRoot) {
         searchInput.focus();
     });
 }
+
+document.addEventListener("pointerdown", (event) => {
+    if (!suggestionsRoot || suggestionsRoot.hidden) {
+        return;
+    }
+
+    if (event.target.closest(".viewall-search-shell")) {
+        return;
+    }
+
+    hideSuggestions();
+});
 
 document.addEventListener("click", (event) => {
     if (!filterForm || !filterForm.contains(event.target)) {
